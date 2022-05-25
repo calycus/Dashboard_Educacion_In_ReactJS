@@ -144,9 +144,7 @@ export default function PermanentDrawerLeft({ children }) {
         component="main"
         sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
       >
-        {
-          children
-        }
+        {children}
       </Box>
     </Box>
   );

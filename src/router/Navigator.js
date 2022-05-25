@@ -1,7 +1,7 @@
 import { useEffect, } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Dashboard_General from '../Dashboard_General';
 import MainLayout from '../layouts/MainLayout'
+import Dashboard_General from '../Dashboard_General';
 import Dashboard_General_prueba from '../Dashboard_General_prueba';
 
 
