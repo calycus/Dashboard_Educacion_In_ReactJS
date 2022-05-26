@@ -78,7 +78,7 @@ export default function PermanentDrawerLeft() {
               </AccordionSummary>
               <AccordionDetails>
                 <Link to="/general_prueba">
-                  <ListItemButton onClick={() => setExpandedPanel(false)} to="/general_prueba">
+                  <ListItemButton onClick={() => setExpandedPanel(false)}>
                     <ListItemIcon>
                       <Send />
                     </ListItemIcon>
@@ -160,3 +160,4 @@ export default function PermanentDrawerLeft() {
     </BrowserRouter>
   );
 }
+

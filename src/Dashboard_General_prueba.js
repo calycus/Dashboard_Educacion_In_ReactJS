@@ -69,6 +69,7 @@ export default function OutlinedCard() {
     return (
         <Box sx={{ minWidth: 275 }}>
             <h2>PRUEBA DE RUTA DASHBOAR 2</h2>
+            
             <div className='cardGridSelect'>
                 <Card variant="outlined">{cardSelect}</Card>
             </div>

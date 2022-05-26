@@ -1,7 +1,4 @@
-import { useEffect, } from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import Navigator from '../layouts/Navigator'
 import Dashboard_General from '../Dasboard_General/Dashboard_General';
 import Dashboard_General_prueba from '../Dashboard_General_prueba';
 

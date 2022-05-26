@@ -1,6 +1,5 @@
 import React from "react";
-import { Card, CardHeader, CardActions, CardContent } from '@mui/material';
-import { Box } from "@mui/system";
+import { CardHeader, CardContent } from '@mui/material';
 import { IconButton } from "@mui/material";
 import { Announcement, AspectRatio, BarChart } from '@mui/icons-material';
 import { Divider } from '@mui/material';
@@ -10,14 +9,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-const bull = (
-    <Box
-        component="span"
-        sx={{ display: 'inline-block', mx: '10px', transform: 'scale(0.8)' }}
-    >
-        •
-    </Box>
-);
+
 const CardSelect = (
     <React.Fragment>
         <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
@@ -39,10 +31,10 @@ const DashCardVD = (
         <CardHeader
             action={
                 [
-                    <IconButton aria-label="expanded">
+                    <IconButton aria-label="expanded" key={1}>
                         <Announcement />
                     </IconButton>,
-                    <IconButton aria-label="expanded">
+                    <IconButton aria-label="expanded" key={2}>
                         <AspectRatio />
                     </IconButton>
                 ]
@@ -61,10 +53,10 @@ const DashCardVI = (
         <CardHeader
             action={
                 [
-                    <IconButton aria-label="expanded">
+                    <IconButton aria-label="expanded" key={1}>
                         <Announcement />
                     </IconButton>,
-                    <IconButton aria-label="expanded">
+                    <IconButton aria-label="expanded" key={2}>
                         <AspectRatio />
                     </IconButton>
                 ]
@@ -82,8 +74,8 @@ const DashCardTRE = (
         <CardHeader
             action={
                 [
-                    <IconButton aria-label="expanded">
-                        <BarChart />
+                    <IconButton aria-label="expanded" key={1}>
+                        <Announcement />
                     </IconButton>,
                 ]
             }
@@ -100,8 +92,8 @@ const DashCardTDE = (
         <CardHeader
             action={
                 [
-                    <IconButton aria-label="expanded">
-                        <BarChart />
+                    <IconButton aria-label="expanded" key={1}>
+                        <Announcement />
                     </IconButton>,
                 ]
             }
@@ -119,8 +111,8 @@ const DashCardTRT = (
         <CardHeader
             action={
                 [
-                    <IconButton aria-label="expanded">
-                        <BarChart />
+                    <IconButton aria-label="expanded" key={1}>
+                        <Announcement />
                     </IconButton>,
                 ]
             }
