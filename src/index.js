@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Navigator from './layouts/Navigator';
-import store from './store/store'
-import { Provider } from 'react-redux'
+import { Navigator } from './layouts/Navigator';
+import EleccionMallaNavigartor from './layouts/EleccionMallaNavigartor'
+import store from './store/store';
+import { Provider } from 'react-redux';
 //import MallasStore from './store/MallasStore';
 import EleccionMalla from './EleccionMalla';
 
@@ -29,7 +30,7 @@ const theme = createTheme({
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     <Provider store={store}>
-      <EleccionMalla />
+      <Navigator />
     </Provider>
   </ThemeProvider>,
   document.getElementById('root')

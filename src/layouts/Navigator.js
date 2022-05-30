@@ -52,13 +52,13 @@ export default function PermanentDrawerLeft() {
             component="nav"
             aria-labelledby="nested-list-subheader"
           >
-            <ListItemButton>
+            <ListItemButton to="/">
               <ListItemIcon>
                 <Send />
               </ListItemIcon>
               <ListItemText primary="FACULTADES" />
             </ListItemButton>
-            <Link to="/">
+            <Link to="/general">
               <ListItemButton>
                 <ListItemIcon>
                   <Drafts />

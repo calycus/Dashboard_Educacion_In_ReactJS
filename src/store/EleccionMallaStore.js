@@ -6,6 +6,11 @@ export const traerFacultades = createSlice({
     name: 'arrayFacultades',
     initialState: {
         value: [],
+        id_escuela: parseInt(localStorage.getItem('id_escuela'), 10) || null,
+        id_malla: parseInt(localStorage.getItem('id_malla'), 10) || null,
+        id_facultad: parseInt(localStorage.getItem('id_facultad'), 10) || null,
+        name_facultad: localStorage.getItem('name_facultad')  || "" ,
+        name_escuela: localStorage.getItem('name_escuela')  || "" 
     },
 
     reducers: {
@@ -26,7 +31,32 @@ export const traerFacultades = createSlice({
                     }
                 })
             }
-        }
+        },
+
+        setLocalIdEscuela: (state, action) => {
+            state.id_escuela = action.payload;
+            localStorage.setItem('id_escuela', action.payload)
+        },
+
+        setLocalIdMalla: (state, action) => {
+            state.id_malla = action.payload;
+            localStorage.setItem('id_malla', action.payload)
+        },
+
+        setLocalIdFacultad: (state, action) => {
+            state.id_facultad = action.payload;
+            localStorage.setItem('id_facultad', action.payload)
+        },
+
+        /* setLocalNameFacultad: (state, action) => {
+            state.name_facultad = action.payload;
+            localStorage.setItem('id_escuela', action.payload)
+        },
+
+        setLocalIdEscuela: (state, action) => {
+            state.name_escuela = action.payload;
+            localStorage.setItem('id_escuela', action.payload)
+        }, */
     }
 })
 
@@ -38,18 +68,24 @@ export const traerFacultadesAsync = () => (dispatch) => {
         },
     })
         .then(res => {
-            const newArray = res.data.map(el => {
+            const newArrayFacultades = res.data;
+            /* const newArray = res.data.map(el => {
                 return {
                     ...el, fac_expandida: false
                 }
-            })
-            dispatch(setFacultades(newArray));
+            }) */
+            dispatch(setFacultades(newArrayFacultades));
             //console.log("console del store =>", res.data);
         })
 
 }
 
 
-export const { setFacultades, toggleExpanded } = traerFacultades.actions;
+export const { setFacultades, toggleExpanded, setLocalIdEscuela } = traerFacultades.actions;
+
 export const selectArrayFacultades = (state) => state.arrayFacultades.value;
+export const selectIdEscuela = (state) => state.arrayFacultades.id_escuela;
+export const selectIdMalla = (state) => state.arrayFacultades.id_malla;
+export const selectIdFacultad = (state) => state.arrayFacultades.id_facultad;
+
 export default traerFacultades.reducer;

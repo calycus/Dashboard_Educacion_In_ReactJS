@@ -8,7 +8,15 @@ import { Box, Container } from '@mui/system';
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
-import { selectArrayFacultades, toggleExpanded, traerFacultadesAsync } from './store/EleccionMallaStore';
+import { BrowserRouter, Link, Route, useNavigate } from 'react-router-dom';
+
+//store
+import {
+    selectArrayFacultades, selectIdFacultad, selectIdEscuela,
+    setLocalIdEscuela, setLocalIdMalla, setLocalIdFacultad,
+    toggleExpanded, traerFacultadesAsync
+} from './store/EleccionMallaStore';
+
 //iconos
 import { ExpandMore, AssuredWorkload, ArrowForward } from '@mui/icons-material';
 
@@ -17,23 +25,36 @@ import './css/EleccionMalla.css';
 
 //control de apertura y cierra de los card de acordiones
 
-export default function CardCareerChoice() {
+export default function CardCareerChoice(props) {
     const theme = useTheme()
+    let navigate = useNavigate();
     const facultades = useSelector(selectArrayFacultades);
+    const idEscuela = useSelector(selectIdEscuela);
+    const idFacultad = useSelector(selectIdFacultad);
     const dispatch = useDispatch();
-    const [expanded, setExpanded] = useState(false);
     const [expandedPanel, setExpandedPanel] = useState(false);
-    const [text, setText] = useState(facultades);
 
     useEffect(() => {
         dispatch(traerFacultadesAsync());
     }, []);
+
+    function setLocalVariables(id_escuela) {
+        dispatch(setLocalIdEscuela(id_escuela))
+        /* dispatch(setLocalIdMalla(id_malla))
+        dispatch(setLocalIdFacultad(id_facultad)) */
+    }
+
+    function handleClick() {
+        navigate("/index", { replace: true });
+    }
 
     return (
         <Box>
             <div className='titulo' >
                 Seleccione una Malla para Continuar
             </div>
+            {/* <Button onClick={() => veridlocal()}>VER</Button> */}
+            <Button onClick={() => handleClick()}>VER</Button>
             <div className='grid-mallas'>
                 {
                     facultades.map((facultad, index) =>
@@ -64,15 +85,16 @@ export default function CardCareerChoice() {
                                                         <AssuredWorkload style={{ paddingRight: '10px' }} />
                                                         {escuela.nombre}
                                                     </AccordionSummary>
-
                                                     <AccordionDetails >
                                                         {escuela.mallas.map((malla, index) =>
-                                                            <AccordionDetails key={index} >
+
+                                                            <AccordionDetails key={index} style={{ cursor: 'pointer' }} onClick={() => setLocalVariables(escuela.id)}>
                                                                 <div className='div-select-malla'>
                                                                     {malla.nombre}
-                                                                    <ArrowForward className='arrowFoward-class'/>
+                                                                    <ArrowForward className='arrowFoward-class' />
                                                                 </div>
                                                             </AccordionDetails>
+
                                                         )}
                                                     </AccordionDetails>
                                                 </Accordion>
@@ -81,7 +103,6 @@ export default function CardCareerChoice() {
                                     </Collapse>
                                 </Container>
                             </div>
-
                         </Card>)
                 }
             </div>
