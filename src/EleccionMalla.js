@@ -8,11 +8,11 @@ import { Box, Container } from '@mui/system';
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
-import { BrowserRouter, Link, Route, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 //store
 import {
-    selectArrayFacultades, selectIdFacultad, selectIdEscuela,
+    selectArrayFacultades,
     setLocalIdEscuela, setLocalIdMalla, setLocalIdFacultad,
     toggleExpanded, traerFacultadesAsync
 } from './store/EleccionMallaStore';
@@ -29,8 +29,6 @@ export default function CardCareerChoice(props) {
     const theme = useTheme()
     let navigate = useNavigate();
     const facultades = useSelector(selectArrayFacultades);
-    const idEscuela = useSelector(selectIdEscuela);
-    const idFacultad = useSelector(selectIdFacultad);
     const dispatch = useDispatch();
     const [expandedPanel, setExpandedPanel] = useState(false);
 
@@ -38,14 +36,16 @@ export default function CardCareerChoice(props) {
         dispatch(traerFacultadesAsync());
     }, []);
 
-    function setLocalVariables(id_escuela) {
+    /* function setLocalVariables(id_escuela) {
         dispatch(setLocalIdEscuela(id_escuela))
-        /* dispatch(setLocalIdMalla(id_malla))
-        dispatch(setLocalIdFacultad(id_facultad)) */
-    }
+        dispatch(setLocalIdMalla(id_malla))
+        dispatch(setLocalIdFacultad(id_facultad)) 
+    } */
 
-    function handleClick() {
-        navigate("/index", { replace: true });
+    function handleClick(id_escuela) {
+        dispatch(setLocalIdEscuela(id_escuela))
+
+        navigate("/general", { replace: true });
     }
 
     return (
@@ -53,8 +53,6 @@ export default function CardCareerChoice(props) {
             <div className='titulo' >
                 Seleccione una Malla para Continuar
             </div>
-            {/* <Button onClick={() => veridlocal()}>VER</Button> */}
-            <Button onClick={() => handleClick()}>VER</Button>
             <div className='grid-mallas'>
                 {
                     facultades.map((facultad, index) =>
@@ -87,8 +85,7 @@ export default function CardCareerChoice(props) {
                                                     </AccordionSummary>
                                                     <AccordionDetails >
                                                         {escuela.mallas.map((malla, index) =>
-
-                                                            <AccordionDetails key={index} style={{ cursor: 'pointer' }} onClick={() => setLocalVariables(escuela.id)}>
+                                                            <AccordionDetails key={index} style={{ cursor: 'pointer' }} onClick={() => handleClick(escuela.id)}>
                                                                 <div className='div-select-malla'>
                                                                     {malla.nombre}
                                                                     <ArrowForward className='arrowFoward-class' />

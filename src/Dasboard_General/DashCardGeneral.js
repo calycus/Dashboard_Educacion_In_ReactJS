@@ -4,27 +4,6 @@ import { IconButton } from "@mui/material";
 import { Announcement, AspectRatio, BarChart } from '@mui/icons-material';
 import { Divider } from '@mui/material';
 
-//dependencias he importacion para el select
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-
-const CardSelect = (
-    <React.Fragment>
-        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-            <InputLabel id="demo-select-small">Age</InputLabel>
-            <Select labelId="demo-select-small" id="demo-select-small" label="Age">
-                <MenuItem value="">
-                    <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
-        </FormControl>
-    </React.Fragment>
-);
 
 const DashCardVD = (
     <React.Fragment>
@@ -125,8 +104,7 @@ const DashCardTRT = (
     </React.Fragment>
 );
 
-export default{
-    CardSelect,
+export default {
     DashCardVD,
     DashCardVI,
     DashCardTRE,

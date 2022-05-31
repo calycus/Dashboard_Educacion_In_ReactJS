@@ -7,7 +7,7 @@ import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { Send, Drafts} from '@mui/icons-material';
+import { Send, Drafts } from '@mui/icons-material';
 
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -17,7 +17,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import SwitchDrawer from '../router/SwitchDrawer';
 import {
-  BrowserRouter, Link
+  BrowserRouter, Link, matchPath, useLocation
 } from 'react-router-dom';
 
 
@@ -26,66 +26,70 @@ const drawerWidth = 260;
 
 export default function PermanentDrawerLeft() {
   const [expandedPanel, setExpandedPanel] = useState(false);
+  const sampleLocation = useLocation();
 
-  /* const handleAccordionChange = (panel) => (isExpanded) => {
-    setExpandedPanel(isExpanded ? panel : false);
-  }; */
-
-  return (
-
-    <BrowserRouter>
-      <Box sx={{ display: 'flex' }}>
-        {<Drawer
-          sx={{
+  let drawerComp = "";
+  if (sampleLocation.pathname != "/") {
+    drawerComp =
+      <Drawer
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
             width: drawerWidth,
-            flexShrink: 0,
-            '& .MuiDrawer-paper': {
-              width: drawerWidth,
-              boxSizing: 'border-box',
-            },
-          }}
-          variant="permanent"
-          anchor="left"
+            boxSizing: 'border-box',
+          },
+        }}
+        variant="permanent"
+        anchor="left"
+      >
+        <List
+          sx={{ width: '100%', bgcolor: 'background.paper' }}
+          component="nav"
+          aria-labelledby="nested-list-subheader"
         >
-          <List
-            sx={{ width: '100%', bgcolor: 'background.paper' }}
-            component="nav"
-            aria-labelledby="nested-list-subheader"
-          >
-            <ListItemButton to="/">
+          <ListItemButton to="/">
+            <ListItemIcon>
+              <Send />
+            </ListItemIcon>
+            <ListItemText primary="FACULTADES" />
+          </ListItemButton>
+          <Link to="/general">
+            <ListItemButton>
               <ListItemIcon>
-                <Send />
+                <Drafts />
               </ListItemIcon>
-              <ListItemText primary="FACULTADES" />
+              <ListItemText primary="Dashboard General" />
             </ListItemButton>
-            <Link to="/general">
-              <ListItemButton>
-                <ListItemIcon>
-                  <Drafts />
-                </ListItemIcon>
-                <ListItemText primary="Dashboard General" />
-              </ListItemButton>
-            </Link>
+          </Link>
 
 
-            <Accordion expanded sx={{ boxShadow: 'none' }}>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-              >
-                <Typography>Fenomesnos Academicos</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Link to="/general_prueba">
-                  <ListItemButton onClick={() => setExpandedPanel(false)}>
+          <Accordion expanded sx={{ boxShadow: 'none' }}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography>Fenomesnos Academicos</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Link to="/general_prueba">
+                <Accordion
+                  onClick={() => setExpandedPanel(false)}
+                  sx={{ boxShadow: 'none' }}
+                >
+                  <AccordionSummary
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
                     <ListItemIcon>
                       <Send />
                     </ListItemIcon>
-                    <ListItemText primary="Tasa de Retencion" />
-                  </ListItemButton>
-                </Link>
-
+                    <Typography>Tasa de Retencion</Typography>
+                  </AccordionSummary>
+                </Accordion>
+              </Link>
+              <Link to="/general_prueba">
                 <Accordion
                   expanded={expandedPanel === 'panelTRP'}
                   /* onChange={handleAccordionChange('panelTRP')} */
@@ -115,7 +119,8 @@ export default function PermanentDrawerLeft() {
                     </ListItemButton>
                   </AccordionDetails>
                 </Accordion>
-
+              </Link>
+              <Link to="/general_prueba">
                 <Accordion
                   expanded={expandedPanel === 'panelTDS'}
                   /* onChange={handleAccordionChange('panelTDS')} */
@@ -145,19 +150,22 @@ export default function PermanentDrawerLeft() {
                     </ListItemButton>
                   </AccordionDetails>
                 </Accordion>
-              </AccordionDetails>
-            </Accordion>
-          </List>
-        </Drawer>}
-        <Box
-          component="main"
-          sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
-        >
-          <SwitchDrawer />
-
-        </Box>
+              </Link>
+            </AccordionDetails>
+          </Accordion>
+        </List>
+      </Drawer>
+  }
+  return (
+    <Box sx={{ display: 'flex' }}>
+      {drawerComp}
+      <Box
+        component="main"
+        sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
+      >
+        <SwitchDrawer />
       </Box>
-    </BrowserRouter>
+    </Box>
   );
 }
 
