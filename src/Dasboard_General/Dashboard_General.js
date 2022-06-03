@@ -9,22 +9,25 @@ import Select from '../Project_Components/SelectComponent';
 
 //store
 import {
-    selectIdEscuela, selectIdMalla
+    selectIdEscuela, selectIdMalla, selectIdFacultad
 } from '../store/MallaStore/EleccionMallaStore';
 import { selectArrayMallas, traerMallasPorIdEscuelaAsync } from '../store/MallaStore/Mallas';
-import {traerInfoAsync} from '../store/DashGeneralStore/HighchartStore/HighchartStoreGeneral'
-
+import {traerInfoGeneralAsync} from '../store/DashGeneralStore/HighchartStore/HighchartStoreGeneral'
+import {traerInfoFenomenosAsync} from '../store/DashGeneralStore/HighchartStore/HighchartFenomenos'
 //dependencias CSS
 import '../css/Dashboard_General.css';
 
-export default function OutlinedCard(children) {
+export default function OutlinedCard() {
     const id_escuela = useSelector(selectIdEscuela);
     const id_malla = useSelector(selectIdMalla);
+    const id_facultad = useSelector(selectIdFacultad)
     const mallas = useSelector(selectArrayMallas);
     const dispatch = useDispatch();
+    
     React.useEffect(() => {
         dispatch(traerMallasPorIdEscuelaAsync(id_escuela))
-        dispatch(traerInfoAsync(id_malla))
+        dispatch(traerInfoGeneralAsync(id_malla))
+        dispatch(traerInfoFenomenosAsync(id_facultad))
     }, []);
 
     return (

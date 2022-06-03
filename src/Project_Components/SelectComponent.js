@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from 'react-redux';
 //store
 import { selectIdEscuela, selectIdMalla, setLocalIdMalla } from '../store/MallaStore/EleccionMallaStore';
 import { selectArrayMallas } from '../store/MallaStore/Mallas';
-import {traerInfoAsync} from '../store/DashGeneralStore/HighchartStore/HighchartStoreGeneral'
+import {traerInfoGeneralAsync} from '../store/DashGeneralStore/HighchartStore/HighchartStoreGeneral'
 
 //dependencias CSS
 import '../css/Select.css'
@@ -79,7 +79,7 @@ function CardSelectMalla(props) {
                     }</MenuItem>)}
                 </Select>
             </FormControl>
-            <IconButton aria-label="search" size='large' onClick={() => dispatch(traerInfoAsync(mallaAux.idMalla))}>
+            <IconButton aria-label="search" size='large' onClick={() => dispatch(traerInfoGeneralAsync(mallaAux.idMalla))}>
                 <SearchIcon sx={{ fontSize: 30, color: theme.palette.primary.main }} />
             </IconButton>
         </React.Fragment>

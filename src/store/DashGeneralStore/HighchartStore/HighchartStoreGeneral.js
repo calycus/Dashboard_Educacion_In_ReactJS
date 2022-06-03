@@ -45,14 +45,14 @@ export const traerInfo = createSlice({
             data.array_indices_desercion_to_response.forEach(element => {
                 state.LineDependienteGeneral.series[0].data.push(
                     {
-                        y: parseFloat(element)
+                        y: parseFloat(element, 2)
                     }
                 );
             });
             data.array_indices_retencion_to_response.forEach(element => {
                 state.LineDependienteGeneral.series[1].data.push(
                     {
-                        y: parseFloat(element)
+                        y: parseFloat(element, 2)
                     }
                 );
             });
@@ -70,7 +70,7 @@ export const traerInfo = createSlice({
             data.array_indices_repitencia_to_response.forEach(element => {
                 state.LineIndependienteGeneral.series[0].data.push(
                     {
-                        y: parseFloat(element)
+                        y: parseFloat(element, 2)
                     }
                 );
             });
@@ -78,14 +78,14 @@ export const traerInfo = createSlice({
     }
 })
 
-export const traerInfoAsync = (id_Malla) => (dispatch) => {
+export const traerInfoGeneralAsync = (id_Malla) => (dispatch) => {
     axios.get(ApiUrl.Api + '/api/educacion/dash_general/indices/' + id_Malla, {
         headers: {
             Authorization: "Bearer " + ApiUrl.userToken,
         },
     })
         .then(res => {
-            console.log(res.data.data)
+            
             dispatch(setInfoDependienteGeneral(res.data.data))
             dispatch(setInfoIndependienteGeneral(res.data.data))
         })

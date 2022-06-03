@@ -32,6 +32,11 @@ export const traerFacultades = createSlice({
                 })
             }
         },
+        
+        setLocalIdFacultad: (state, action) => {
+            state.id_facultad = action.payload;
+            localStorage.setItem('id_facultad', action.payload)
+        },
 
         setLocalIdEscuela: (state, action) => {
             state.id_escuela = action.payload;
@@ -45,17 +50,12 @@ export const traerFacultades = createSlice({
             //console.log("id cambiado a " , state.id_malla);
         },
 
-        setLocalIdFacultad: (state, action) => {
-            state.id_facultad = action.payload;
-            localStorage.setItem('id_facultad', action.payload)
-        },
-
         /* setLocalNameFacultad: (state, action) => {
             state.name_facultad = action.payload;
             localStorage.setItem('id_escuela', action.payload)
         },
 
-        setLocalIdEscuela: (state, action) => {
+        setLocalNameEscuela: (state, action) => {
             state.name_escuela = action.payload;
             localStorage.setItem('id_escuela', action.payload)
         }, */
@@ -77,7 +77,9 @@ export const traerFacultadesAsync = () => (dispatch) => {
 }
 
 
-export const { setFacultades, toggleExpanded, setLocalIdEscuela, setLocalIdMalla } = traerFacultades.actions;
+export const { setFacultades, toggleExpanded, 
+                setLocalIdFacultad, setLocalIdEscuela, 
+                    setLocalIdMalla } = traerFacultades.actions;
 
 export const selectArrayFacultades = (state) => state.arrayFacultades.value;
 export const selectIdEscuela = (state) => state.arrayFacultades.id_escuela;

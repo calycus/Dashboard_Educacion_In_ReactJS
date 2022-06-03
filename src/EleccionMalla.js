@@ -42,9 +42,12 @@ export default function CardCareerChoice(props) {
         dispatch(setLocalIdFacultad(id_facultad)) 
     } */
 
-    function handleClick(id_escuela, id_malla) {
+    function handleClick(id_escuela, id_malla, id_facultad) {
+
+        dispatch(setLocalIdFacultad(id_facultad)) 
         dispatch(setLocalIdEscuela(id_escuela))
         dispatch(setLocalIdMalla(id_malla))
+        
         navigate("/general", { replace: true });
     }
 
@@ -85,7 +88,7 @@ export default function CardCareerChoice(props) {
                                                     </AccordionSummary>
                                                     <AccordionDetails >
                                                         {escuela.mallas.map((malla, index) =>
-                                                            <AccordionDetails key={index} style={{ cursor: 'pointer' }} onClick={() => handleClick(escuela.id, malla.id)}>
+                                                            <AccordionDetails key={index} style={{ cursor: 'pointer' }} onClick={() => handleClick(escuela.id, malla.id, facultad.id)}>
                                                                 <div className='div-select-malla'>
                                                                     {malla.nombre}
                                                                     <ArrowForward className='arrowFoward-class' />

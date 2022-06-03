@@ -7,6 +7,9 @@ import { Divider } from '@mui/material';
 //componentes
 import LineDependiente from '../HighchartsComponent/HighchartsGeneral/HighchartsLineDependiente'
 import LineIndependiente from '../HighchartsComponent/HighchartsGeneral/HighchartsLineIndependiente'
+import PieIndiceRepitencia from '../HighchartsComponent/HighchartsGeneral/HighchartPieRepitencia'
+import PieIndiceDesercion from '../HighchartsComponent/HighchartsGeneral/HighchartPieDesercion'
+import PieIndiceRetencion from '../HighchartsComponent/HighchartsGeneral/HighchartPieRetencion'
 
 const DashCardVD = (
     <React.Fragment>
@@ -68,6 +71,7 @@ const DashCardTRE = (
         />
         <Divider />
         <CardContent>
+            <PieIndiceRepitencia />
         </CardContent>
     </React.Fragment>
 );
@@ -86,6 +90,7 @@ const DashCardTDE = (
         />
         <Divider />
         <CardContent>
+            <PieIndiceDesercion />
         </CardContent>
     </React.Fragment>
 );
@@ -105,6 +110,7 @@ const DashCardTRT = (
         />
         <Divider />
         <CardContent>
+            <PieIndiceRetencion />
         </CardContent>
     </React.Fragment>
 );
