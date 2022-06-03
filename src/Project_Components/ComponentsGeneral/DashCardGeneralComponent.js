@@ -4,6 +4,9 @@ import { IconButton } from "@mui/material";
 import { Announcement, AspectRatio, BarChart } from '@mui/icons-material';
 import { Divider } from '@mui/material';
 
+//componentes
+import LineDependiente from '../HighchartsComponent/HighchartsGeneral/HighchartsLineDependiente'
+import LineIndependiente from '../HighchartsComponent/HighchartsGeneral/HighchartsLineIndependiente'
 
 const DashCardVD = (
     <React.Fragment>
@@ -23,6 +26,7 @@ const DashCardVD = (
         />
         <Divider />
         <CardContent>
+            <LineDependiente />
         </CardContent>
     </React.Fragment>
 );
@@ -45,6 +49,7 @@ const DashCardVI = (
         />
         <Divider />
         <CardContent>
+            <LineIndependiente />
         </CardContent>
     </React.Fragment>
 );

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import ApiUrl from './ApiUrl';
+import ApiUrl from '../ApiUrl';
 
 export const traerFacultades = createSlice({
     name: 'arrayFacultades',
@@ -38,9 +38,11 @@ export const traerFacultades = createSlice({
             localStorage.setItem('id_escuela', action.payload)
         },
 
-        setLocalIdMalla: (state, action) => {
+        setLocalIdMalla: (state, action) => {    
+            //console.log("quieres cambiar la malla local = ",state.id_malla, " por ", action.payload )
             state.id_malla = action.payload;
             localStorage.setItem('id_malla', action.payload)
+            //console.log("id cambiado a " , state.id_malla);
         },
 
         setLocalIdFacultad: (state, action) => {
@@ -69,19 +71,13 @@ export const traerFacultadesAsync = () => (dispatch) => {
     })
         .then(res => {
             const newArrayFacultades = res.data;
-            /* const newArray = res.data.map(el => {
-                return {
-                    ...el, fac_expandida: false
-                }
-            }) */
             dispatch(setFacultades(newArrayFacultades));
-            //console.log("console del store =>", res.data);
         })
 
 }
 
 
-export const { setFacultades, toggleExpanded, setLocalIdEscuela } = traerFacultades.actions;
+export const { setFacultades, toggleExpanded, setLocalIdEscuela, setLocalIdMalla } = traerFacultades.actions;
 
 export const selectArrayFacultades = (state) => state.arrayFacultades.value;
 export const selectIdEscuela = (state) => state.arrayFacultades.id_escuela;

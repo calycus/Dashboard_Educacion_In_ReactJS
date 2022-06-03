@@ -10,17 +10,18 @@ export const traerMallasPorId = createSlice({
 
     reducers: {
         setMallas: (state, action) => {
-            state.value=action.payload;
+            state.value = action.payload;
         },
     }
 })
 
 export const traerMallasPorIdEscuelaAsync = (id_escuela) => (dispatch) => {
-    axios.get(ApiUrl.Api + '/api/general/escuela/mallas/'+ id_escuela)
-    .then(res => {
-        dispatch(setMallas(res.data));
+    axios.get(ApiUrl.Api + '/api/general/escuela/mallas/' + id_escuela, {
+        headers: {},
     })
-    
+        .then(res => {
+            dispatch(setMallas(res.data));
+        })
 }
 
 

@@ -1,5 +1,13 @@
-
-
 .css-1869usk-MuiFormControl-root {
     min-width: 382px !important;
+}
+
+.css-jedpe8-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select {
+    text-overflow: ellipsis;
+    font-size: 13px !important;
+    white-space: normal !important;
+}
+
+.css-1in441m {
+    width: 32% !important;
 }
