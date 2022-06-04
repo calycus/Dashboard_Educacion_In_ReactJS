@@ -16,16 +16,12 @@ const DashCardVD = (
         <CardHeader
             action={
                 [
-                    <IconButton aria-label="expanded" key={1}>
-                        <Announcement />
-                    </IconButton>,
                     <IconButton aria-label="expanded" key={2}>
                         <AspectRatio />
                     </IconButton>
                 ]
             }
-            title="PRUEBA DE TITULO"
-            subheader="hola"
+            title="FENÓMENOS ACADÉMICOS DE VARIABLE DEPENDIENTE"
         />
         <Divider />
         <CardContent>
@@ -39,16 +35,12 @@ const DashCardVI = (
         <CardHeader
             action={
                 [
-                    <IconButton aria-label="expanded" key={1}>
-                        <Announcement />
-                    </IconButton>,
                     <IconButton aria-label="expanded" key={2}>
                         <AspectRatio />
                     </IconButton>
                 ]
             }
-            title="PRUEBA DE TITULO"
-            subheader="hola"
+            title="FENÓMENO ACADÉMICO DE VARIABLE INDEPENDIENTE"
         />
         <Divider />
         <CardContent>
@@ -64,10 +56,12 @@ const DashCardTRE = (
                     <IconButton aria-label="expanded" key={1}>
                         <Announcement />
                     </IconButton>,
+                    <IconButton aria-label="AspectRatio" key={2}>
+                        <AspectRatio />
+                    </IconButton>
                 ]
             }
-            title="PRUEBA DE TITULO"
-            subheader="hola"
+            title="TASA DE REPITENCIA"
         />
         <Divider />
         <CardContent>
@@ -83,10 +77,12 @@ const DashCardTDE = (
                     <IconButton aria-label="expanded" key={1}>
                         <Announcement />
                     </IconButton>,
+                    <IconButton aria-label="AspectRatio" key={2}>
+                        <AspectRatio />
+                    </IconButton>
                 ]
             }
-            title="PRUEBA DE TITULO"
-            subheader="hola"
+            title="TASA DE DESERCIÓN"
         />
         <Divider />
         <CardContent>
@@ -103,10 +99,12 @@ const DashCardTRT = (
                     <IconButton aria-label="expanded" key={1}>
                         <Announcement />
                     </IconButton>,
+                    <IconButton aria-label="AspectRatio" key={2}>
+                        <AspectRatio />
+                    </IconButton>
                 ]
             }
-            title="PRUEBA DE TITULO"
-            subheader="hola"
+            title="TASA DE RETENCION"
         />
         <Divider />
         <CardContent>

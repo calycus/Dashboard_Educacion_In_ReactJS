@@ -13,7 +13,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 //dependencias CSS
-import './css/Dashboard_General.css';
+import './css/DsGeneral/Dashboard_General.css';
 
 const bull = (
     <Box

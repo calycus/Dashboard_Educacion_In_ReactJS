@@ -48,12 +48,6 @@ function NameSelect(data) {
     })
 }
 
-//funcion que se encarga de actualizar una variable en el local Storage
-/* function SearchData(idMalla, idPeriodo) {
-    const dispatch = useDispatch();
-    
-} */
-
 //funciones que devuelven los diferentes selects usados en el dashboard
 function CardSelectMalla(props) {
     NameSelect(props);

@@ -1,6 +1,6 @@
 .titulo {
     text-align: center;
-    font-size: 2.2rem;
+    font-size: 2.1rem;
     font-weight: bold;
     padding-top: 2rem;
     padding-bottom: 3rem;
@@ -40,10 +40,16 @@
 }
 
 .div-select-malla {
-    display: flex;
-    align-self: center;
+    display: grid;
+    grid-auto-flow: column;
 }
-.arrowFowar-class{
+
+.div-name-select-malla {
+    padding-right: 3rem;
+    padding-bottom: 0.5rem;
+}
+
+.arrowFowar-class {
     margin-left: 10px !important
 }
 
@@ -74,19 +80,20 @@
 .MuiCollapse-wrapperInner.MuiCollapse-vertical.css-9l5vo-MuiCollapse-wrapperInner {
     font-weight: 550 !important;
 }
+
 .css-o4b71y-MuiAccordionSummary-content {
     margin: 0px 5px !important;
     /* margin-left: 5px !important; */
     /* margin-right: 5px !important; */
 }
 
-.MuiAccordionSummary-content.MuiAccordionSummary-contentGutters.css-o4b71y-MuiAccordionSummary-content{
-    font-size: .80 !important;
+.MuiAccordionSummary-content.MuiAccordionSummary-contentGutters.css-o4b71y-MuiAccordionSummary-content {
+    font-size: .80rem !important;
     font-weight: 650 !important;
     color: #004600;
 }
 
-.css-sh22l5-MuiButtonBase-root-MuiAccordionSummary-root{
+.css-sh22l5-MuiButtonBase-root-MuiAccordionSummary-root {
     padding: 0px !important;
     min-height: 35px !important;
 }
@@ -95,4 +102,16 @@
     align-self: center;
     font-size: 1.3rem !important;
     color: #004600;
+}
+
+.css-5qqpcr-MuiDivider-root {
+    margin: 0;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    border-width: 1px !important;
+    border-style: solid;
+    border-color: #004600 !important;
+    border-bottom-width: thin;
+    margin: 8px;
 }

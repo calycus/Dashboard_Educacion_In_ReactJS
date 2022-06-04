@@ -16,13 +16,12 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import SwitchDrawer from '../router/SwitchDrawer';
-import {
-  BrowserRouter, Link, matchPath, useLocation
-} from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+
+import '../css/Drawer.css'
 
 
-
-const drawerWidth = 260;
+const drawerWidth = 270;
 
 export default function PermanentDrawerLeft() {
   const [expandedPanel, setExpandedPanel] = useState(false);
@@ -39,6 +38,7 @@ export default function PermanentDrawerLeft() {
             width: drawerWidth,
             boxSizing: 'border-box',
           },
+          
         }}
         variant="permanent"
         anchor="left"

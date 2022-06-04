@@ -44,10 +44,10 @@ export default function CardCareerChoice(props) {
 
     function handleClick(id_escuela, id_malla, id_facultad) {
 
-        dispatch(setLocalIdFacultad(id_facultad)) 
+        dispatch(setLocalIdFacultad(id_facultad))
         dispatch(setLocalIdEscuela(id_escuela))
         dispatch(setLocalIdMalla(id_malla))
-        
+
         navigate("/general", { replace: true });
     }
 
@@ -69,7 +69,7 @@ export default function CardCareerChoice(props) {
                                         </div>
                                     </div>
 
-                                    <Collapse in={facultad.fac_expandida} timeout="auto" unmountOnExit>
+                                    <Collapse in={facultad.fac_expandida} timeout="auto" unmountOnExit style={{paddingBottom: '12px'}}>
                                         <Divider sx={{ margin: 1 }} />
                                         {facultad.escuelas.map((escuela, index) =>
                                             <Accordion expanded sx={{ boxShadow: 'none' }} key={index}>
@@ -90,8 +90,12 @@ export default function CardCareerChoice(props) {
                                                         {escuela.mallas.map((malla, index) =>
                                                             <AccordionDetails key={index} style={{ cursor: 'pointer' }} onClick={() => handleClick(escuela.id, malla.id, facultad.id)}>
                                                                 <div className='div-select-malla'>
-                                                                    {malla.nombre}
-                                                                    <ArrowForward className='arrowFoward-class' />
+                                                                    <div className='div-name-select-malla'>
+                                                                        {malla.nombre}
+                                                                    </div>
+                                                                    <div style={ {justifySelf: 'right', display: 'inline-flex'}}>
+                                                                        <ArrowForward className='arrowFoward-class' />
+                                                                    </div>
                                                                 </div>
                                                             </AccordionDetails>
 
