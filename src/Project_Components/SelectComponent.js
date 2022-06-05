@@ -7,11 +7,14 @@ import Select from '@mui/material/Select';
 import SearchIcon from '@mui/icons-material/Search';
 import { Button, IconButton, OutlinedInput } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+
 
 //store
 import { selectIdEscuela, selectIdMalla, setLocalIdMalla } from '../store/MallaStore/EleccionMallaStore';
 import { selectArrayMallas } from '../store/MallaStore/Mallas';
-import {traerInfoGeneralAsync} from '../store/DashGeneralStore/HighchartStore/HighchartStoreGeneral'
+import {traerInfoGeneralAsync} from '../store/HighchartStore/DashboardGeneral/HighchartStoreGeneral'
+import {traerInfoRetencionAsync} from '../store/HighchartStore/DashboardRetencion/HighchartStoreRetencion'
 
 //dependencias CSS
 import '../css/Select.css'
@@ -52,6 +55,8 @@ function NameSelect(data) {
 function CardSelectMalla(props) {
     NameSelect(props);
     const dispatch = useDispatch();
+    const sampleLocation = useLocation();
+    
     const handleChange = (event) => {
         newIdMalla = event.target.value;
         dispatch(setLocalIdMalla(newIdMalla));
@@ -73,7 +78,26 @@ function CardSelectMalla(props) {
                     }</MenuItem>)}
                 </Select>
             </FormControl>
-            <IconButton aria-label="search" size='large' onClick={() => dispatch(traerInfoGeneralAsync(mallaAux.idMalla))}>
+            <IconButton aria-label="search" size='large' onClick={() =>{
+                {
+                    if(sampleLocation.pathname == "/general")
+                    {
+                        dispatch(traerInfoGeneralAsync(mallaAux.idMalla))
+
+                    }else if(sampleLocation.pathname == "/tasa_retencion")
+                    {
+                        dispatch(traerInfoRetencionAsync(mallaAux.idMalla))
+
+                    }else if(sampleLocation.pathname == "/tasa_repitencia")
+                    {
+                        /* dispatch(traerInfoGeneralAsync(mallaAux.idMalla)) */
+
+                    }else if(sampleLocation.pathname == "/tasa_desercion")
+                    {
+                        /* dispatch(traerInfoGeneralAsync(mallaAux.idMalla)) */
+                        
+                    }
+                }} /* dispatch(traerInfoGeneralAsync(mallaAux.idMalla)) */}>
                 <SearchIcon sx={{ fontSize: 30, color: theme.palette.primary.main }} />
             </IconButton>
         </React.Fragment>

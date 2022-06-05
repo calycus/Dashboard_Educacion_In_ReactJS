@@ -1,7 +1,7 @@
 import React from 'react'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
-import { selectpieIndiceDesercion } from '../../../store/DashGeneralStore/HighchartStore/HighchartFenomenos'
+import { selectpieIndiceDesercion } from '../../../store/HighchartStore/DashboardGeneral/HighchartFenomenos'
 
 
 //dependencia

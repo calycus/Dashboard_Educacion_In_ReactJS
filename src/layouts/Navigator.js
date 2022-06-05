@@ -73,7 +73,7 @@ export default function PermanentDrawerLeft() {
               <Typography>Fenomesnos Academicos</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Link to="/general_prueba">
+              <Link to="/tasa_retencion">
                 <Accordion
                   onClick={() => setExpandedPanel(false)}
                   sx={{ boxShadow: 'none' }}
@@ -89,7 +89,7 @@ export default function PermanentDrawerLeft() {
                   </AccordionSummary>
                 </Accordion>
               </Link>
-              <Link to="/general_prueba">
+              <Link to="/tasa_repitencia">
                 <Accordion
                   expanded={expandedPanel === 'panelTRP'}
                   /* onChange={handleAccordionChange('panelTRP')} */
@@ -120,7 +120,7 @@ export default function PermanentDrawerLeft() {
                   </AccordionDetails>
                 </Accordion>
               </Link>
-              <Link to="/general_prueba">
+              <Link to="/tasa_desercion">
                 <Accordion
                   expanded={expandedPanel === 'panelTDS'}
                   /* onChange={handleAccordionChange('panelTDS')} */

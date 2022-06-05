@@ -4,18 +4,19 @@ import { Card, Button } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 
 //componentes
-import DashCardGeneral from '../Project_Components/ComponentsGeneral/DashCardGeneralComponent';
-import Select from '../Project_Components/SelectComponent';
+import DashCardGeneral from '../../Project_Components/ComponentsGeneral/DashCardGeneralComponent';
+import Select from '../../Project_Components/SelectComponent';
 
 //store
 import {
     selectIdEscuela, selectIdMalla, selectIdFacultad
-} from '../store/MallaStore/EleccionMallaStore';
-import { selectArrayMallas, traerMallasPorIdEscuelaAsync } from '../store/MallaStore/Mallas';
-import {traerInfoGeneralAsync} from '../store/DashGeneralStore/HighchartStore/HighchartStoreGeneral'
-import {traerInfoFenomenosAsync} from '../store/DashGeneralStore/HighchartStore/HighchartFenomenos'
+} from '../../store/MallaStore/EleccionMallaStore';
+import { selectArrayMallas, traerMallasPorIdEscuelaAsync } from '../../store/MallaStore/Mallas';
+import {traerInfoGeneralAsync} from '../../store/HighchartStore/DashboardGeneral/HighchartStoreGeneral'
+import {traerInfoFenomenosAsync} from '../../store/HighchartStore/DashboardGeneral/HighchartFenomenos'
+
 //dependencias CSS
-import '../css/DsGeneral/Dashboard_General.css';
+import './Dashboard_General.css'
 
 export default function OutlinedCard() {
     const id_escuela = useSelector(selectIdEscuela);
@@ -32,14 +33,14 @@ export default function OutlinedCard() {
 
     return (
         <Box sx={{ minWidth: 275 }}>
-            <div className='cardGridSelect'>
+            <div className='cardGridSelectGeneral'>
                 <Card variant="outlined" className='selectContainer'>{Select.CardSelectMalla(mallas)}</Card>
             </div>
-            <div className='cardGridUp'>
+            <div className='cardGridUpGeneral'>
                 <Card variant="outlined">{DashCardGeneral.DashCardVD}</Card>
                 <Card variant="outlined">{DashCardGeneral.DashCardVI}</Card>
             </div>
-            <div className='cardGridDown'>
+            <div className='cardGridDownGeneral'>
                 <Card variant="outlined">{DashCardGeneral.DashCardTRE}</Card>
                 <Card variant="outlined">{DashCardGeneral.DashCardTDE}</Card>
                 <Card variant="outlined">{DashCardGeneral.DashCardTRT}</Card>

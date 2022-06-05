@@ -1,7 +1,7 @@
 import React from 'react'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
-import { selectLineIndependienteGeneral } from '../../../store/DashGeneralStore/HighchartStore/HighchartStoreGeneral'
+import { selectLineIndependienteGeneral } from '../../../store/HighchartStore/DashboardGeneral/HighchartStoreGeneral'
 
 
 //dependencia

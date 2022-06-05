@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
 import ArrayMallasReducer from './MallaStore/Mallas'
 import ArrayFacultadesReducer from './MallaStore/EleccionMallaStore'
-import HighchartLineGeneral from './DashGeneralStore/HighchartStore/HighchartStoreGeneral'
-import PieFenomenosGeneral from './DashGeneralStore/HighchartStore/HighchartFenomenos'
+import HighchartLineGeneral from './HighchartStore/DashboardGeneral/HighchartStoreGeneral'
+import PieFenomenosGeneral from './HighchartStore/DashboardGeneral/HighchartFenomenos'
+import HighchartRetencion from './HighchartStore/DashboardRetencion/HighchartStoreRetencion'
 
 export default configureStore({
   reducer: {
@@ -11,6 +12,14 @@ export default configureStore({
     
     //store Highchart DS General
     HighchartLineGeneral: HighchartLineGeneral,
-    PieFenomenosGeneral: PieFenomenosGeneral
+    PieFenomenosGeneral: PieFenomenosGeneral,
+
+    //store Highchart DS Retencion
+    HighchartRetencion: HighchartRetencion,
+
+    //store Highchart DS Repitencia
+
+
+    //store Highchart DS Desercion
   },
 })

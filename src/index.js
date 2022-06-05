@@ -23,7 +23,7 @@ const theme = createTheme({
     },
     negative: {
       main: '#C10015',
-    }
+    },
   },
 });
 
