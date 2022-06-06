@@ -62,7 +62,7 @@ export default function CardIndiceDeRetencionPorMalla() {
                     justifyContent="center"
                 >
                     <Typography style={{color:"#00bcd4", fontSize: "2rem"}}>
-                        {preData.promedioGeneral}
+                        {preData.promedioGeneral}%
                     </Typography>
                 </Box>
             </Box>
@@ -80,7 +80,7 @@ export default function CardIndiceDeRetencionPorMalla() {
                         justifyContent="center"
                     >
                         <div className='BorderLinearTextContents'>
-                            {preData.totalDeEstudiantesInscritos}%
+                            {preData.totalDeEstudiantesInscritos}
                         </div>
                     </Box>
                 </Box>

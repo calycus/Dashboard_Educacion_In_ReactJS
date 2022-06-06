@@ -1,11 +1,16 @@
 import React from "react";
 import { CardHeader, CardContent } from '@mui/material';
 import { IconButton } from "@mui/material";
-import { Announcement, AspectRatio } from '@mui/icons-material';
+import { Announcement, AspectRatio, ImportExport } from '@mui/icons-material';
 import { Divider } from '@mui/material';
 
 //componentes
+import LineMetodoSga from '../HighchartsComponent/HighchartsDesercion/TasaDeDesercion/HighchartsLineMetodoSga'
+import PieDesercionPorMaternidad from '../HighchartsComponent/HighchartsDesercion/TasaDeDesercion/HighchartsPieDesercionPorMaternidad'
+import ColumnDesercionPorEdad from '../HighchartsComponent/HighchartsDesercion/TasaDeDesercion/HighchartsColumnDesercionPorEdad'
+import ColumnDesercionPorGenero from '../HighchartsComponent/HighchartsDesercion/TasaDeDesercion/HighchartsColumnDesercionPorGenero'
 
+import './DashCardTsDesercionComponent.css'
 
 const DashCardLineDesercion = (
     <React.Fragment>
@@ -17,10 +22,12 @@ const DashCardLineDesercion = (
                     </IconButton>
                 ]
             }
-            title="FENÓMENOS ACADÉMICOS DE VARIABLE DEPENDIENTE"
+            title="TASA DE DESERCIÓN"
         />
         <Divider />
-        <CardContent>
+        <CardContent 
+            className="HighchartContent">
+            <LineMetodoSga />
         </CardContent>
     </React.Fragment>
 );
@@ -38,7 +45,7 @@ const DashCardCircularProgressDesercion = (
                     </IconButton>
                 ]
             }
-            title="TASA DE REPITENCIA"
+            title="TOTAL DE INSCRITOS"
         />
         <Divider />
         <CardContent>
@@ -52,17 +59,15 @@ const DashCardDesercionPorMaternidad = (
             action={
                 [
                     <IconButton aria-label="expanded" key={1}>
-                        <Announcement />
-                    </IconButton>,
-                    <IconButton aria-label="AspectRatio" key={2}>
                         <AspectRatio />
-                    </IconButton>
+                    </IconButton>,
                 ]
             }
-            title="TASA DE DESERCIÓN"
+            title="DESERCION POR MATERNIDAD"
         />
         <Divider />
         <CardContent>
+            <PieDesercionPorMaternidad />
         </CardContent>
     </React.Fragment>
 );
@@ -73,17 +78,15 @@ const DashCardDesercionPorRangoDeEdad = (
             action={
                 [
                     <IconButton aria-label="expanded" key={1}>
-                        <Announcement />
-                    </IconButton>,
-                    <IconButton aria-label="AspectRatio" key={2}>
                         <AspectRatio />
-                    </IconButton>
+                    </IconButton>,
                 ]
             }
-            title="TASA DE RETENCION"
+            title="DESERCION POR RANGO DE EDAD"
         />
         <Divider />
         <CardContent>
+            <ColumnDesercionPorEdad />
         </CardContent>
     </React.Fragment>
 );
@@ -94,17 +97,15 @@ const DashCardDesercionPorGenero = (
             action={
                 [
                     <IconButton aria-label="expanded" key={1}>
-                        <Announcement />
-                    </IconButton>,
-                    <IconButton aria-label="AspectRatio" key={2}>
                         <AspectRatio />
-                    </IconButton>
+                    </IconButton>,
                 ]
             }
-            title="TASA DE RETENCION"
+            title="DESERCION POR GENERO"
         />
         <Divider />
         <CardContent>
+            <ColumnDesercionPorGenero />
         </CardContent>
     </React.Fragment>
 );

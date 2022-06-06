@@ -12,6 +12,8 @@ import {
     selectIdEscuela, selectIdMalla
 } from '../../../store/MallaStore/EleccionMallaStore';
 import { selectArrayMallas, traerMallasPorIdEscuelaAsync } from '../../../store/MallaStore/Mallas';
+import { traerInfoLineDesertoresAsync } from '../../../store/HighchartStore/DashboardDesercion/TasaDeDesercion/HighchartDesercionGeneral'
+import { traerInfoesercionGenerosEdadEmbarazoAsync } from '../../../store/HighchartStore/DashboardDesercion/TasaDeDesercion/HighchartDesercionGenerosEdadEmbarazo'
 
 //dependencias CSS
 import './Dashboard_Desercion.css'
@@ -24,6 +26,8 @@ export default function PageTasaDeRetencion() {
     
     React.useEffect(() => {
         dispatch(traerMallasPorIdEscuelaAsync(id_escuela))
+        dispatch(traerInfoLineDesertoresAsync(id_malla))
+        dispatch(traerInfoesercionGenerosEdadEmbarazoAsync(id_malla))
     }, []);
 
     return (

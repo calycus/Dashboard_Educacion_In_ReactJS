@@ -25,7 +25,7 @@ const DashCardLineRetencion = (
             subheader="prueba"
         />
         <Divider />
-        <Container >
+        <Container className="HighchartContent">
             <LineRetencionPorMalla/>
         </Container>
     </React.Fragment>

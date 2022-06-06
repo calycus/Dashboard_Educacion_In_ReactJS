@@ -13,8 +13,13 @@ import { useLocation } from 'react-router-dom';
 //store
 import { selectIdEscuela, selectIdMalla, setLocalIdMalla } from '../store/MallaStore/EleccionMallaStore';
 import { selectArrayMallas } from '../store/MallaStore/Mallas';
+///DsGeneral
 import {traerInfoGeneralAsync} from '../store/HighchartStore/DashboardGeneral/HighchartStoreGeneral'
+///Retencion
 import {traerInfoRetencionAsync} from '../store/HighchartStore/DashboardRetencion/HighchartStoreRetencion'
+///Desercion
+import { traerInfoLineDesertoresAsync } from '../store/HighchartStore/DashboardDesercion/TasaDeDesercion/HighchartDesercionGeneral'
+import { traerInfoesercionGenerosEdadEmbarazoAsync } from '../store/HighchartStore/DashboardDesercion/TasaDeDesercion/HighchartDesercionGenerosEdadEmbarazo'
 
 //dependencias CSS
 import '../css/Select.css'
@@ -94,7 +99,8 @@ function CardSelectMalla(props) {
 
                     }else if(sampleLocation.pathname == "/tasa_desercion")
                     {
-                        /* dispatch(traerInfoGeneralAsync(mallaAux.idMalla)) */
+                        dispatch(traerInfoLineDesertoresAsync(mallaAux.idMalla))
+                        dispatch(traerInfoesercionGenerosEdadEmbarazoAsync(mallaAux.idMalla))
                         
                     }
                 }} /* dispatch(traerInfoGeneralAsync(mallaAux.idMalla)) */}>
