@@ -17,5 +17,16 @@
 
 .BoxContentsCircularProgress{
     justify-content: space-around;
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.ButtonIndiceDeRetencion{
+    min-width: 10rem;
+    max-width: fit-content;
+    -webkit-text-stroke-width: thin;
+}
+
+.ButtonTextIndiceDeRetencion{
+    font-size: 0.9rem !important;
+    text-transform: capitalize !important;
 }

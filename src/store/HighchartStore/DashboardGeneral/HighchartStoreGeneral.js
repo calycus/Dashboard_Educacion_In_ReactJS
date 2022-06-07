@@ -39,7 +39,7 @@ export const traerInfo = createSlice({
             state.LineDependienteGeneral.series[1].data = [];
             data.array_periodos_de_interes.forEach(element => {
                 state.LineDependienteGeneral.categories.push(
-                    element.nombre
+                    element.abreviatura
                 );
             });
             data.array_indices_desercion_to_response.forEach(element => {
@@ -64,7 +64,7 @@ export const traerInfo = createSlice({
             state.LineIndependienteGeneral.series[0].data = [];
             data.array_periodos_de_interes.forEach(element => {
                 state.LineIndependienteGeneral.categories.push(
-                    element.nombre
+                    element.abreviatura
                 );
             });
             data.array_indices_repitencia_to_response.forEach(element => {

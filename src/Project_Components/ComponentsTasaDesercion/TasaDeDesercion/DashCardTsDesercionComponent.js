@@ -5,10 +5,11 @@ import { Announcement, AspectRatio, ImportExport } from '@mui/icons-material';
 import { Divider } from '@mui/material';
 
 //componentes
-import LineMetodoSga from '../HighchartsComponent/HighchartsDesercion/TasaDeDesercion/HighchartsLineMetodoSga'
-import PieDesercionPorMaternidad from '../HighchartsComponent/HighchartsDesercion/TasaDeDesercion/HighchartsPieDesercionPorMaternidad'
-import ColumnDesercionPorEdad from '../HighchartsComponent/HighchartsDesercion/TasaDeDesercion/HighchartsColumnDesercionPorEdad'
-import ColumnDesercionPorGenero from '../HighchartsComponent/HighchartsDesercion/TasaDeDesercion/HighchartsColumnDesercionPorGenero'
+import LineMetodoSga from '../../HighchartsComponent/HighchartsDesercion/TasaDeDesercion/HighchartsLineMetodoSga'
+import CardIndiceTotalDeInscritos from './CardIndiceTotalDeInscritos'
+import PieDesercionPorMaternidad from '../../HighchartsComponent/HighchartsDesercion/TasaDeDesercion/HighchartsPieDesercionPorMaternidad'
+import ColumnDesercionPorEdad from '../../HighchartsComponent/HighchartsDesercion/TasaDeDesercion/HighchartsColumnDesercionPorEdad'
+import ColumnDesercionPorGenero from '../../HighchartsComponent/HighchartsDesercion/TasaDeDesercion/HighchartsColumnDesercionPorGenero'
 
 import './DashCardTsDesercionComponent.css'
 
@@ -26,7 +27,7 @@ const DashCardLineDesercion = (
         />
         <Divider />
         <CardContent 
-            className="HighchartContent">
+            className="HighchartContentDesercion">
             <LineMetodoSga />
         </CardContent>
     </React.Fragment>
@@ -49,6 +50,7 @@ const DashCardCircularProgressDesercion = (
         />
         <Divider />
         <CardContent>
+            <CardIndiceTotalDeInscritos/>
         </CardContent>
     </React.Fragment>
 );

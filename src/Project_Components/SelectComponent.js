@@ -14,12 +14,25 @@ import { useLocation } from 'react-router-dom';
 import { selectIdEscuela, selectIdMalla, setLocalIdMalla } from '../store/MallaStore/EleccionMallaStore';
 import { selectArrayMallas } from '../store/MallaStore/Mallas';
 ///DsGeneral
-import {traerInfoGeneralAsync} from '../store/HighchartStore/DashboardGeneral/HighchartStoreGeneral'
+import { traerInfoGeneralAsync } from '../store/HighchartStore/DashboardGeneral/HighchartStoreGeneral'
+
 ///Retencion
-import {traerInfoRetencionAsync} from '../store/HighchartStore/DashboardRetencion/HighchartStoreRetencion'
+import { traerInfoRetencionAsync } from '../store/HighchartStore/DashboardRetencion/HighchartStoreRetencion'
+
+///Repitencia
+////Repitencia => MetaData
+import { traerInfoRPPieFactorEconomicoAsync } from '../store/HighchartStore/DashboardRepitencia/MetaData/HighchartRepitenciaFactorEconomico';
+import { traerInfoRPColumnFactorEdnicoAsync } from '../store/HighchartStore/DashboardRepitencia/MetaData/HighchartRepitenciaFactorEdnico';
+import { traerInfoRPColumnFactorGeograficoAsync } from '../store/HighchartStore/DashboardRepitencia/MetaData/HighchartRepitenciaFactorGeograficdo';
+
 ///Desercion
 import { traerInfoLineDesertoresAsync } from '../store/HighchartStore/DashboardDesercion/TasaDeDesercion/HighchartDesercionGeneral'
 import { traerInfoesercionGenerosEdadEmbarazoAsync } from '../store/HighchartStore/DashboardDesercion/TasaDeDesercion/HighchartDesercionGenerosEdadEmbarazo'
+////Desercion => MetaData
+import { traerInfoDSPieFactorEconomicoAsync } from '../store/HighchartStore/DashboardDesercion/MetaData/HighchartDesercionFactorEconomico';
+import { traerInfoDSColumnFactorEdnicoAsync } from '../store/HighchartStore/DashboardDesercion/MetaData/HighchartDesercionFactorEdnico';
+import { traerInfoDSColumnFactorGeograficoAsync } from '../store/HighchartStore/DashboardDesercion/MetaData/HighchartDesercionFactorGeograficdo';
+
 
 //dependencias CSS
 import '../css/Select.css'
@@ -61,7 +74,7 @@ function CardSelectMalla(props) {
     NameSelect(props);
     const dispatch = useDispatch();
     const sampleLocation = useLocation();
-    
+
     const handleChange = (event) => {
         newIdMalla = event.target.value;
         dispatch(setLocalIdMalla(newIdMalla));
@@ -83,27 +96,34 @@ function CardSelectMalla(props) {
                     }</MenuItem>)}
                 </Select>
             </FormControl>
-            <IconButton aria-label="search" size='large' onClick={() =>{
+            <IconButton aria-label="search" size='large' onClick={() => {
                 {
-                    if(sampleLocation.pathname == "/general")
-                    {
+                    if (sampleLocation.pathname == "/general") {
                         dispatch(traerInfoGeneralAsync(mallaAux.idMalla))
 
-                    }else if(sampleLocation.pathname == "/tasa_retencion")
-                    {
+                    } else if (sampleLocation.pathname == "/tasa_retencion") {
                         dispatch(traerInfoRetencionAsync(mallaAux.idMalla))
 
-                    }else if(sampleLocation.pathname == "/tasa_repitencia")
-                    {
+                    } else if (sampleLocation.pathname == "/tasa_repitencia") {
                         /* dispatch(traerInfoGeneralAsync(mallaAux.idMalla)) */
 
-                    }else if(sampleLocation.pathname == "/tasa_desercion")
-                    {
+                    } else if (sampleLocation.pathname == "/tasa_repitencia_metadata") {
+                        dispatch(traerInfoRPPieFactorEconomicoAsync(mallaAux.idMalla))
+                        dispatch(traerInfoRPColumnFactorEdnicoAsync(mallaAux.idMalla))
+                        dispatch(traerInfoRPColumnFactorGeograficoAsync(mallaAux.idMalla))
+
+                    } else if (sampleLocation.pathname == "/tasa_desercion") {
                         dispatch(traerInfoLineDesertoresAsync(mallaAux.idMalla))
                         dispatch(traerInfoesercionGenerosEdadEmbarazoAsync(mallaAux.idMalla))
-                        
+
+                    } else if (sampleLocation.pathname == "/tasa_desercion_metadata") {
+                        dispatch(traerInfoDSPieFactorEconomicoAsync(mallaAux.idMalla))
+                        dispatch(traerInfoDSColumnFactorEdnicoAsync(mallaAux.idMalla))
+                        dispatch(traerInfoDSColumnFactorGeograficoAsync(mallaAux.idMalla))
+
                     }
-                }} /* dispatch(traerInfoGeneralAsync(mallaAux.idMalla)) */}>
+                }
+            }}>
                 <SearchIcon sx={{ fontSize: 30, color: theme.palette.primary.main }} />
             </IconButton>
         </React.Fragment>

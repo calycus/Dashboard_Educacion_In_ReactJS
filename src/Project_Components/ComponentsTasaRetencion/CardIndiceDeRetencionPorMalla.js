@@ -1,15 +1,17 @@
 import React from 'react'
 import { styled } from '@mui/material/styles';
+import { GroupAdd, HowToReg, School } from '@mui/icons-material';
 import { selectColumnGraduadosPorGenero } from '../../store/HighchartStore/DashboardRetencion/HighchartStoreRetencion'
-import { CircularProgress, circularProgressClasses, Typography, Box, LinearProgress, linearProgressClasses, Stack } from '@mui/material'
+import { CircularProgress, Typography, Box, LinearProgress, linearProgressClasses, Stack, Button } from '@mui/material'
 
 //dependencia
 import { useSelector } from 'react-redux'
 import './CardIndiceDeRetencionPorMalla.css'
+import { padding } from '@mui/system';
 
 export default function CardIndiceDeRetencionPorMalla() {
     const preData = useSelector(selectColumnGraduadosPorGenero);
-    
+
     const BorderLinearTotInscritos = styled(LinearProgress)(({ theme }) => ({
         height: 30,
         borderRadius: 5,
@@ -45,12 +47,12 @@ export default function CardIndiceDeRetencionPorMalla() {
     }));
 
     let totEstudiantesRetenidos = parseFloat(preData.totalDeEstudiantesRetenidos, 2)
-    let totalDeEstudiantesGradudados = parseFloat(preData.totalDeEstudiantesGradudados,2)
+    let totalDeEstudiantesGradudados = parseFloat(preData.totalDeEstudiantesGradudados, 2)
 
     return (
         <div className='cardIndiceDeRetencionPorMalla'>
             <Box position="relative" display="inline-flex" className='BoxContentsCircularProgress'>
-                <CircularProgress thickness={4} style={{color:"#00bcd4"}} variant="determinate" value={preData.promedioGeneral} size={125} />
+                <CircularProgress thickness={4.5} style={{ color: "#00bcd4" }} variant="determinate" value={preData.promedioGeneral} size={125} />
                 <Box
                     top={0}
                     left={0}
@@ -61,12 +63,17 @@ export default function CardIndiceDeRetencionPorMalla() {
                     alignItems="center"
                     justifyContent="center"
                 >
-                    <Typography style={{color:"#00bcd4", fontSize: "2rem"}}>
+                    <Typography style={{ color: "#00bcd4", fontSize: "2rem" }}>
                         {preData.promedioGeneral}%
                     </Typography>
                 </Box>
             </Box>
             <Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
+
+                <Button className='ButtonIndiceDeRetencion' style={{ color: '#21BA45' }}>
+                    <GroupAdd style={{ color: '#21BA45', paddingRight: '0.6rem', paddingLeft: '0.5rem'}} sx={{fontSize: 25}}/>
+                    <Typography className='ButtonTextIndiceDeRetencion'>Tot. Inscritos</Typography>
+                </Button>
                 <Box position="relative" display="inline-block">
                     <BorderLinearTotInscritos variant="buffer" value={100} />
                     <Box
@@ -85,6 +92,10 @@ export default function CardIndiceDeRetencionPorMalla() {
                     </Box>
                 </Box>
 
+                <Button className='ButtonIndiceDeRetencion' style={{ color: '#26a69a' }}>
+                    <HowToReg style={{ color: '#26a69a', paddingRight: '0.6rem', paddingLeft: '0.5rem'}} sx={{fontSize: 25}}/>
+                    <Typography className='ButtonTextIndiceDeRetencion'>Tot. Conservados</Typography>
+                </Button>
                 <Box position="relative" display="inline-block">
                     <BorderLinearTotConservados variant="determinate" value={totEstudiantesRetenidos} />
                     <Box
@@ -102,7 +113,10 @@ export default function CardIndiceDeRetencionPorMalla() {
                         </div>
                     </Box>
                 </Box>
-
+                <Button className='ButtonIndiceDeRetencion' style={{ color: '#00bcd4' }}>
+                    <School style={{ color: '#00bcd4', paddingRight: '0.6rem', paddingLeft: '0.5rem'}} sx={{fontSize: 25}}/>
+                    <Typography className='ButtonTextIndiceDeRetencion'>Tot. Graduados</Typography>
+                </Button>
                 <Box position="relative" display="inline-block">
                     <BorderLinearTotGraduados variant="determinate" value={totalDeEstudiantesGradudados} />
                     <Box
@@ -120,8 +134,6 @@ export default function CardIndiceDeRetencionPorMalla() {
                         </div>
                     </Box>
                 </Box>
-
-
             </Stack>
         </div>
     );

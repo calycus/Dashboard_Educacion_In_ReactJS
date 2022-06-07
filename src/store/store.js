@@ -3,9 +3,24 @@ import ArrayMallasReducer from './MallaStore/Mallas'
 import ArrayFacultadesReducer from './MallaStore/EleccionMallaStore'
 import HighchartLineGeneral from './HighchartStore/DashboardGeneral/HighchartStoreGeneral'
 import PieFenomenosGeneral from './HighchartStore/DashboardGeneral/HighchartFenomenos'
+//store Highchart DS Retencion
 import HighchartRetencion from './HighchartStore/DashboardRetencion/HighchartStoreRetencion'
+
+//store Highchart DS Repitencia
+////store Highchart DS Repitencia => Repitencia Por Materia
+////store Highchart DS Repitencia => Metadata
+import HighchartRepitenciaFactorEconomico from './HighchartStore/DashboardRepitencia/MetaData/HighchartRepitenciaFactorEconomico'
+import HighchartRepitenciaFactorEdnico from './HighchartStore/DashboardRepitencia/MetaData/HighchartRepitenciaFactorEdnico'
+import HighchartRepitenciaFactorGeografico from './HighchartStore/DashboardRepitencia/MetaData/HighchartRepitenciaFactorGeograficdo'
+
+//store Highchart DS Desercion
 import HighchartDesercionGeneral from './HighchartStore/DashboardDesercion/TasaDeDesercion/HighchartDesercionGeneral'
 import HighchartDesercionGenerosEdadEmbarazo from './HighchartStore/DashboardDesercion/TasaDeDesercion/HighchartDesercionGenerosEdadEmbarazo'
+////store Highchart DS Desercion => Prediccion
+////store Highchart DS Desercion => Metadata
+import HighchartDesercionFactorEconomico from './HighchartStore/DashboardDesercion/MetaData/HighchartDesercionFactorEconomico'
+import HighchartDesercionFactorEdnico from './HighchartStore/DashboardDesercion/MetaData/HighchartDesercionFactorEdnico'
+import HighchartDesercionFactorGeografico from './HighchartStore/DashboardDesercion/MetaData/HighchartDesercionFactorGeograficdo'
 
 export default configureStore({
   reducer: {
@@ -22,11 +37,17 @@ export default configureStore({
     //store Highchart DS Repitencia
     ////store Highchart DS Repitencia => Repitencia Por Materia
     ////store Highchart DS Repitencia => Metadata
+    HighchartRepitenciaFactorEconomico: HighchartRepitenciaFactorEconomico,
+    HighchartRepitenciaFactorEdnico: HighchartRepitenciaFactorEdnico,
+    HighchartRepitenciaFactorGeografico: HighchartRepitenciaFactorGeografico,
 
     //store Highchart DS Desercion
     HighchartDesercionGeneral: HighchartDesercionGeneral,
-    HighchartDesercionGenerosEdadEmbarazo: HighchartDesercionGenerosEdadEmbarazo
+    HighchartDesercionGenerosEdadEmbarazo: HighchartDesercionGenerosEdadEmbarazo,
     ////store Highchart DS Desercion => Prediccion
     ////store Highchart DS Desercion => Metadata
+    HighchartDesercionFactorEconomico: HighchartDesercionFactorEconomico,
+    HighchartDesercionFactorEdnico: HighchartDesercionFactorEdnico,
+    HighchartDesercionFactorGeografico: HighchartDesercionFactorGeografico
   },
 })

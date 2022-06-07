@@ -10,6 +10,7 @@ import ColumnGraduadosPorGenero from '../HighchartsComponent/HighchartsRetencion
 import ColumnGraduadosPorRangoDeEdad from '../HighchartsComponent/HighchartsRetencion/HighchartsColumnPrimeraMatriculaPorRangoDeEdad'
 import CardIndiceDeRetencionPorMalla from './CardIndiceDeRetencionPorMalla'
 
+import './DashCardTsRetencionComponent.css'
 
 const DashCardLineRetencion = (
     <React.Fragment>
@@ -25,7 +26,7 @@ const DashCardLineRetencion = (
             subheader="prueba"
         />
         <Divider />
-        <Container className="HighchartContent">
+        <Container className="HighchartContentRetencion">
             <LineRetencionPorMalla/>
         </Container>
     </React.Fragment>

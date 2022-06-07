@@ -4,7 +4,7 @@ import { Card } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 
 //componentes
-import DashCardTasaDeDesercion from '../../../Project_Components/ComponentsTasaDesercion/DashCardTsDesercionComponent';
+import DashCardTasaDeDesercion from '../../../Project_Components/ComponentsTasaDesercion/TasaDeDesercion/DashCardTsDesercionComponent';
 import Select from '../../../Project_Components/SelectComponent';
 
 //store

@@ -1,5 +1,5 @@
-.HighchartContent{
+.HighchartContentRetencion{
     display: grid !important;
-    min-height: 19rem !important;
-    max-height: 20rem !important;
+    min-height: 24rem !important;
+    max-height: 24rem !important;
 }

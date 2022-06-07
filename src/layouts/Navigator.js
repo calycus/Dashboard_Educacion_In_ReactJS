@@ -38,7 +38,7 @@ export default function PermanentDrawerLeft() {
             width: drawerWidth,
             boxSizing: 'border-box',
           },
-          
+
         }}
         variant="permanent"
         anchor="left"
@@ -89,13 +89,14 @@ export default function PermanentDrawerLeft() {
                   </AccordionSummary>
                 </Accordion>
               </Link>
-              <Link to="/tasa_repitencia">
-                <Accordion
-                  expanded={expandedPanel === 'panelTRP'}
-                  /* onChange={handleAccordionChange('panelTRP')} */
-                  onChange={(e, expanded) => setExpandedPanel(expanded ? 'panelTRP' : false)}
-                  sx={{ boxShadow: 'none' }}
-                >
+              <Accordion
+                expanded={expandedPanel === 'panelTRP'}
+                /* onChange={handleAccordionChange('panelTRP')} */
+                onChange={(e, expanded) => setExpandedPanel(expanded ? 'panelTRP' : false)}
+                sx={{ boxShadow: 'none' }}
+              >
+
+                <Link to="/tasa_repitencia">
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
@@ -106,27 +107,32 @@ export default function PermanentDrawerLeft() {
                     </ListItemIcon>
                     <Typography>Tasa de Repitencia</Typography>
                   </AccordionSummary>
+                </Link>
 
-                  <AccordionDetails>
-                    <ListItemButton>
-                      <ListItemIcon></ListItemIcon>
-                      <ListItemText primary="Predicción" />
-                    </ListItemButton>
+                <AccordionDetails>
 
+                  <ListItemButton>
+                    <ListItemIcon></ListItemIcon>
+                    <ListItemText primary="Por Materia" />
+                  </ListItemButton>
+
+                  <Link to="/tasa_repitencia_metadata">
                     <ListItemButton>
                       <ListItemIcon></ListItemIcon>
                       <ListItemText primary="MetaData" />
                     </ListItemButton>
-                  </AccordionDetails>
-                </Accordion>
-              </Link>
-              <Link to="/tasa_desercion">
-                <Accordion
-                  expanded={expandedPanel === 'panelTDS'}
-                  /* onChange={handleAccordionChange('panelTDS')} */
-                  onChange={(e, expanded) => setExpandedPanel(expanded ? 'panelTDS' : false)}
-                  sx={{ boxShadow: 'none' }}
-                >
+                  </Link>
+
+                </AccordionDetails>
+              </Accordion>
+
+              <Accordion
+                expanded={expandedPanel === 'panelTDS'}
+                /* onChange={handleAccordionChange('panelTDS')} */
+                onChange={(e, expanded) => setExpandedPanel(expanded ? 'panelTDS' : false)}
+                sx={{ boxShadow: 'none' }}
+              >
+                <Link to="/tasa_desercion">
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
@@ -137,24 +143,25 @@ export default function PermanentDrawerLeft() {
                     </ListItemIcon>
                     <Typography>Tasa de Desercion</Typography>
                   </AccordionSummary>
-
-                  <AccordionDetails>
+                </Link>
+                <AccordionDetails>
                     <ListItemButton>
                       <ListItemIcon></ListItemIcon>
-                      <ListItemText primary="Por Materia" />
+                      <ListItemText primary="Predicción" />
                     </ListItemButton>
 
+                  <Link to="/tasa_desercion_metadata">
                     <ListItemButton>
                       <ListItemIcon></ListItemIcon>
                       <ListItemText primary="MetaData" />
                     </ListItemButton>
-                  </AccordionDetails>
-                </Accordion>
-              </Link>
+                  </Link>
+                </AccordionDetails>
+              </Accordion>
             </AccordionDetails>
           </Accordion>
         </List>
-      </Drawer>
+      </Drawer >
   }
   return (
     <Box sx={{ display: 'flex' }}>

@@ -1,0 +1,40 @@
+.BorderLinearTextContents {
+    background-color: #fff !important;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    line-height: 15px;
+    min-height: 12px;
+    font-weight: normal;
+    color: black;
+    vertical-align: baseline;
+}
+
+.cardIndiceDeDesercioncionPorMalla {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    padding: 0.5rem;
+}
+
+.BoxContentsCircularProgressDesercion{
+    display: flex !important;
+    justify-content: space-around;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.PaperDesercion{
+    min-width: 9rem;
+    max-width: 10rem;
+    text-align: center;
+}
+
+.DivPaperContents{
+    display: flex;
+    justify-content: space-around;
+}
+.css-1pvw06u-MuiStack-root>:not(style)+:not(style) {
+    margin: 0;
+    margin-top: 0px !important;
+}

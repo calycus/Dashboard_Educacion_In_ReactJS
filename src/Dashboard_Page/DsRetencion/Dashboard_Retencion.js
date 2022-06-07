@@ -34,7 +34,7 @@ export default function PageTasaDeRetencion() {
                 <Card variant="outlined" className='selectContainer'>{Select.CardSelectMalla(mallas)}</Card>
             </div>
             <div className='cardGridUpRetencion'>
-                <Card variant="outlined" >{DashCardTasaDeRetencion.DashCardLineRetencion}</Card>
+                <Card variant="outlined" className='CardLineRetencion'>{DashCardTasaDeRetencion.DashCardLineRetencion}</Card>
                 <Card variant="outlined">{DashCardTasaDeRetencion.DashCardCircularProgressRetencion}</Card>
             </div>
             <div className='cardGridDownRetencion'>
