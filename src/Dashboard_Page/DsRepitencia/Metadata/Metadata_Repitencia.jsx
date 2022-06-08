@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { Card } from '@mui/material';
+import { Card, CardContent } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 
 //componentes
@@ -36,14 +36,30 @@ export default function PageTasaDeDesercionMetaData() {
     return (
         <Box sx={{ minWidth: 275 }}>
             <div className='cardGridSelectRepitenciaMetaData'>
-                <Card variant="outlined" className='selectContainer'>{Select.CardSelectMalla(mallas)}</Card>
+                <Card>
+                    <CardContent className='selectContainer'>
+                        {Select.CardSelectMalla(mallas)}
+                    </CardContent>
+                </Card>
             </div>
             <div className='cardGridUpRepitenciaMetaData'>
-                <Card variant="outlined">{DashCardRPMetaDataComponent.DashCardPieFactorEconomico}</Card>
-                <Card variant="outlined">{DashCardRPMetaDataComponent.DashCardColumnFactorEtnico}</Card>
+                <Card>
+                    <CardContent>
+                        {DashCardRPMetaDataComponent.DashCardPieFactorEconomico}
+                    </CardContent>
+                </Card>
+                <Card>
+                    <CardContent>
+                        {DashCardRPMetaDataComponent.DashCardColumnFactorEtnico}
+                    </CardContent>
+                </Card>
             </div>
             <div className='cardGridDownRepitenciaMetaData'>
-                <Card variant="outlined">{DashCardRPMetaDataComponent.DashCardColumnFactorGeografico}</Card>
+                <Card>
+                    <CardContent>
+                        {DashCardRPMetaDataComponent.DashCardColumnFactorGeografico}
+                    </CardContent>
+                </Card>
             </div>
         </Box >
     );

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { Card } from '@mui/material';
+import { Card, CardContent } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 
 //componentes
@@ -12,7 +12,7 @@ import {
     selectIdEscuela, selectIdMalla
 } from '../../store/MallaStore/EleccionMallaStore';
 import { selectArrayMallas, traerMallasPorIdEscuelaAsync } from '../../store/MallaStore/Mallas';
-import {traerInfoRetencionAsync} from '../../store/HighchartStore/DashboardRetencion/HighchartStoreRetencion'
+import { traerInfoRetencionAsync } from '../../store/HighchartStore/DashboardRetencion/HighchartStoreRetencion'
 
 //dependencias CSS
 import './Dashboard_Retencion.css'
@@ -22,7 +22,7 @@ export default function PageTasaDeRetencion() {
     const id_malla = useSelector(selectIdMalla);
     const mallas = useSelector(selectArrayMallas);
     const dispatch = useDispatch();
-    
+
     React.useEffect(() => {
         dispatch(traerMallasPorIdEscuelaAsync(id_escuela))
         dispatch(traerInfoRetencionAsync(id_malla))
@@ -31,15 +31,35 @@ export default function PageTasaDeRetencion() {
     return (
         <Box sx={{ minWidth: 275 }}>
             <div className='cardGridSelectRetencion'>
-                <Card variant="outlined" className='selectContainer'>{Select.CardSelectMalla(mallas)}</Card>
+                <Card>
+                    <CardContent className='selectContainer'>
+                        {Select.CardSelectMalla(mallas)}
+                    </CardContent>
+                </Card>
             </div>
             <div className='cardGridUpRetencion'>
-                <Card variant="outlined" className='CardLineRetencion'>{DashCardTasaDeRetencion.DashCardLineRetencion}</Card>
-                <Card variant="outlined">{DashCardTasaDeRetencion.DashCardCircularProgressRetencion}</Card>
+                <Card>
+                    <CardContent className='CardLineRetencion'>
+                        {DashCardTasaDeRetencion.DashCardLineRetencion}
+                    </CardContent>
+                </Card>
+                <Card>
+                    <CardContent>
+                        {DashCardTasaDeRetencion.DashCardCircularProgressRetencion}
+                    </CardContent>
+                </Card>
             </div>
             <div className='cardGridDownRetencion'>
-                <Card variant="outlined">{DashCardTasaDeRetencion.DashCardGraduadosPorGenero}</Card>
-                <Card variant="outlined">{DashCardTasaDeRetencion.DashCardPrimeraMatricula}</Card>
+                <Card>
+                    <CardContent>
+                        {DashCardTasaDeRetencion.DashCardPrimeraMatricula}
+                    </CardContent>
+                </Card>
+                <Card>
+                    <CardContent>
+                        {DashCardTasaDeRetencion.DashCardPrimeraMatricula}
+                    </CardContent>
+                </Card>
             </div>
         </Box >
     );

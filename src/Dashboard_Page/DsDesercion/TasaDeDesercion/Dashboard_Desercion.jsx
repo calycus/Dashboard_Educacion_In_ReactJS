@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { Card } from '@mui/material';
+import { Card, CardContent } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 
 //componentes
@@ -23,7 +23,7 @@ export default function PageTasaDeRetencion() {
     const id_malla = useSelector(selectIdMalla);
     const mallas = useSelector(selectArrayMallas);
     const dispatch = useDispatch();
-    
+
     React.useEffect(() => {
         dispatch(traerMallasPorIdEscuelaAsync(id_escuela))
         dispatch(traerInfoLineDesertoresAsync(id_malla))
@@ -33,16 +33,40 @@ export default function PageTasaDeRetencion() {
     return (
         <Box sx={{ minWidth: 275 }}>
             <div className='cardGridSelectDesercion'>
-                <Card variant="outlined" className='selectContainer'>{Select.CardSelectMalla(mallas)}</Card>
+                <Card>
+                    <CardContent className='selectContainer'>
+                        {Select.CardSelectMalla(mallas)}
+                    </CardContent>
+                </Card>
             </div>
             <div className='cardGridUpDesercion'>
-                <Card variant="outlined">{DashCardTasaDeDesercion.DashCardLineDesercion}</Card>
-                <Card variant="outlined">{DashCardTasaDeDesercion.DashCardCircularProgressDesercion}</Card>
+                <Card>
+                    <CardContent>
+                        {DashCardTasaDeDesercion.DashCardLineDesercion}
+                    </CardContent>
+                </Card>
+                <Card>
+                    <CardContent>
+                        {DashCardTasaDeDesercion.DashCardCircularProgressDesercion}
+                    </CardContent>
+                </Card>
             </div>
             <div className='cardGridDownDesercion'>
-                <Card variant="outlined">{DashCardTasaDeDesercion.DashCardDesercionPorMaternidad}</Card>
-                <Card variant="outlined">{DashCardTasaDeDesercion.DashCardDesercionPorRangoDeEdad}</Card>
-                <Card variant="outlined">{DashCardTasaDeDesercion.DashCardDesercionPorGenero}</Card>
+                <Card>
+                    <CardContent>
+                        {DashCardTasaDeDesercion.DashCardDesercionPorMaternidad}
+                    </CardContent>
+                </Card>
+                <Card>
+                    <CardContent>
+                        {DashCardTasaDeDesercion.DashCardDesercionPorRangoDeEdad}
+                    </CardContent>
+                </Card>
+                <Card>
+                    <CardContent>
+                        {DashCardTasaDeDesercion.DashCardDesercionPorMaternidad}
+                    </CardContent>
+                </Card>
             </div>
         </Box >
     );

@@ -38,17 +38,17 @@ export default function CardIndiceTotalDeInscritos() {
                 </Box>
                 <div className='DivPaperContents'>
                     <Paper key={2} elevation={2} className='PaperDesercion'>
-                        <div style={{ minHeight: '1.8rem', backgroundColor: 'rgb(0 0 0 / 10%)' }}>
+                        <div className='divContents' style={{ minHeight: '1.6rem', backgroundColor: 'rgb(0 0 0 / 10%)' }}>
                             {preData.TotNoDesertores}
                         </div>
                         <Divider />
-                        <div style={{ minHeight: '2rem', backgroundColor: 'rgb(0 0 0 / 20%)' }}>No Desertores</div>
+                        <div className='divContents' style={{ minHeight: '1.8rem', backgroundColor: 'rgb(0 0 0 / 20%)' }}>No Desertores</div>
                     </Paper>
                 </div>
             </div>
             <div style={{ paddingRight: '0.5rem' }}>
                 <Box position="relative" display="inline-flex" className='BoxContentsCircularProgressDesercion'>
-                    <CircularProgress thickness={4} style={{ color: "#f44336 " }} variant="determinate" value={porcentajeDesertores} size={125} />
+                    <CircularProgress thickness={4} style={{ color: "#f44336" }} variant="determinate" value={porcentajeDesertores} size={125} />
                     <Box
                         top={0}
                         left={0}
@@ -66,11 +66,11 @@ export default function CardIndiceTotalDeInscritos() {
                 </Box>
                 <div className='DivPaperContents'>
                     <Paper key={2} elevation={2} className='PaperDesercion'>
-                        <div style={{ minHeight: '1.8rem', backgroundColor: 'rgb(0 0 0 / 10%)' }}>
+                        <div className='divContents' style={{ minHeight: '1.6rem', alignContent: 'center', backgroundColor: 'rgb(0 0 0 / 10%)' }}>
                             {preData.TotDesertores}
                         </div>
                         <Divider />
-                        <div style={{ minHeight: '2rem', backgroundColor: 'rgb(0 0 0 / 20%)' }}>No Desertores</div>
+                        <div className='divContents' style={{ minHeight: '1.8rem', backgroundColor: 'rgb(0 0 0 / 20%)' }}>Desertores</div>
                     </Paper>
                 </div>
             </div>

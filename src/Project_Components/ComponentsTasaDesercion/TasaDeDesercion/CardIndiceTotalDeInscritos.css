@@ -15,6 +15,7 @@
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto;
     padding: 0.5rem;
+    justify-items: center;
 }
 
 .BoxContentsCircularProgressDesercion{
@@ -25,9 +26,18 @@
 }
 
 .PaperDesercion{
-    min-width: 9rem;
-    max-width: 10rem;
+    min-width: -webkit-fill-available;
+    max-width: 9rem;
     text-align: center;
+    font-family: "Roboto", "-apple-system", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-size: 0.875rem !important;
+}
+
+.divContents{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .DivPaperContents{

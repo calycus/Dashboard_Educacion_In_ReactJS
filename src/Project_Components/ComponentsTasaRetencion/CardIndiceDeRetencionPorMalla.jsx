@@ -71,7 +71,7 @@ export default function CardIndiceDeRetencionPorMalla() {
             <Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
 
                 <Button className='ButtonIndiceDeRetencion' style={{ color: '#21BA45' }}>
-                    <GroupAdd style={{ color: '#21BA45', paddingRight: '0.6rem', paddingLeft: '0.5rem'}} sx={{fontSize: 25}}/>
+                    <GroupAdd style={{ color: '#21BA45', paddingRight: '0.6rem', paddingLeft: '0.5rem' }} sx={{ fontSize: 25 }} />
                     <Typography className='ButtonTextIndiceDeRetencion'>Tot. Inscritos</Typography>
                 </Button>
                 <Box position="relative" display="inline-block">
@@ -93,7 +93,7 @@ export default function CardIndiceDeRetencionPorMalla() {
                 </Box>
 
                 <Button className='ButtonIndiceDeRetencion' style={{ color: '#26a69a' }}>
-                    <HowToReg style={{ color: '#26a69a', paddingRight: '0.6rem', paddingLeft: '0.5rem'}} sx={{fontSize: 25}}/>
+                    <HowToReg style={{ color: '#26a69a', paddingRight: '0.6rem', paddingLeft: '0.5rem' }} sx={{ fontSize: 25 }} />
                     <Typography className='ButtonTextIndiceDeRetencion'>Tot. Conservados</Typography>
                 </Button>
                 <Box position="relative" display="inline-block">
@@ -114,7 +114,7 @@ export default function CardIndiceDeRetencionPorMalla() {
                     </Box>
                 </Box>
                 <Button className='ButtonIndiceDeRetencion' style={{ color: '#00bcd4' }}>
-                    <School style={{ color: '#00bcd4', paddingRight: '0.6rem', paddingLeft: '0.5rem'}} sx={{fontSize: 25}}/>
+                    <School style={{ color: '#00bcd4', paddingRight: '0.6rem', paddingLeft: '0.5rem' }} sx={{ fontSize: 25 }} />
                     <Typography className='ButtonTextIndiceDeRetencion'>Tot. Graduados</Typography>
                 </Button>
                 <Box position="relative" display="inline-block">
