@@ -1,0 +1,31 @@
+.css-11mde6h-MuiPaper-root {
+    box-shadow: none !important;
+}
+
+.css-1ygcj2i-MuiTableCell-root {
+    padding: 0px !important;
+}
+
+.css-1w1rijm-MuiButtonBase-root-MuiButton-root{
+    padding: 17px 0px !important;
+    font-size: 0.775rem !important;
+    width: 11rem !important;
+    justify-content: start !important;
+    font-weight: 600 !important;
+}
+
+.css-nfmglb-MuiTableCell-root {
+    padding: 0px !important;
+}
+
+.css-1ex1afd-MuiTableCell-root {
+    font-family: "Roboto", "-apple-system", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-size: 13px !important;
+    
+    padding: 5px 20px !important;
+}
+
+.tss-178gktx-MUIDataTableHeadCell-contentWrapper {
+    width: 8rem !important;
+}
+

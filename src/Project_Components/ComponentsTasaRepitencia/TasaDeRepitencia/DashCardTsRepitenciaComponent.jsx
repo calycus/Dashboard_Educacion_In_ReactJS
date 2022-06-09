@@ -5,23 +5,14 @@ import { Announcement, AspectRatio } from '@mui/icons-material';
 import { Divider } from '@mui/material';
 
 //componentes
-
+import ListMateriasRepitencia from '../../HighchartsComponent/HighchartsRepitencia/TasaDeRepitencia/DashCardListRepitencia'
 
 const DashCardListRepitencia = (
     <React.Fragment>
-        <CardHeader
-            action={
-                [
-                    <IconButton aria-label="expanded" key={2}>
-                        <AspectRatio />
-                    </IconButton>
-                ]
-            }
-            title="FENÓMENOS ACADÉMICOS DE VARIABLE DEPENDIENTE"
-        />
-        <Divider />
+        
         <CardContent>
         </CardContent>
+        <ListMateriasRepitencia />
     </React.Fragment>
 );
 
