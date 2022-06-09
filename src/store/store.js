@@ -1,12 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit'
 import ArrayMallasReducer from './MallaStore/Mallas'
 import ArrayFacultadesReducer from './MallaStore/EleccionMallaStore'
+import ArrayPeriodosPorIdMalla from './PeriodosStore/Periodos'
+
+//store Highchart General
 import HighchartLineGeneral from './HighchartStore/DashboardGeneral/HighchartStoreGeneral'
 import PieFenomenosGeneral from './HighchartStore/DashboardGeneral/HighchartFenomenos'
+
 //store Highchart DS Retencion
 import HighchartRetencion from './HighchartStore/DashboardRetencion/HighchartStoreRetencion'
 
 //store Highchart DS Repitencia
+import HighchartRepitencia from './HighchartStore/DashboardRepitencia/TasaDeRepitencia/HighchartStoreRepitenciaGeneral'
 ////store Highchart DS Repitencia => Repitencia Por Materia
 ////store Highchart DS Repitencia => Metadata
 import HighchartRepitenciaFactorEconomico from './HighchartStore/DashboardRepitencia/MetaData/HighchartRepitenciaFactorEconomico'
@@ -26,6 +31,7 @@ export default configureStore({
   reducer: {
     arrayMallas: ArrayMallasReducer,
     arrayFacultades: ArrayFacultadesReducer,
+    arrayPeriodos: ArrayPeriodosPorIdMalla,
 
     //store Highchart DS General
     HighchartLineGeneral: HighchartLineGeneral,
@@ -35,6 +41,7 @@ export default configureStore({
     HighchartRetencion: HighchartRetencion,
 
     //store Highchart DS Repitencia
+    HighchartRepitencia: HighchartRepitencia,
     ////store Highchart DS Repitencia => Repitencia Por Materia
     ////store Highchart DS Repitencia => Metadata
     HighchartRepitenciaFactorEconomico: HighchartRepitenciaFactorEconomico,

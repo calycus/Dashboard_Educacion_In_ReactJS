@@ -5,7 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import SearchIcon from '@mui/icons-material/Search';
-import { Button, IconButton, OutlinedInput } from '@mui/material';
+import { Button, IconButton, OutlinedInput, Chip, Box } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
@@ -13,6 +13,7 @@ import { useLocation } from 'react-router-dom';
 //store
 import { selectIdEscuela, selectIdMalla, setLocalIdMalla } from '../store/MallaStore/EleccionMallaStore';
 import { selectArrayMallas } from '../store/MallaStore/Mallas';
+import { selectArrayPeriodos } from '../store/PeriodosStore/Periodos';
 ///DsGeneral
 import { traerInfoGeneralAsync } from '../store/HighchartStore/DashboardGeneral/HighchartStoreGeneral'
 
@@ -20,6 +21,8 @@ import { traerInfoGeneralAsync } from '../store/HighchartStore/DashboardGeneral/
 import { traerInfoRetencionAsync } from '../store/HighchartStore/DashboardRetencion/HighchartStoreRetencion'
 
 ///Repitencia
+import { traerInfoRepitenciaAsync } from '../store/HighchartStore/DashboardRepitencia/TasaDeRepitencia/HighchartStoreRepitenciaGeneral';
+////Repitencia => Repitencia Por Materia
 ////Repitencia => MetaData
 import { traerInfoRPPieFactorEconomicoAsync } from '../store/HighchartStore/DashboardRepitencia/MetaData/HighchartRepitenciaFactorEconomico';
 import { traerInfoRPColumnFactorEdnicoAsync } from '../store/HighchartStore/DashboardRepitencia/MetaData/HighchartRepitenciaFactorEdnico';
@@ -28,6 +31,7 @@ import { traerInfoRPColumnFactorGeograficoAsync } from '../store/HighchartStore/
 ///Desercion
 import { traerInfoLineDesertoresAsync } from '../store/HighchartStore/DashboardDesercion/TasaDeDesercion/HighchartDesercionGeneral'
 import { traerInfoesercionGenerosEdadEmbarazoAsync } from '../store/HighchartStore/DashboardDesercion/TasaDeDesercion/HighchartDesercionGenerosEdadEmbarazo'
+////Desercion => Prediccion
 ////Desercion => MetaData
 import { traerInfoDSPieFactorEconomicoAsync } from '../store/HighchartStore/DashboardDesercion/MetaData/HighchartDesercionFactorEconomico';
 import { traerInfoDSColumnFactorEdnicoAsync } from '../store/HighchartStore/DashboardDesercion/MetaData/HighchartDesercionFactorEdnico';
@@ -42,6 +46,7 @@ import { useTheme } from '@mui/material/styles';
 //constantes globales
 let nameMalla = [];
 let newIdMalla = null;
+let idsPeriodos = "";
 let theme = null;
 let mallaAux = [];
 
@@ -69,33 +74,136 @@ function NameSelect(data) {
     })
 }
 
+//Funcion encargada de asignar un estilo nuevo a las opciones seleccionadas en el multi select
+function getStyles(id, PeriodosDeInteres, theme) {
+    return {
+        fontWeight:
+            PeriodosDeInteres.indexOf(id) === -1
+                ? theme.typography.fontWeightRegular
+                : theme.typography.fontWeightMedium,
+    };
+}
+
 //funciones que devuelven los diferentes selects usados en el dashboard
 function CardSelectMalla(props) {
     NameSelect(props);
     const dispatch = useDispatch();
     const sampleLocation = useLocation();
+    const ArrayPeriodos = useSelector(selectArrayPeriodos);
+    const [PeriodosDeInteres, setPeriodosDeInteres] = useState([]);
 
-    const handleChange = (event) => {
+    const ITEM_HEIGHT = 48;
+    const ITEM_PADDING_TOP = 2;
+    const MenuProps = {
+        PaperProps: {
+            style: {
+                maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+                width: 250,
+            },
+        },
+    };
+
+    //Constantes de tipo evento encargadas de supervisar lo que pasa con los diferentes selects
+    const SelectMalla = (event) => {
         newIdMalla = event.target.value;
         dispatch(setLocalIdMalla(newIdMalla));
 
     };
+    const SelectMultiPeriodos = (event) => {
+        let array = event.target.value
+
+        if (array.length > 4) {
+            return
+        } else {
+            let ids = "";
+            setPeriodosDeInteres(array);
+
+            array.map((item, index) => {
+                if (index > 0) {
+                    ids += ",";
+                }
+                ids += item.id.toString();
+            });
+
+            idsPeriodos = ids;
+        }
+    };
+
+    //constante que devuelve un select con los periodes de interes
+    function SelectPeriodos() {
+        let SelectReturn = null;
+        if (sampleLocation.pathname == "/tasa_repitencia") {
+            SelectReturn = (
+                <FormControl sx={{ m: 1, minWidth: 500, maxWidth: 700 }} size="small">
+                    <InputLabel id="demo-multiple-chip-label">Seleccionar Periodos</InputLabel>
+                    <Select
+                        labelId="demo-multiple-chip-label"
+                        id="demo-multiple-chip"
+                        multiple
+                        value={PeriodosDeInteres}
+                        onChange={SelectMultiPeriodos}
+                        input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+                        renderValue={(selected) => (
+                            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                                {selected.map((value) => (
+                                    <Chip key={value.id} label={value.abreviatura} />
+                                ))}
+                            </Box>
+                        )}
+                        MenuProps={MenuProps}
+                    >
+                        {ArrayPeriodos.map((periodos) => (
+                            <MenuItem
+                                key={periodos.id}
+                                value={periodos}
+                                style={getStyles(periodos.abreviatura, PeriodosDeInteres, theme)}
+                            >
+                                {periodos.abreviatura}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+            )
+        } else if (sampleLocation.pathname == "/tasa_retencion") {
+            /* SelectReturn = (
+                <FormControl sx={{ m: 1, minWidth: 200, maxWidth: 400 }} size="small">
+                    <InputLabel id="demo-select-small">Seleccionar Periodo</InputLabel>
+                    <Select
+                        labelId="demo-select-small"
+                        id="demo-select-small"
+                        defaultValue={mallaAux.idMalla}
+                        label="id"
+                        onChange={handleChange}
+                    >
+                        {props.map((malla, index) => <MenuItem key={malla.id} value={malla.id}>{
+                            malla.nombre
+                        }</MenuItem>)}
+                    </Select>
+                </FormControl>
+            ) */
+        }
+
+        return SelectReturn
+    }
+
+
     return (
         <React.Fragment>
-            <FormControl sx={{ m: 1, minWidth: 200, maxWidth: 400 }} size="small">
+            <FormControl sx={{ m: 1 }} size="small">
                 <InputLabel id="demo-select-small">Seleccionar Malla</InputLabel>
                 <Select
                     labelId="demo-select-small"
                     id="demo-select-small"
                     defaultValue={mallaAux.idMalla}
                     label="id"
-                    onChange={handleChange}
+                    onChange={SelectMalla}
                 >
                     {props.map((malla, index) => <MenuItem key={malla.id} value={malla.id}>{
                         malla.nombre
                     }</MenuItem>)}
                 </Select>
             </FormControl>
+            {SelectPeriodos()}
             <IconButton aria-label="search" size='large' onClick={() => {
                 {
                     if (sampleLocation.pathname == "/general") {
@@ -105,7 +213,11 @@ function CardSelectMalla(props) {
                         dispatch(traerInfoRetencionAsync(mallaAux.idMalla))
 
                     } else if (sampleLocation.pathname == "/tasa_repitencia") {
-                        /* dispatch(traerInfoGeneralAsync(mallaAux.idMalla)) */
+                        if (PeriodosDeInteres.length == 0) {
+                            return
+                        } else {
+                            dispatch(traerInfoRepitenciaAsync(mallaAux.idMalla, idsPeriodos))
+                        }
 
                     } else if (sampleLocation.pathname == "/tasa_repitencia_metadata") {
                         dispatch(traerInfoRPPieFactorEconomicoAsync(mallaAux.idMalla))
@@ -129,51 +241,6 @@ function CardSelectMalla(props) {
         </React.Fragment>
     )
 };
-
-/* function CardSelectMallaPeriodos(props) {
-    return (
-        <React.Fragment>
-            <FormControl sx={{ m: 1, width: 300 }}>
-                <InputLabel id="demo-multiple-chip-label">Seleccionar Malla</InputLabel>
-                <Select
-                    labelId="demo-multiple-chip-label"
-                    id="demo-multiple-chip"
-                    multiple
-                    value={newIdEscuela}
-                    onChange={handleChange}
-                    input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
-                    renderValue={(selected) => (
-                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                            {selected.map((value) => (
-                                <Chip key={value} label={value} />
-                            ))}
-                        </Box>
-                    )}
-                >
-                    {props.map((escuela, index) => <MenuItem key={index} value={escuela.id}>{
-                        escuela.nombre
-                    }</MenuItem>)}
-                </Select>
-            </FormControl>
-        </React.Fragment>
-    )
-}; */
-
-function CardSelectMallaPeriodo(props) {
-    return (
-        <React.Fragment>
-            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-                <InputLabel id="demo-select-small">Age</InputLabel>
-                <Select labelId="demo-select-small" id="demo-select-small" label="Age">
-                    {/* {props.map((escuela, index) => <MenuItem key={index} value={escuela.id}>{
-                        escuela.nombre
-                    }</MenuItem>)} */}
-                </Select>
-            </FormControl>
-        </React.Fragment>
-    )
-};
-
 
 export default {
     CardSelectMalla,
