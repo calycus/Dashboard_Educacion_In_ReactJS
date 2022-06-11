@@ -53,12 +53,13 @@ export const traerFacultades = createSlice({
         /* setLocalNameFacultad: (state, action) => {
             state.name_facultad = action.payload;
             localStorage.setItem('id_escuela', action.payload)
-        },
+        },*/
 
         setLocalNameEscuela: (state, action) => {
+            console.log(action.payload);
             state.name_escuela = action.payload;
             localStorage.setItem('id_escuela', action.payload)
-        }, */
+        },
     }
 })
 
@@ -79,11 +80,12 @@ export const traerFacultadesAsync = () => (dispatch) => {
 
 export const { setFacultades, toggleExpanded, 
                 setLocalIdFacultad, setLocalIdEscuela, 
-                    setLocalIdMalla } = traerFacultades.actions;
+                    setLocalIdMalla, setLocalNameEscuela } = traerFacultades.actions;
 
 export const selectArrayFacultades = (state) => state.arrayFacultades.value;
 export const selectIdEscuela = (state) => state.arrayFacultades.id_escuela;
 export const selectIdMalla = (state) => state.arrayFacultades.id_malla;
 export const selectIdFacultad = (state) => state.arrayFacultades.id_facultad;
+export const selectNameEscuela = (state) => state.arrayFacultades.name_escuela;
 
 export default traerFacultades.reducer;

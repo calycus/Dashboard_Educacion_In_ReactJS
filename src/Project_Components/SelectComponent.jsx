@@ -11,7 +11,7 @@ import { useLocation } from 'react-router-dom';
 
 
 //store
-import { selectIdEscuela, selectIdMalla, setLocalIdMalla } from '../store/MallaStore/EleccionMallaStore';
+import { selectIdEscuela, selectIdMalla, setLocalIdMalla, setLocalNameEscuela } from '../store/MallaStore/EleccionMallaStore';
 import { selectArrayMallas } from '../store/MallaStore/Mallas';
 import { selectArrayPeriodos } from '../store/PeriodosStore/Periodos';
 ///DsGeneral
@@ -44,7 +44,7 @@ import { useTheme } from '@mui/material/styles';
 
 
 //constantes globales
-let nameMalla = [];
+let nameMalla = "";
 let newIdMalla = null;
 let idsPeriodos = "";
 let theme = null;
@@ -107,6 +107,7 @@ function CardSelectMalla(props) {
     const SelectMalla = (event) => {
         newIdMalla = event.target.value;
         dispatch(setLocalIdMalla(newIdMalla));
+        dispatch(setLocalNameEscuela(nameMalla));
 
     };
     const SelectMultiPeriodos = (event) => {

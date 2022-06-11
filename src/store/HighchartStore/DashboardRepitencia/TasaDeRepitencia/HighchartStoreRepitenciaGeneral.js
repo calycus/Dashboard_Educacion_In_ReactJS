@@ -20,11 +20,14 @@ export const traerInfo = createSlice({
             // no se lo puede recorrer con un forEach, ya que no es un array
             // Se recorre con el for .. in para pushear los valores de los keys del object en elementos del
             // array state.array_Materias_Repitencia
+
             state.array_Materias_Repitencia = [];
             for (const value in action.payload.array_materias_mayor_incidencia) {
                 //console.log(`${value}: ${data.array_materias_mayor_incidencia[value]}`);
                 state.array_Materias_Repitencia.push(action.payload.array_materias_mayor_incidencia[value]);
+                //console.log(state.array_Materias_Repitencia[0])
             }
+            
         },
 
         setTotalInscripcionesRepitencia: (state, action) => {

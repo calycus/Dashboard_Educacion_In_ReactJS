@@ -4,6 +4,7 @@
 
 .css-1ygcj2i-MuiTableCell-root {
     padding: 0px !important;
+    padding-left: 0.5rem !important;
 }
 
 .css-1w1rijm-MuiButtonBase-root-MuiButton-root{
@@ -26,6 +27,35 @@
 }
 
 .tss-178gktx-MUIDataTableHeadCell-contentWrapper {
-    width: 8rem !important;
+    width: 6rem !important;
 }
 
+
+/* .css-4ot77g-MuiDataGrid-root {
+    border: none !important;
+}
+
+.css-f3jnds-MuiDataGrid-columnHeaders {
+    display: grid !important;
+    grid-template-columns: repeat(1, 1fr) !important;
+    grid-template-rows: auto !important;
+}
+.css-s1v7zr-MuiDataGrid-virtualScrollerRenderZone {
+    display: grid !important;
+    position: fixed !important;
+    grid-template-columns: repeat(1, 1fr) !important;
+    grid-template-rows: auto !important;
+}
+
+.css-1s0hp0k-MuiDataGrid-columnHeadersInner {
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr) !important;
+    grid-template-rows: auto !important;
+}
+
+
+.css-4ot77g-MuiDataGrid-root .MuiDataGrid-row {
+    display: grid !important;
+    grid-template-columns: 10% auto 10% 10% 10% !important;
+    grid-template-rows: auto !important;
+} */

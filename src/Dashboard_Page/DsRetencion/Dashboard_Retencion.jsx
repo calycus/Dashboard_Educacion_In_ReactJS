@@ -52,7 +52,7 @@ export default function PageTasaDeRetencion() {
             <div className='cardGridDownRetencion'>
                 <Card>
                     <CardContent>
-                        {DashCardTasaDeRetencion.DashCardPrimeraMatricula}
+                        {DashCardTasaDeRetencion.DashCardGraduadosPorGenero}
                     </CardContent>
                 </Card>
                 <Card>

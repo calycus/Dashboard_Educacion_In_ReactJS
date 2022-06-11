@@ -64,7 +64,7 @@ export default function PageTasaDeRetencion() {
                 </Card>
                 <Card>
                     <CardContent>
-                        {DashCardTasaDeDesercion.DashCardDesercionPorMaternidad}
+                        {DashCardTasaDeDesercion.DashCardDesercionPorGenero}
                     </CardContent>
                 </Card>
             </div>

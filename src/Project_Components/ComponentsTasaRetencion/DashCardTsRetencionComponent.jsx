@@ -7,7 +7,7 @@ import { Divider } from '@mui/material';
 //componentes
 import LineRetencionPorMalla from '../HighchartsComponent/HighchartsRetencion/HighchartsLineRetencion'
 import ColumnGraduadosPorGenero from '../HighchartsComponent/HighchartsRetencion/HighchartsColumnGraduadosPorGenero'
-import ColumnGraduadosPorRangoDeEdad from '../HighchartsComponent/HighchartsRetencion/HighchartsColumnPrimeraMatriculaPorRangoDeEdad'
+import ColumnPrimeraMatriculaPorRangoDeEdad from '../HighchartsComponent/HighchartsRetencion/HighchartsColumnPrimeraMatriculaPorRangoDeEdad'
 import CardIndiceDeRetencionPorMalla from './CardIndiceDeRetencionPorMalla'
 
 import './DashCardTsRetencionComponent.css'
@@ -91,7 +91,7 @@ const DashCardPrimeraMatricula = (
         />
         <Divider />
         <CardContent>
-        <ColumnGraduadosPorRangoDeEdad/>
+        <ColumnPrimeraMatriculaPorRangoDeEdad/>
         </CardContent>
     </React.Fragment>
 );
