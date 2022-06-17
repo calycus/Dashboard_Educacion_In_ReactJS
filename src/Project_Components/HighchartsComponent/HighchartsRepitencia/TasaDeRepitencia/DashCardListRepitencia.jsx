@@ -1,7 +1,10 @@
 import React from 'react';
-import { selectArrayMateriasRepitencia } from '../../../../store/HighchartStore/DashboardRepitencia/TasaDeRepitencia/HighchartStoreRepitenciaGeneral';
 import { useSelector } from 'react-redux';
 import MUIDataTable from "mui-datatables";
+import { Radio, RadioGroup, FormControlLabel } from '@mui/material';
+
+import { selectArrayMateriasRepitencia } from '../../../../store/HighchartStore/DashboardRepitencia/TasaDeRepitencia/HighchartStoreRepitenciaGeneral';
+import { selectArrayAbreviaturasPeriodoRepitencia } from '../../../../store/HighchartStore/DashboardRepitencia/TasaDeRepitencia/HighchartStoreRepitenciaGeneral';
 import { selectNameEscuela } from '../../../../store/MallaStore/EleccionMallaStore';
 
 import '../../../../css/ListStyle.css'
@@ -35,28 +38,33 @@ const TableOptions = {
 
 export default function DataTable() {
     let ArrayMaterias = null;
+    let ArrayAbrebiaturasMaterias = null;
     const nameEscuela = useSelector(selectNameEscuela);
     ArrayMaterias = useSelector(selectArrayMateriasRepitencia);
-    /* const ArrayMaterias = [
-        { id: 337, materia: 'PROGRAMACION I', nivel: 1, cantidad_perdidas: 82, porcentaje_incidencia: '10.07' },
-        { id: 336, materia: 'INVESTIGACION FORMATIVA FORMATIVA FORMATIVA', nivel: 1, cantidad_perdidas: 79, porcentaje_incidencia: '9.71' },
-        { id: 5, materia: 'ELECTROTECNIA', nivel: 1, cantidad_perdidas: 65, porcentaje_incidencia: '7.99' },
-        { id: 338, materia: 'SOCIOLOGIA FORMATIVA FORMATIVA FORMATIVA', nivel: 1, cantidad_perdidas: 61, porcentaje_incidencia: '7.49' },
-        { id: 753, materia: 'FILOSOFIA FORMATIVA FORMATIVA FORMATIVA', nivel: 1, cantidad_perdidas: 61, porcentaje_incidencia: '7.49' },
-        { id: 335, materia: 'MATEMATICAS BASICAS II', nivel: 1, cantidad_perdidas: 57, porcentaje_incidencia: '7.00' }
-    ] */
+    ArrayAbrebiaturasMaterias = useSelector(selectArrayAbreviaturasPeriodoRepitencia);
 
-
+    console.log(ArrayMaterias)
     if (ArrayMaterias.length == 0) {
         return
     } else {
         return (
-            <MUIDataTable
-                title={nameEscuela}
-                data={ArrayMaterias[0]}
-                columns={TableColumns}
-                options={TableOptions}
-            />
+            <div>
+                <RadioGroup
+                    row
+                    aria-labelledby="demo-row-radio-buttons-group-label"
+                    name="row-radio-buttons-group"
+                >   
+                {/* {ArrayAbrebiaturasMaterias.map(abreviatura => {
+                    <FormControlLabel value={abreviatura.id} control={<Radio />} label={abreviatura.abreviatura} />
+                })} */}
+                </RadioGroup>
+                {/*  <MUIDataTable
+                    title={nameEscuela}
+                    data={ArrayMaterias[0]}
+                    columns={TableColumns}
+                    options={TableOptions}
+                /> */}
+            </div>
         );
     }
 }

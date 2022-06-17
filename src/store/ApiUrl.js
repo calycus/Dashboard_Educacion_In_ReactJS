@@ -1,7 +1,7 @@
 
 const Api = "https://localhost";
 //const userToken = localStorage.getItem('utmDashboardsToken') || null;
-const userToken = "6fa09fb132a94120f385423a72b5a9d84930ed2d887b0beaf67d52f9f7cff603";
+const userToken = "b38908010268a83266920a0fc09133f6e1417b3d21f66c06bd8d13c5708871b5";
 
 export default {
     Api,
