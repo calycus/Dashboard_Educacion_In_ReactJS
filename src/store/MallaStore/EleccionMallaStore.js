@@ -67,7 +67,7 @@ export const traerFacultadesAsync = () => (dispatch) => {
     axios.get(ApiUrl.Api + '/api/general/facultades', {
         headers: {
             //Authorization: "Bearer " + this.userToken,
-            Authorization: "Bearer " + "6fa09fb132a94120f385423a72b5a9d84930ed2d887b0beaf67d52f9f7cff603"
+            Authorization: "Bearer " + ApiUrl.userToken
         },
     })
         .then(res => {
