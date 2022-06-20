@@ -1,12 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import MUIDataTable from "mui-datatables";
-import { Radio, RadioGroup, FormControlLabel } from '@mui/material';
 
-import { selectArrayMateriasRepitencia } from '../../../../store/HighchartStore/DashboardRepitencia/TasaDeRepitencia/HighchartStoreRepitenciaGeneral';
-import { selectArrayAbreviaturasPeriodoRepitencia } from '../../../../store/HighchartStore/DashboardRepitencia/TasaDeRepitencia/HighchartStoreRepitenciaGeneral';
 import { selectNameEscuela } from '../../../../store/MallaStore/EleccionMallaStore';
-
+import { selectArrayMateriasSelectPeriodo } from '../../../../store/HighchartStore/DashboardRepitencia/TasaDeRepitencia/HighchartStoreRepitenciaGeneral';
 import '../../../../css/ListStyle.css'
 
 const TableColumns = [
@@ -36,38 +33,23 @@ const TableOptions = {
     }
 };
 
+let viewRowsTable = [];
+let nameEscuela = "";
+
+
 export default function DataTable() {
-    let ArrayMaterias = null;
-    let ArrayAbrebiaturasMaterias = null;
-    let nameEscuela = useSelector(selectNameEscuela);
-    ArrayMaterias = useSelector(selectArrayMateriasRepitencia);
-    ArrayAbrebiaturasMaterias = useSelector(selectArrayAbreviaturasPeriodoRepitencia);
-
-
-    if (ArrayMaterias.length == 0) {
-        return
-    } else {
-        console.log("Array Materias: ",ArrayMaterias)
-        console.log("Array Periodos: ",ArrayAbrebiaturasMaterias)
-        console.log("Escuela: ", nameEscuela)
+    viewRowsTable = useSelector(selectArrayMateriasSelectPeriodo)
+    nameEscuela = useSelector(selectNameEscuela);
+    
+    if(viewRowsTable.length != 0){
         return (
-            <div>
-                <RadioGroup
-                    row
-                    aria-labelledby="demo-row-radio-buttons-group-label"
-                    name="row-radio-buttons-group"
-                >
-                    {/* {ArrayAbrebiaturasMaterias.map(abreviatura => {
-                    <FormControlLabel value={abreviatura.id} control={<Radio />} label={abreviatura.abreviatura} />
-                })} */}
-                </RadioGroup>
-                {/*  <MUIDataTable
-                    title={nameEscuela}
-                    data={ArrayMaterias[0]}
-                    columns={TableColumns}
-                    options={TableOptions}
-                /> */}
-            </div>
-        );
+            < MUIDataTable
+                title={nameEscuela}
+                data={viewRowsTable}
+                columns={TableColumns}
+                options={TableOptions}
+            />
+        )
     }
+    
 }

@@ -5,6 +5,7 @@ import { Announcement, AspectRatio } from '@mui/icons-material';
 import { Divider } from '@mui/material';
 
 //componentes
+import ListPeriodosRepitencia from '../../HighchartsComponent/HighchartsRepitencia/TasaDeRepitencia/DashcardRadioListRepitencia'
 import ListMateriasRepitencia from '../../HighchartsComponent/HighchartsRepitencia/TasaDeRepitencia/DashCardListRepitencia'
 
 const DashCardListRepitencia = (
@@ -12,6 +13,7 @@ const DashCardListRepitencia = (
         
         <CardContent>
         </CardContent>
+        <ListPeriodosRepitencia />
         <ListMateriasRepitencia />
     </React.Fragment>
 );

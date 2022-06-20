@@ -11,7 +11,7 @@ import { useLocation } from 'react-router-dom';
 
 
 //store
-import { selectIdEscuela, selectIdMalla, setLocalIdMalla, setLocalNameEscuela } from '../store/MallaStore/EleccionMallaStore';
+import { selectNameEscuela, selectIdEscuela, selectIdMalla, setLocalIdMalla, setLocalNameEscuela } from '../store/MallaStore/EleccionMallaStore';
 import { selectArrayMallas } from '../store/MallaStore/Mallas';
 import { selectArrayPeriodos } from '../store/PeriodosStore/Periodos';
 ///DsGeneral
@@ -62,17 +62,15 @@ function UseSelectAll() {
 }
 
 //funcion encargada de recorrer los datos traidos del store para extraer una varible en especifico 
-function NameSelect(data) {
+/* function NameSelect(data) {
 
     mallaAux = UseSelectAll();
-    theme = useTheme()
-
     data.map((es) => {
         if (es.id == mallaAux.idEscuela) {
             nameMalla = es.nombre
         }
     })
-}
+} */
 
 //Funcion encargada de asignar un estilo nuevo a las opciones seleccionadas en el multi select
 function getStyles(id, PeriodosDeInteres, theme) {
@@ -86,12 +84,17 @@ function getStyles(id, PeriodosDeInteres, theme) {
 
 //funciones que devuelven los diferentes selects usados en el dashboard
 function CardSelectMalla(props) {
-    NameSelect(props);
+
+    /* NameSelect(DataMallas); */
+    mallaAux = UseSelectAll();
+    theme = useTheme();
+    nameMalla = useSelector(selectNameEscuela);
+
+    const DataMallas = props;
     const dispatch = useDispatch();
     const sampleLocation = useLocation();
     const ArrayPeriodos = useSelector(selectArrayPeriodos);
     const [PeriodosDeInteres, setPeriodosDeInteres] = useState([]);
-
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 2;
     const MenuProps = {
@@ -106,8 +109,12 @@ function CardSelectMalla(props) {
     //Constantes de tipo evento encargadas de supervisar lo que pasa con los diferentes selects
     const SelectMalla = (event) => {
         newIdMalla = event.target.value;
+        let sendData = {
+            newIdMalla: newIdMalla,
+            dataMalla: DataMallas
+        }
         dispatch(setLocalIdMalla(newIdMalla));
-        dispatch(setLocalNameEscuela(nameMalla));
+        dispatch(setLocalNameEscuela(sendData));
 
     };
     const SelectMultiPeriodos = (event) => {

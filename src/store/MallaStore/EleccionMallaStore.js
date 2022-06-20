@@ -9,8 +9,8 @@ export const traerFacultades = createSlice({
         id_escuela: parseInt(localStorage.getItem('id_escuela'), 10) || null,
         id_malla: parseInt(localStorage.getItem('id_malla'), 10) || null,
         id_facultad: parseInt(localStorage.getItem('id_facultad'), 10) || null,
-        name_facultad: localStorage.getItem('name_facultad')  || "" ,
-        name_escuela: localStorage.getItem('name_escuela')  || "" 
+        name_facultad: localStorage.getItem('name_facultad') || "",
+        name_escuela: localStorage.getItem('name_escuela') || ""
     },
 
     reducers: {
@@ -32,7 +32,7 @@ export const traerFacultades = createSlice({
                 })
             }
         },
-        
+
         setLocalIdFacultad: (state, action) => {
             state.id_facultad = action.payload;
             localStorage.setItem('id_facultad', action.payload)
@@ -43,7 +43,7 @@ export const traerFacultades = createSlice({
             localStorage.setItem('id_escuela', action.payload)
         },
 
-        setLocalIdMalla: (state, action) => {    
+        setLocalIdMalla: (state, action) => {
             //console.log("quieres cambiar la malla local = ",state.id_malla, " por ", action.payload )
             state.id_malla = action.payload;
             localStorage.setItem('id_malla', action.payload)
@@ -56,9 +56,17 @@ export const traerFacultades = createSlice({
         },*/
 
         setLocalNameEscuela: (state, action) => {
-            console.log(action.payload);
-            state.name_escuela = action.payload;
-            localStorage.setItem('id_escuela', action.payload)
+            let newData = action.payload;
+            
+            newData.dataMalla.forEach(nameMalla => {
+                if (newData.newIdMalla == nameMalla.id) {
+                    state.name_escuela = nameMalla.nombre;
+                    localStorage.setItem('name_escuela', nameMalla.nombre)
+                }
+            })
+            console.log(state.name_escuela)
+            /* state.name_escuela = action.payload;
+            localStorage.setItem('name_escuela', action.payload) */
         },
     }
 })
@@ -78,9 +86,9 @@ export const traerFacultadesAsync = () => (dispatch) => {
 }
 
 
-export const { setFacultades, toggleExpanded, 
-                setLocalIdFacultad, setLocalIdEscuela, 
-                    setLocalIdMalla, setLocalNameEscuela } = traerFacultades.actions;
+export const { setFacultades, toggleExpanded,
+    setLocalIdFacultad, setLocalIdEscuela,
+    setLocalIdMalla, setLocalNameEscuela } = traerFacultades.actions;
 
 export const selectArrayFacultades = (state) => state.arrayFacultades.value;
 export const selectIdEscuela = (state) => state.arrayFacultades.id_escuela;

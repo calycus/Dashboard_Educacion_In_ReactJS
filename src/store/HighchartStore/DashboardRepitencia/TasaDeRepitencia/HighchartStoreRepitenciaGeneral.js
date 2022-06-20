@@ -11,6 +11,7 @@ export const traerInfo = createSlice({
         array_tot_inscripciones_pasadas: [],
         array_abreviaturas_periodos: [],
         array_Indices_Repitencia: [],
+        array_Listado_Materias_Mostradas: []
     },
 
     reducers: {
@@ -45,8 +46,12 @@ export const traerInfo = createSlice({
 
         setArrayAbreviaturasPeriodoRepitencia: (state, action) => {
             state.array_abreviaturas_periodos = action.payload;
-            console.log(state.array_abreviaturas_periodos)
         },
+        
+        setArrayMateriasSelectPeriodo: (state, action) => {
+            state.array_Listado_Materias_Mostradas = []
+            state.array_Listado_Materias_Mostradas = action.payload
+        }
     }
 })
 
@@ -66,7 +71,7 @@ export const traerInfoRepitenciaAsync = (id_Malla, id_Periodos) => (dispatch) =>
 
 
 export const { setMateriasRepitencia, setTotalInscripcionesRepitencia,
-    setIndicesRepitencia, setArrayAbreviaturasPeriodoRepitencia } = traerInfo.actions;
+    setIndicesRepitencia, setArrayAbreviaturasPeriodoRepitencia, setArrayMateriasSelectPeriodo } = traerInfo.actions;
 
 export const selectArrayMateriasRepitencia = (state) => state.HighchartRepitencia.array_Materias_Repitencia;
 export const selectArrayTotalInscripcionesRepitencia = (state) => state.HighchartRepitencia.array_tot_inscripciones;
@@ -74,5 +79,6 @@ export const selectArrayTotalInscripcionesPerdidasRepitencia = (state) => state.
 export const selectArrayTotalInscripcionesPasadasRepitencia = (state) => state.HighchartRepitencia.array_tot_inscripciones_pasadas;
 export const selectArrayAbreviaturasPeriodoRepitencia = (state) => state.HighchartRepitencia.array_abreviaturas_periodos;
 export const selectArrayIndicesRepitencia = (state) => state.HighchartRepitencia.array_Indices_Repitencia;
+export const selectArrayMateriasSelectPeriodo = (state) => state.HighchartRepitencia.array_Listado_Materias_Mostradas;
 
 export default traerInfo.reducer;
