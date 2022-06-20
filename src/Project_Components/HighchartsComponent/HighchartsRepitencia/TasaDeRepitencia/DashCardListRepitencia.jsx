@@ -39,22 +39,25 @@ const TableOptions = {
 export default function DataTable() {
     let ArrayMaterias = null;
     let ArrayAbrebiaturasMaterias = null;
-    const nameEscuela = useSelector(selectNameEscuela);
+    let nameEscuela = useSelector(selectNameEscuela);
     ArrayMaterias = useSelector(selectArrayMateriasRepitencia);
     ArrayAbrebiaturasMaterias = useSelector(selectArrayAbreviaturasPeriodoRepitencia);
 
-    console.log(ArrayMaterias)
+
     if (ArrayMaterias.length == 0) {
         return
     } else {
+        console.log("Array Materias: ",ArrayMaterias)
+        console.log("Array Periodos: ",ArrayAbrebiaturasMaterias)
+        console.log("Escuela: ", nameEscuela)
         return (
             <div>
                 <RadioGroup
                     row
                     aria-labelledby="demo-row-radio-buttons-group-label"
                     name="row-radio-buttons-group"
-                >   
-                {/* {ArrayAbrebiaturasMaterias.map(abreviatura => {
+                >
+                    {/* {ArrayAbrebiaturasMaterias.map(abreviatura => {
                     <FormControlLabel value={abreviatura.id} control={<Radio />} label={abreviatura.abreviatura} />
                 })} */}
                 </RadioGroup>

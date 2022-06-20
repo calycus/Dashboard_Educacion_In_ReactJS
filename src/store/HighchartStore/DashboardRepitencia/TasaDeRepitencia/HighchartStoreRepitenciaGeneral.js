@@ -44,8 +44,8 @@ export const traerInfo = createSlice({
         },
 
         setArrayAbreviaturasPeriodoRepitencia: (state, action) => {
-            state.array_abreviaturas_periodos = action.payload.array_abreviaturas_periodo;
-            /* console.log(data.array_abreviaturas_periodo) */
+            state.array_abreviaturas_periodos = action.payload;
+            console.log(state.array_abreviaturas_periodos)
         },
     }
 })
@@ -60,7 +60,7 @@ export const traerInfoRepitenciaAsync = (id_Malla, id_Periodos) => (dispatch) =>
             dispatch(setMateriasRepitencia(res.data.data))
             dispatch(setTotalInscripcionesRepitencia(res.data.data))
             dispatch(setIndicesRepitencia(res.data.data))
-            dispatch(setArrayAbreviaturasPeriodoRepitencia(res.data.data))
+            dispatch(setArrayAbreviaturasPeriodoRepitencia(res.data.data.array_abreviaturas_periodo))
         })
 }
 
