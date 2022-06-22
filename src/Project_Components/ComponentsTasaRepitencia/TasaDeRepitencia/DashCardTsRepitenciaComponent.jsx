@@ -10,7 +10,7 @@ import ListMateriasRepitencia from '../../HighchartsComponent/HighchartsRepitenc
 
 const DashCardListRepitencia = (
     <React.Fragment>
-        
+
         <CardContent>
         </CardContent>
         <ListPeriodosRepitencia />

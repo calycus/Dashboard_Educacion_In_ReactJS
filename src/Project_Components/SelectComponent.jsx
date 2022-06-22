@@ -13,7 +13,7 @@ import { useLocation } from 'react-router-dom';
 //store
 import { selectNameEscuela, selectIdEscuela, selectIdMalla, setLocalIdMalla, setLocalNameEscuela } from '../store/MallaStore/EleccionMallaStore';
 import { selectArrayMallas } from '../store/MallaStore/Mallas';
-import { selectArrayPeriodos } from '../store/PeriodosStore/Periodos';
+import { selectArrayPeriodos, traerPeriodosPorIdMallaAsync } from '../store/PeriodosStore/Periodos';
 ///DsGeneral
 import { traerInfoGeneralAsync } from '../store/HighchartStore/DashboardGeneral/HighchartStoreGeneral'
 
@@ -49,6 +49,7 @@ let newIdMalla = null;
 let idsPeriodos = "";
 let theme = null;
 let mallaAux = [];
+let ArrayPeriodos = [];
 
 //funcion encargada de traer las los datos del store
 function UseSelectAll() {
@@ -61,16 +62,6 @@ function UseSelectAll() {
     }
 }
 
-//funcion encargada de recorrer los datos traidos del store para extraer una varible en especifico 
-/* function NameSelect(data) {
-
-    mallaAux = UseSelectAll();
-    data.map((es) => {
-        if (es.id == mallaAux.idEscuela) {
-            nameMalla = es.nombre
-        }
-    })
-} */
 
 //Funcion encargada de asignar un estilo nuevo a las opciones seleccionadas en el multi select
 function getStyles(id, PeriodosDeInteres, theme) {
@@ -82,18 +73,19 @@ function getStyles(id, PeriodosDeInteres, theme) {
     };
 }
 
+
 //funciones que devuelven los diferentes selects usados en el dashboard
 function CardSelectMalla(props) {
+    
 
-    /* NameSelect(DataMallas); */
     mallaAux = UseSelectAll();
     theme = useTheme();
     nameMalla = useSelector(selectNameEscuela);
-
+    ArrayPeriodos = useSelector(selectArrayPeriodos);
+    
     const DataMallas = props;
     const dispatch = useDispatch();
     const sampleLocation = useLocation();
-    const ArrayPeriodos = useSelector(selectArrayPeriodos);
     const [PeriodosDeInteres, setPeriodosDeInteres] = useState([]);
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 2;
@@ -106,9 +98,11 @@ function CardSelectMalla(props) {
         },
     };
 
+
     //Constantes de tipo evento encargadas de supervisar lo que pasa con los diferentes selects
     const SelectMalla = (event) => {
         newIdMalla = event.target.value;
+        let array = [];
         let sendData = {
             newIdMalla: newIdMalla,
             dataMalla: DataMallas
@@ -116,6 +110,9 @@ function CardSelectMalla(props) {
         dispatch(setLocalIdMalla(newIdMalla));
         dispatch(setLocalNameEscuela(sendData));
 
+        dispatch(traerPeriodosPorIdMallaAsync(newIdMalla))
+        setPeriodosDeInteres(array)
+        SelectPeriodos();
     };
     const SelectMultiPeriodos = (event) => {
         let array = event.target.value
