@@ -12,6 +12,7 @@ import HighchartRetencion from './HighchartStore/DashboardRetencion/HighchartSto
 
 //store Highchart DS Repitencia
 import HighchartRepitencia from './HighchartStore/DashboardRepitencia/TasaDeRepitencia/HighchartStoreRepitenciaGeneral'
+import HighchartRepitenciaSpaiderWeb from './HighchartStore/DashboardRepitencia/TasaDeRepitencia/HighchartStoreRepitenciaSpaiderWeb'
 ////store Highchart DS Repitencia => Repitencia Por Materia
 ////store Highchart DS Repitencia => Metadata
 import HighchartRepitenciaFactorEconomico from './HighchartStore/DashboardRepitencia/MetaData/HighchartRepitenciaFactorEconomico'
@@ -42,6 +43,7 @@ export default configureStore({
 
     //store Highchart DS Repitencia
     HighchartRepitencia: HighchartRepitencia,
+    HighchartRepitenciaSpaiderWeb: HighchartRepitenciaSpaiderWeb,
     ////store Highchart DS Repitencia => Repitencia Por Materia
     ////store Highchart DS Repitencia => Metadata
     HighchartRepitenciaFactorEconomico: HighchartRepitenciaFactorEconomico,

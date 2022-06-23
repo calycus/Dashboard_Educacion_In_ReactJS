@@ -1,20 +1,15 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
-import Checkbox from '@mui/material/Checkbox';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Checkbox } from '@mui/material';
 
 import { selectNameEscuela } from '../../../../store/MallaStore/EleccionMallaStore';
 import { selectArrayMateriasSelectPeriodo } from '../../../../store/HighchartStore/DashboardRepitencia/TasaDeRepitencia/HighchartStoreRepitenciaGeneral';
+import { setArraySelectMaterias } from '../../../../store/HighchartStore/DashboardRepitencia/TasaDeRepitencia/HighchartStoreRepitenciaSpaiderWeb';
+
 import '../../../../css/ListStyle.css'
-import { useState } from 'react';
 import { ConstructionOutlined } from '@mui/icons-material';
 
-/* const TableColumns = [
-    { name: 'materia', label: 'Materia' },
-    { name: 'nivel', label: 'Nivel' },
-    { name: 'cantidad_perdidas', label: 'Reprobados' },
-    { name: 'porcentaje_incidencia', label: '% INCIDENCIA' },
-]; */
 
 /* let viewRow = [];
 
@@ -96,20 +91,25 @@ const dataList = [
 
 
 
-
 export default function DataTable() {
     viewRowsTable = useSelector(selectArrayMateriasSelectPeriodo)
     nameEscuela = useSelector(selectNameEscuela);
-    const [chexData, sendChexData] = useState({ select: [] })
+
+    const dispatch = useDispatch();
+    const [chexData, sendChexData] = useState([])
     const [contador, setContador] = useState(0)
 
-    const handleSelects = (data) => {
-        let newData = data;
-        const { select } = chexData;
+    const handleSelects = (data, checkedControl) => {
+        let newArray = [];
+        if (!checkedControl) {
+            newArray = chexData.filter((item) => item.id !== data.id);
+            sendChexData(newArray);
 
-        select.push(newData);
-        sendChexData({ ...chexData, select });
-        console.log("hola")
+            dispatch(setArraySelectMaterias(newArray))
+            return
+        }
+        chexData.push(data);
+        sendChexData(chexData);
     }
 
     const handleChexControl = (checked) => {
@@ -136,17 +136,12 @@ export default function DataTable() {
                 </TableHead>
                 <TableBody>
                     {dataList.map((row, index) => (
-                        /* <TableRow
+                        <Fila
                             key={row.id}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        >
-                            <TableCell ><Checkbox color="success" disabled={isDisabled()} onClick={() => handleSelects(row)} onChange={handleChexControl} /></TableCell>
-                            <TableCell >{row.materia}</TableCell>
-                            <TableCell align="center" >{row.nivel}</TableCell>
-                            <TableCell align="center" >{row.cantidad_perdidas}</TableCell>
-                            <TableCell align="center" >{row.porcentaje_incidencia}</TableCell>
-                        </TableRow> */
-                        <Fila key={row.id} row={row} handleSelects={handleSelects} handleChexControl={handleChexControl} contador={contador} />
+                            row={row}
+                            handleSelects={handleSelects}
+                            handleChexControl={handleChexControl}
+                            contador={contador} />
                     ))}
                 </TableBody>
             </Table>
@@ -159,18 +154,19 @@ const Fila = ({ row, handleSelects, handleChexControl, contador }) => {
     const [checked, setChecked] = useState(false)
 
     const isDisabled = () => {
-        if (!checked && contador == 2) {
+        if (!checked && contador == 4) {
             return true
         } else {
             return false
         }
     }
+
     return (
         <TableRow
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
         >
             <TableCell >
-                <Checkbox color="success" checked={checked} disabled={isDisabled(checked)} onClick={() => handleSelects(row)} onChange={(e) => {
+                <Checkbox color="success" checked={checked} disabled={isDisabled(checked)} onClick={() => handleSelects(row, !checked)} onChange={(e) => {
                     handleChexControl(e.target.checked)
                     setChecked(e.target.checked)
                 }} />
