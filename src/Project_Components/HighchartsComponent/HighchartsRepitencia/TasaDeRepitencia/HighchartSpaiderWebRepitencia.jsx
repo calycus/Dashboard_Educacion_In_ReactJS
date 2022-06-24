@@ -1,20 +1,11 @@
 import React from 'react'
-import Highcharts from 'highcharts'
-import HighchartsReact from 'highcharts-react-official'
-import { selectpieIndiceDesercion } from '../../../store/HighchartStore/DashboardGeneral/HighchartFenomenos'
+import Highcharts from "highcharts/highstock";
+import HighchartsReact from "highcharts-react-official";
+import HcMore from "highcharts/highcharts-more";
+HcMore(Highcharts);
 
-
-//dependencia
-import { useSelector } from 'react-redux'
-
-
-
-export default function SpiderWebSelectMaterias(materiasArray) {
-    //const prepieIndiceDesercion = useSelector(selectpieIndiceDesercion);
-
-        console.log(materiasArray);
-    
-    let SpiderSelectMaterias = {
+const ArraySelected = (data) => {
+    let SpaiderWebSelectmaterias = {
         chart: {
             polar: true,
             reflow: true,
@@ -23,6 +14,9 @@ export default function SpiderWebSelectMaterias(materiasArray) {
         title: {
             text: "",
             x: -80,
+        },
+        subtitle: {
+            text: ""
         },
         credits: { enabled: false },
         pane: {
@@ -83,13 +77,30 @@ export default function SpiderWebSelectMaterias(materiasArray) {
         },
     };
 
-    //SpiderSelectMaterias.series.data = prepieIndiceDesercion.series
+    let array = data;
+    SpaiderWebSelectmaterias.xAxis.categories = []
+    SpaiderWebSelectmaterias.series[0].data = []
 
-    return (
-        {/* <HighchartsReact
-            highcharts={Highcharts}
-            options={SpiderSelectMaterias}
-        /> */}
-    )
+    if (array.length != undefined) {
+        console.log(array)
+        array.map(materias => {
+            SpaiderWebSelectmaterias.series[0].data.push({
+                name: materias.materia,
+                label: materias.materia,
+                y: parseFloat(materias.porcentaje_incidencia),
+            });;
+            SpaiderWebSelectmaterias.xAxis.categories.push(
+                materias.materia
+            );;
+        })
+        return (
+            <HighchartsReact
+                highcharts={Highcharts}
+                options={SpaiderWebSelectmaterias}
+            />
+        )
+    }
 
 }
+
+export default ArraySelected

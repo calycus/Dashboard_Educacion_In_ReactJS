@@ -7,6 +7,9 @@ import { Divider } from '@mui/material';
 //componentes
 import ListPeriodosRepitencia from '../../HighchartsComponent/HighchartsRepitencia/TasaDeRepitencia/DashcardRadioListRepitencia'
 import ListMateriasRepitencia from '../../HighchartsComponent/HighchartsRepitencia/TasaDeRepitencia/DashCardListRepitencia'
+import SpaiderWebMateriasSelected from '../../HighchartsComponent/HighchartsRepitencia/TasaDeRepitencia/HighchartSpaiderWebRepitencia'
+import ColumnTopMaterias from '../../HighchartsComponent/HighchartsRepitencia/TasaDeRepitencia/HighchartColumnTopMateriasMayorIncidencia'
+
 
 const DashCardListRepitencia = (
     <React.Fragment>
@@ -35,6 +38,7 @@ const DashCardSpaiderWeb = (
         />
         <Divider />
         <CardContent>
+            <SpaiderWebMateriasSelected/>
         </CardContent>
     </React.Fragment>
 );
@@ -56,6 +60,7 @@ const DashCardColumnComparativo = (
         />
         <Divider />
         <CardContent>
+            <ColumnTopMaterias/>
         </CardContent>
     </React.Fragment>
 );

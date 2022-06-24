@@ -5,41 +5,9 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 
 import { selectNameEscuela } from '../../../../store/MallaStore/EleccionMallaStore';
 import { selectArrayMateriasSelectPeriodo } from '../../../../store/HighchartStore/DashboardRepitencia/TasaDeRepitencia/HighchartStoreRepitenciaGeneral';
-import { setArraySelectMaterias } from '../../../../store/HighchartStore/DashboardRepitencia/TasaDeRepitencia/HighchartStoreRepitenciaSpaiderWeb';
+import ArraySelected from './HighchartSpaiderWebRepitencia';
 
 import '../../../../css/ListStyle.css'
-import { ConstructionOutlined } from '@mui/icons-material';
-
-
-/* let viewRow = [];
-
-const TableOptions = {
-    filter: false,
-    print: false,
-    download: false,
-    viewColumns: false,
-    rowsPerPageOptions: [],
-    rowsPerPage: 6,
-    selectableRowsHeader: false,
-    customToolbarSelect: () => (
-        <div></div>
-    ),
-    textLabels: {
-        selectedRows: {
-            text: "fila(s) Selecciona(s)",
-            deleteAria: "Delete Selected Rows",
-        },
-    },
-    onRowSelectionChange: (currentRowsSelected, rowsSelected) => {
-        if (rowsSelected.length > 2) {
-            console.log(rowsSelected)
-            console.log(currentRowsSelected)
-
-            rowsSelected.pop()
-            //currentRowsSelected.splice(0,2)
-        }
-    },
-}; */
 
 let viewRowsTable = [];
 let nameEscuela = "";
@@ -90,12 +58,10 @@ const dataList = [
 ];
 
 
-
 export default function DataTable() {
     viewRowsTable = useSelector(selectArrayMateriasSelectPeriodo)
     nameEscuela = useSelector(selectNameEscuela);
 
-    const dispatch = useDispatch();
     const [chexData, sendChexData] = useState([])
     const [contador, setContador] = useState(0)
 
@@ -104,12 +70,12 @@ export default function DataTable() {
         if (!checkedControl) {
             newArray = chexData.filter((item) => item.id !== data.id);
             sendChexData(newArray);
-
-            dispatch(setArraySelectMaterias(newArray))
+            ArraySelected(newArray)
             return
         }
         chexData.push(data);
         sendChexData(chexData);
+        ArraySelected(chexData)
     }
 
     const handleChexControl = (checked) => {

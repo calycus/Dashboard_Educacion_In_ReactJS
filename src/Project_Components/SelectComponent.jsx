@@ -22,6 +22,7 @@ import { traerInfoRetencionAsync } from '../store/HighchartStore/DashboardRetenc
 
 ///Repitencia
 import { traerInfoRepitenciaAsync } from '../store/HighchartStore/DashboardRepitencia/TasaDeRepitencia/HighchartStoreRepitenciaGeneral';
+import { traerInfoRepitenciaColumnTopAsync } from '../store/HighchartStore/DashboardRepitencia/TasaDeRepitencia/HighchartStoreRepitenciaColumnTopMaterias';
 ////Repitencia => Repitencia Por Materia
 ////Repitencia => MetaData
 import { traerInfoRPPieFactorEconomicoAsync } from '../store/HighchartStore/DashboardRepitencia/MetaData/HighchartRepitenciaFactorEconomico';
@@ -222,6 +223,7 @@ function CardSelectMalla(props) {
                             return
                         } else {
                             dispatch(traerInfoRepitenciaAsync(mallaAux.idMalla, idsPeriodos))
+                            dispatch(traerInfoRepitenciaColumnTopAsync(mallaAux.idMalla))
                         }
 
                     } else if (sampleLocation.pathname == "/tasa_repitencia_metadata") {
