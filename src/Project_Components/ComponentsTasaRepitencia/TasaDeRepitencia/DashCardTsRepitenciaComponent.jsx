@@ -60,7 +60,7 @@ const DashCardColumnComparativo = (
         />
         <Divider />
         <CardContent>
-            <ColumnTopMaterias/>
+            <div id="HighchartTopMaterias"></div>
         </CardContent>
     </React.Fragment>
 );
