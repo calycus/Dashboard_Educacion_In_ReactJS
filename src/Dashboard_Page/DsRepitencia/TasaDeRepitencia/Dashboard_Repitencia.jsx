@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 //componentes
 import DashCardTasaDeRepitencia from '../../../Project_Components/ComponentsTasaRepitencia/TasaDeRepitencia/DashCardTsRepitenciaComponent';
 import Select from '../../../Project_Components/SelectComponent';
-
+import DialogMateriasSelectedRepitencia from '../../../Project_Components/ComponentsTasaRepitencia/TasaDeRepitencia/DashcardRepitenciaDialogMateriasSelected'
 //store
 import {
     selectIdEscuela, selectIdMalla
@@ -29,6 +29,7 @@ export default function PageTasaDeRetencion() {
     }, []);
 
     return (
+        
         <Box sx={{ minWidth: 275 }}>
             <div className='cardGridSelectRepitencia'>
                 <Card>

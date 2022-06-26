@@ -1,62 +1,21 @@
 import React from 'react';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Checkbox } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Checkbox, Typography } from '@mui/material';
+import Highcharts from "highcharts";
+import HcMore from "highcharts/highcharts-more";
 
+//Dependencias
 import { selectNameEscuela } from '../../../../store/MallaStore/EleccionMallaStore';
 import { selectArrayMateriasSelectPeriodo } from '../../../../store/HighchartStore/DashboardRepitencia/TasaDeRepitencia/HighchartStoreRepitenciaGeneral';
-import ArraySelected from './HighchartSpaiderWebRepitencia';
+import HighchartSpaiderWebRepitencia from './HighchartSpaiderWebRepitencia';
+import '../../../../css/ListTableStyle.css'
 
-import '../../../../css/ListStyle.css'
+HcMore(Highcharts);
 
 let viewRowsTable = [];
 let nameEscuela = "";
-let index = null;
-const dataList = [
-    {
-        id: 337,
-        materia: "PROGRAMACION I",
-        nivel: 1,
-        cantidad_perdidas: 82,
-        porcentaje_incidencia: "10.07"
-    },
-    {
-        id: 336,
-        materia: "INVESTIGACION FORMATIVA FORMATIVA FORMATIVA",
-        nivel: 1,
-        cantidad_perdidas: 79,
-        porcentaje_incidencia: "9.71"
-    },
-    {
-        id: 5,
-        materia: "ELECTROTECNIA",
-        nivel: 1,
-        cantidad_perdidas: 65,
-        porcentaje_incidencia: "7.99"
-    },
-    {
-        id: 338,
-        materia: "SOCIOLOGIA FORMATIVA FORMATIVA FORMATIVA",
-        nivel: 1,
-        cantidad_perdidas: 61,
-        porcentaje_incidencia: "7.49"
-    },
-    {
-        id: 753,
-        materia: "FILOSOFIA FORMATIVA FORMATIVA FORMATIVA",
-        nivel: 1,
-        cantidad_perdidas: 61,
-        porcentaje_incidencia: "7.49"
-    },
-    {
-        id: 335,
-        materia: "MATEMATICAS BASICAS II",
-        nivel: 1,
-        cantidad_perdidas: 57,
-        porcentaje_incidencia: "7.00"
-    }
-];
-
+let newOpcionGraphic = HighchartSpaiderWebRepitencia
 
 export default function DataTable() {
     viewRowsTable = useSelector(selectArrayMateriasSelectPeriodo)
@@ -67,15 +26,16 @@ export default function DataTable() {
 
     const handleSelects = (data, checkedControl) => {
         let newArray = [];
+
         if (!checkedControl) {
             newArray = chexData.filter((item) => item.id !== data.id);
             sendChexData(newArray);
-            ArraySelected(newArray)
+            renderSelected(newArray)
             return
         }
         chexData.push(data);
         sendChexData(chexData);
-        ArraySelected(chexData)
+        renderSelected(chexData)
     }
 
     const handleChexControl = (checked) => {
@@ -90,6 +50,12 @@ export default function DataTable() {
 
     return (
         <TableContainer component={Paper}>
+            <Typography
+                className='TableTitle'
+                component="div"
+            >
+                {nameEscuela}
+            </Typography>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
@@ -101,7 +67,7 @@ export default function DataTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {dataList.map((row, index) => (
+                    {viewRowsTable.map((row, index) => (
                         <Fila
                             key={row.id}
                             row={row}
@@ -120,7 +86,7 @@ const Fila = ({ row, handleSelects, handleChexControl, contador }) => {
     const [checked, setChecked] = useState(false)
 
     const isDisabled = () => {
-        if (!checked && contador == 4) {
+        if (!checked && contador == 6) {
             return true
         } else {
             return false
@@ -143,4 +109,20 @@ const Fila = ({ row, handleSelects, handleChexControl, contador }) => {
             <TableCell align="center" >{row.porcentaje_incidencia}</TableCell>
         </TableRow>
     )
+}
+
+const renderSelected = (data) => {
+    newOpcionGraphic.xAxis.categories = []
+    newOpcionGraphic.series[0].data = []
+
+    data.map(selected => {
+        newOpcionGraphic.xAxis.categories.push(selected.materia);
+        newOpcionGraphic.series[0].data.push({
+            name: selected.materia,
+            label: selected.materia,
+            y: parseFloat(selected.porcentaje_incidencia),
+        });
+    })
+
+    Highcharts.chart('SpaiderWebMateriasSelected', newOpcionGraphic)
 }

@@ -11,7 +11,8 @@ export const traerInfo = createSlice({
         array_tot_inscripciones_pasadas: [],
         array_abreviaturas_periodos: [],
         array_Indices_Repitencia: [],
-        array_Listado_Materias_Mostradas: []
+        array_Listado_Materias_Mostradas: [],
+        selected_Materias_Controler: false
     },
 
     reducers: {
@@ -51,6 +52,10 @@ export const traerInfo = createSlice({
         setArrayMateriasSelectPeriodo: (state, action) => {
             state.array_Listado_Materias_Mostradas = []
             state.array_Listado_Materias_Mostradas = action.payload
+        },
+
+        setDialogMateriasSelectedControler:(state, action) =>{
+            state.selected_Materias_Controler = action.payload
         }
     }
 })
@@ -71,7 +76,8 @@ export const traerInfoRepitenciaAsync = (id_Malla, id_Periodos) => (dispatch) =>
 
 
 export const { setMateriasRepitencia, setTotalInscripcionesRepitencia,
-    setIndicesRepitencia, setArrayAbreviaturasPeriodoRepitencia, setArrayMateriasSelectPeriodo } = traerInfo.actions;
+    setIndicesRepitencia, setArrayAbreviaturasPeriodoRepitencia, 
+    setArrayMateriasSelectPeriodo, setDialogMateriasSelectedControler } = traerInfo.actions;
 
 export const selectArrayMateriasRepitencia = (state) => state.HighchartRepitencia.array_Materias_Repitencia;
 export const selectArrayTotalInscripcionesRepitencia = (state) => state.HighchartRepitencia.array_tot_inscripciones;
@@ -80,5 +86,6 @@ export const selectArrayTotalInscripcionesPasadasRepitencia = (state) => state.H
 export const selectArrayAbreviaturasPeriodoRepitencia = (state) => state.HighchartRepitencia.array_abreviaturas_periodos;
 export const selectArrayIndicesRepitencia = (state) => state.HighchartRepitencia.array_Indices_Repitencia;
 export const selectArrayMateriasSelectPeriodo = (state) => state.HighchartRepitencia.array_Listado_Materias_Mostradas;
+export const selectDialogMateriasSelectedControler = (state) => state.HighchartRepitencia.selected_Materias_Controler;
 
 export default traerInfo.reducer;

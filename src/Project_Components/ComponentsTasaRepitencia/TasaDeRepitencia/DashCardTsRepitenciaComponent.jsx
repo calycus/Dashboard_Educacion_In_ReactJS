@@ -7,15 +7,11 @@ import { Divider } from '@mui/material';
 //componentes
 import ListPeriodosRepitencia from '../../HighchartsComponent/HighchartsRepitencia/TasaDeRepitencia/DashcardRadioListRepitencia'
 import ListMateriasRepitencia from '../../HighchartsComponent/HighchartsRepitencia/TasaDeRepitencia/DashCardListRepitencia'
-import SpaiderWebMateriasSelected from '../../HighchartsComponent/HighchartsRepitencia/TasaDeRepitencia/HighchartSpaiderWebRepitencia'
-import ColumnTopMaterias from '../../HighchartsComponent/HighchartsRepitencia/TasaDeRepitencia/HighchartColumnTopMateriasMayorIncidencia'
-
+import dialogMaterias from "./DashcardRepitenciaDialogMateriasSelected";
+import DialogMaterias from "./DashcardRepitenciaDialogMateriasSelected";
 
 const DashCardListRepitencia = (
     <React.Fragment>
-
-        <CardContent>
-        </CardContent>
         <ListPeriodosRepitencia />
         <ListMateriasRepitencia />
     </React.Fragment>
@@ -29,7 +25,7 @@ const DashCardSpaiderWeb = (
                     <IconButton aria-label="expanded" key={1}>
                         <Announcement />
                     </IconButton>,
-                    <IconButton aria-label="AspectRatio" key={2}>
+                    <IconButton aria-label="AspectRatio" key={2} onClick={()=> dialogMaterias(true)} >
                         <AspectRatio />
                     </IconButton>
                 ]
@@ -38,7 +34,8 @@ const DashCardSpaiderWeb = (
         />
         <Divider />
         <CardContent>
-            <SpaiderWebMateriasSelected/>
+            <div id="SpaiderWebMateriasSelected"></div> 
+            <DialogMaterias/>
         </CardContent>
     </React.Fragment>
 );
