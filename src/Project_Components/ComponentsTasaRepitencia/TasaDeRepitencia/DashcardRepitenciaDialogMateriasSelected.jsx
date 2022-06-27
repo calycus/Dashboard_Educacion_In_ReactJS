@@ -1,24 +1,36 @@
-import React from "react";
-import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button } from '@mui/material'
+import React, { useState } from "react";
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button, IconButton } from '@mui/material'
+import { OpenInFull, Close } from '@mui/icons-material/';
 
-let state = false
-const handleClose = () => {
-    state = false
-}
+export default function DialogMaterias() {
 
-const dialogMaterias = (data) => {
-    //console.log(props.values)
-    console.log(data)
-    
-    if (data == true) {
-        state = true
-        return (
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    //console.log(state)
+    return (
+        <div>
+            <IconButton aria-label="expanded" onClick={handleClickOpen}>
+                <OpenInFull />
+            </IconButton>
             <Dialog
-                open={state}
+                open={open}
                 onClose={handleClose}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
+                <DialogContent className="dialogCloseIcon">
+                    <IconButton onClick={handleClose}>
+                        <Close />
+                    </IconButton>
+                </DialogContent>
                 <DialogTitle id="alert-dialog-title">
                     {"Use Google's location service?"}
                 </DialogTitle>
@@ -35,9 +47,6 @@ const dialogMaterias = (data) => {
                     </Button>
                 </DialogActions>
             </Dialog>
-        )
-    }
-
+        </div>
+    );
 }
-
-export default dialogMaterias

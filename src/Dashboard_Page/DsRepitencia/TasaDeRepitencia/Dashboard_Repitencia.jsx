@@ -17,7 +17,7 @@ import { traerPeriodosPorIdMallaAsync } from '../../../store/PeriodosStore/Perio
 //dependencias CSS
 import './Dashboard_Repitencia.css'
 
-export default function PageTasaDeRetencion() {
+export default function PageTasaDeRepitencia() {
     const id_escuela = useSelector(selectIdEscuela);
     const id_malla = useSelector(selectIdMalla);
     const mallas = useSelector(selectArrayMallas);
@@ -41,19 +41,19 @@ export default function PageTasaDeRetencion() {
             <div className='cardGridUpRepitencia'>
                 <Card>
                     <CardContent>
-                        {DashCardTasaDeRepitencia.DashCardListRepitencia}
+                        {DashCardTasaDeRepitencia.DashCardListRepitencia()}
                     </CardContent>
                 </Card>
                 <Card>
                     <CardContent>
-                        {DashCardTasaDeRepitencia.DashCardSpaiderWeb}
+                        {DashCardTasaDeRepitencia.DashCardSpaiderWeb()}
                     </CardContent>
                 </Card>
             </div>
             <div className='cardGridDownRepitencia'>
                 <Card>
                     <CardContent>
-                        {DashCardTasaDeRepitencia.DashCardColumnComparativo}
+                        {DashCardTasaDeRepitencia.DashCardColumnComparativo()}
                     </CardContent>
                 </Card>
             </div>

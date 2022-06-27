@@ -2,11 +2,13 @@
     margin-left: 0px !important;
     margin-right: 16px !important;
 }
+
 .css-1hbvpl3-MuiSvgIcon-root {
-    font-size: 1.2rem!important;
+    font-size: 1.2rem !important;
 }
+
 .css-11zohuh-MuiSvgIcon-root {
-    font-size: 1.2rem!important;
+    font-size: 1.2rem !important;
 }
 
 .TableTitle {
@@ -29,6 +31,7 @@
     font-weight: bold !important;
     padding: 0px 0px 0px 5px !important;
 }
+
 .css-1ndpvdd-MuiTableCell-root {
     font-weight: bold !important;
 }
@@ -36,5 +39,16 @@
 .css-1ex1afd-MuiTableCell-root {
     font-family: "Roboto", "-apple-system", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
     font-size: 13px !important;
-    padding: 5px 0px 5px 10px!important;
+    padding: 5px 0px 5px 10px !important;
+}
+
+
+/* Constenido del dialog */
+.dialogCloseIcon {
+    display: flex !important;
+    justify-content: flex-end !important;
+    padding: 10px 10px 0px 10px !important;
+}
+.dialogContainer {
+    
 }

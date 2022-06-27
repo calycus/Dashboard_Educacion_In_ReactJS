@@ -73,7 +73,7 @@ export default function PermanentDrawerLeft() {
               <Typography>Fenomesnos Academicos</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Link to="/tasa_retencion">
+            <Link to="/tasa_retencion">
                 <Accordion
                   onClick={() => setExpandedPanel(false)}
                   sx={{ boxShadow: 'none' }}
@@ -86,6 +86,22 @@ export default function PermanentDrawerLeft() {
                       <Send />
                     </ListItemIcon>
                     <Typography>Tasa de Retencion</Typography>
+                  </AccordionSummary>
+                </Accordion>
+              </Link>
+              <Link to="/prueba">
+                <Accordion
+                  onClick={() => setExpandedPanel(false)}
+                  sx={{ boxShadow: 'none' }}
+                >
+                  <AccordionSummary
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <ListItemIcon>
+                      <Send />
+                    </ListItemIcon>
+                    <Typography>prueba</Typography>
                   </AccordionSummary>
                 </Accordion>
               </Link>

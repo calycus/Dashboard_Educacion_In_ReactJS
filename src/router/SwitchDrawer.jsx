@@ -12,6 +12,9 @@ import Dashboard_Tasa_Repitencia_MetaData from '../Dashboard_Page/DsRepitencia/M
 import Dashboard_Tasa_Desercion from '../Dashboard_Page/DsDesercion/TasaDeDesercion/Dashboard_Desercion';
 import Dashboard_Tasa_Desercion_MetaData from '../Dashboard_Page/DsDesercion/Metadata/Metadata_Desercion';
 
+//PRUEBA
+import Prueba from '../Dashboard_Page/DsRepitencia/TasaDeRepitencia/prueba'
+
 function SwitchDrawer() {
     return (
             <Routes>
@@ -35,6 +38,9 @@ function SwitchDrawer() {
                 } />
                 <Route path='/tasa_desercion_metadata' element={
                     <Dashboard_Tasa_Desercion_MetaData />
+                } />
+                <Route path='/prueba' element={
+                    <Prueba />
                 } />
                 
             </Routes>

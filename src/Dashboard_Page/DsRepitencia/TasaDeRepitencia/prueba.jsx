@@ -4,21 +4,19 @@ import { Card, CardContent } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 
 //componentes
-import DashCardTasaDeDesercion from '../../../Project_Components/ComponentsTasaDesercion/TasaDeDesercion/DashCardTsDesercionComponent';
+import DashCardTasaDeRepitencia from '../../../Project_Components/ComponentsTasaRepitencia/TasaDeRepitencia/prueba';
 import Select from '../../../Project_Components/SelectComponent';
-
 //store
 import {
     selectIdEscuela, selectIdMalla
 } from '../../../store/MallaStore/EleccionMallaStore';
 import { selectArrayMallas, traerMallasPorIdEscuelaAsync } from '../../../store/MallaStore/Mallas';
-import { traerInfoLineDesertoresAsync } from '../../../store/HighchartStore/DashboardDesercion/TasaDeDesercion/HighchartDesercionGeneral'
-import { traerInfoesercionGenerosEdadEmbarazoAsync } from '../../../store/HighchartStore/DashboardDesercion/TasaDeDesercion/HighchartDesercionGenerosEdadEmbarazo'
+import { traerPeriodosPorIdMallaAsync } from '../../../store/PeriodosStore/Periodos';
 
 //dependencias CSS
-import './Dashboard_Desercion.css'
+import './Dashboard_Repitencia.css'
 
-export default function PageTasaDeDesercion() {
+export default function PageTasaPrueba() {
     const id_escuela = useSelector(selectIdEscuela);
     const id_malla = useSelector(selectIdMalla);
     const mallas = useSelector(selectArrayMallas);
@@ -26,45 +24,35 @@ export default function PageTasaDeDesercion() {
 
     React.useEffect(() => {
         dispatch(traerMallasPorIdEscuelaAsync(id_escuela))
-        dispatch(traerInfoLineDesertoresAsync(id_malla))
-        dispatch(traerInfoesercionGenerosEdadEmbarazoAsync(id_malla))
+        dispatch(traerPeriodosPorIdMallaAsync(id_malla))
     }, []);
 
     return (
+
         <Box sx={{ minWidth: 275 }}>
-            <div className='cardGridSelectDesercion'>
+            <div className='cardGridSelectRepitencia'>
                 <Card>
                     <CardContent className='selectContainer'>
                         {Select.CardSelectMalla(mallas)}
                     </CardContent>
                 </Card>
             </div>
-            <div className='cardGridUpDesercion'>
+            <div className='cardGridUpRepitencia'>
                 <Card>
                     <CardContent>
-                        {DashCardTasaDeDesercion.DashCardLineDesercion}
+                        {DashCardTasaDeRepitencia.DashCardListRepitencia()}
                     </CardContent>
                 </Card>
                 <Card>
                     <CardContent>
-                        {DashCardTasaDeDesercion.DashCardCircularProgressDesercion}
+                        {DashCardTasaDeRepitencia.DashCardSpaiderWeb()}
                     </CardContent>
                 </Card>
             </div>
-            <div className='cardGridDownDesercion'>
+            <div className='cardGridDownRepitencia'>
                 <Card>
                     <CardContent>
-                        {DashCardTasaDeDesercion.DashCardDesercionPorMaternidad}
-                    </CardContent>
-                </Card>
-                <Card>
-                    <CardContent>
-                        {DashCardTasaDeDesercion.DashCardDesercionPorRangoDeEdad}
-                    </CardContent>
-                </Card>
-                <Card>
-                    <CardContent>
-                        {DashCardTasaDeDesercion.DashCardDesercionPorGenero}
+                        {DashCardTasaDeRepitencia.DashCardColumnComparativo()}
                     </CardContent>
                 </Card>
             </div>

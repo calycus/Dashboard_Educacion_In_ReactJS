@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { CardHeader, CardContent, Box } from '@mui/material';
+import React from "react";
+import { CardHeader, CardContent } from '@mui/material';
 import { IconButton } from "@mui/material";
 import { Announcement, AspectRatio } from '@mui/icons-material';
 import { Divider } from '@mui/material';
@@ -24,15 +24,9 @@ const DashCardSpaiderWeb = () => {
             <CardHeader
                 action={
                     [
-                        <div style={{ display: "flex" }} key={1}>
-                            <IconButton aria-label="expanded" >
-                                <Announcement />
-                            </IconButton>
-                            <Box aria-label="expanded">
-                                <DialogMaterias />
-                            </Box>
-                        </div>
-
+                        <IconButton aria-label="expanded" key={1}>
+                            <Announcement />
+                        </IconButton>,
                     ]
                 }
                 title="TASA DE REPITENCIA"
