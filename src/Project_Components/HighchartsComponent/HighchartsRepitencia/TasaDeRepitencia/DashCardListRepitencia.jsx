@@ -7,15 +7,16 @@ import HcMore from "highcharts/highcharts-more";
 
 //Dependencias
 import { selectNameEscuela } from '../../../../store/MallaStore/EleccionMallaStore';
+import { selectArrayAbreviaturasPeriodoRepitencia, selectArrayIndicesRepitencia } from '../../../../store/HighchartStore/DashboardRepitencia/TasaDeRepitencia/HighchartStoreRepitenciaGeneral';
 import {
     selectArrayMateriasRepitencia, selectArrayMateriasSelectPeriodo,
-    selectArrayPeriodosDeInteres, setOptionsGraphic
+    selectArrayPeriodosDeInteres
 } from '../../../../store/HighchartStore/DashboardRepitencia/TasaDeRepitencia/HighchartStoreRepitenciaGeneral';
 import HighchartSpaiderWebRepitencia from './HighchartSpaiderWebRepitencia';
 import HighchartDialogSpaiderWebPeriodSubjects from './HighchartDialogSpaiderWebPeriodSubjects';
-import dialogMaterias from '../../../ComponentsTasaRepitencia/TasaDeRepitencia/DashcardRepitenciaDialogMateriasSelected';
+
+import HighchartDialogColumn from './HighchartDialogColumn'
 import '../../../../css/ListTableStyle.css'
-import { render } from 'react-dom';
 
 
 HcMore(Highcharts);
@@ -24,18 +25,22 @@ let viewRowsTable = [];
 let ArrayMaterias = [];
 let arrayDePeriodosSeleccionados = [];
 let nameEscuela = "";
+let AbreviaturasPeriodoRepitencia = []
+let ArrayDeIndicesDeRepitencia = []
 let newOpcionGraphicRenderSelected = HighchartSpaiderWebRepitencia
 let newOpcionGraphicRenderSelectedPeriodSubjects = HighchartDialogSpaiderWebPeriodSubjects
+let newOpcionGraphicDialogColumn = HighchartDialogColumn
 
 export default function DataTable() {
     viewRowsTable = useSelector(selectArrayMateriasSelectPeriodo)
     arrayDePeriodosSeleccionados = useSelector(selectArrayPeriodosDeInteres)
     nameEscuela = useSelector(selectNameEscuela);
     ArrayMaterias = useSelector(selectArrayMateriasRepitencia);
-    
+    AbreviaturasPeriodoRepitencia = useSelector(selectArrayAbreviaturasPeriodoRepitencia)
+    ArrayDeIndicesDeRepitencia = useSelector(selectArrayIndicesRepitencia)
+
     const [chexData, sendChexData] = useState([])
     const [contador, setContador] = useState(0)
-    const dispatch = useDispatch();
 
     const handleSelects = (data, checkedControl) => {
         let newArray = [];
@@ -45,7 +50,7 @@ export default function DataTable() {
             sendChexData(newArray);
             renderSelected(newArray)
             if (newArray.length > 2) {
-                renderSelectedPeriodSubjects(dispatch,newArray)
+                renderSelectedPeriodSubjects(newArray)
             }
             return
         }
@@ -54,7 +59,7 @@ export default function DataTable() {
         renderSelected(chexData)
 
         if (chexData.length > 2) {
-            renderSelectedPeriodSubjects(dispatch,chexData)
+            renderSelectedPeriodSubjects(chexData)
         }
     }
 
@@ -146,11 +151,13 @@ const renderSelected = (data) => {
     Highcharts.chart('SpaiderWebMateriasSelected', newOpcionGraphicRenderSelected)
 }
 
-const renderSelectedPeriodSubjects = (dispatch,data) => {
+const renderSelectedPeriodSubjects = (data) => {
     newOpcionGraphicRenderSelectedPeriodSubjects.xAxis.categories = []
     newOpcionGraphicRenderSelectedPeriodSubjects.series = []
-    
-    
+
+    newOpcionGraphicDialogColumn.xAxis.categories = []
+    newOpcionGraphicDialogColumn.series[0].data = []
+
 
     let materias_keys = Object.keys(ArrayMaterias);
     let arrayMateriasParaMostrar = [];
@@ -164,31 +171,33 @@ const renderSelectedPeriodSubjects = (dispatch,data) => {
             pointPlacement: "on",
         });
 
-        data.map((elementoMateria) => {
-            let elemento = ArrayMaterias[periodo].find(
-                (el) => el.id == elementoMateria.id
-            );
-            newOpcionGraphicRenderSelectedPeriodSubjects.xAxis.categories.push(
-                elementoMateria.materia
-            );
-            if (elemento != null) {
-                arrayMateriasParaMostrar[index].data.push({
-                    name: elemento.materia,
-                    y: parseFloat(elemento.porcentaje_incidencia),
-                });
-            } else {
-                arrayMateriasParaMostrar[index].data.push({
-                    name: elementoMateria.materia,
-                    y: 0,
-                });
-            }
-        });
+        setTimeout(() => {
+            data.map((elementoMateria) => {
+                let elemento = ArrayMaterias[periodo].find(
+                    (el) => el.id == elementoMateria.id
+                );
+                newOpcionGraphicRenderSelectedPeriodSubjects.xAxis.categories.push(
+                    elementoMateria.materia
+                );
+                if (elemento != null) {
+                    arrayMateriasParaMostrar[index].data.push({
+                        name: elemento.materia,
+                        y: parseFloat(elemento.porcentaje_incidencia),
+                    });
+                } else {
+                    arrayMateriasParaMostrar[index].data.push({
+                        name: elementoMateria.materia,
+                        y: 0,
+                    });
+                }
+            });
+        }, 500)
     });
-    //console.log(arrayMateriasParaMostrar)
     newOpcionGraphicRenderSelectedPeriodSubjects.series =
         arrayMateriasParaMostrar;
-        dispatch(setOptionsGraphic(newOpcionGraphicRenderSelectedPeriodSubjects))
 
+    newOpcionGraphicDialogColumn.xAxis.categories = AbreviaturasPeriodoRepitencia
+    newOpcionGraphicDialogColumn.series[0].data = ArrayDeIndicesDeRepitencia
 }
 
 const abreviaturaNombrePeriodo = (indexPeriodo) => {
@@ -203,3 +212,11 @@ const abreviaturaNombrePeriodo = (indexPeriodo) => {
     return arrayValorSelectPeriodosOrdenado[indexPeriodo].abreviatura;
 
 }
+
+const renderHighchartGraphic = () => {
+    setTimeout(() => {
+        Highcharts.chart('SpaiderWebPeriodSubjects', newOpcionGraphicRenderSelectedPeriodSubjects)
+        Highcharts.chart('DialogColumnPeriodSubjects', newOpcionGraphicDialogColumn)
+    }, 500)
+}
+export { renderHighchartGraphic }
