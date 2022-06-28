@@ -21,7 +21,7 @@ import { traerInfoGeneralAsync } from '../store/HighchartStore/DashboardGeneral/
 import { traerInfoRetencionAsync } from '../store/HighchartStore/DashboardRetencion/HighchartStoreRetencion'
 
 ///Repitencia
-import { traerInfoRepitenciaAsync } from '../store/HighchartStore/DashboardRepitencia/TasaDeRepitencia/HighchartStoreRepitenciaGeneral';
+import { traerInfoRepitenciaAsync, setArrayPeriodosDeInteres } from '../store/HighchartStore/DashboardRepitencia/TasaDeRepitencia/HighchartStoreRepitenciaGeneral';
 import { traerInfoRepitenciaColumnTopAsync } from '../store/HighchartStore/DashboardRepitencia/TasaDeRepitencia/HighchartStoreRepitenciaColumnTopMaterias';
 ////Repitencia => Repitencia Por Materia
 ////Repitencia => MetaData
@@ -51,6 +51,7 @@ let idsPeriodos = "";
 let theme = null;
 let mallaAux = [];
 let ArrayPeriodos = [];
+let arrayDePeriodosSeleccionados = [];
 
 //funcion encargada de traer las los datos del store
 function UseSelectAll() {
@@ -116,15 +117,14 @@ function CardSelectMalla(props) {
         SelectPeriodos();
     };
     const SelectMultiPeriodos = (event) => {
-        let array = event.target.value
-
-        if (array.length > 4) {
+        arrayDePeriodosSeleccionados = event.target.value
+        if (arrayDePeriodosSeleccionados.length > 4) {
             return
         } else {
             let ids = "";
-            setPeriodosDeInteres(array);
+            setPeriodosDeInteres(arrayDePeriodosSeleccionados);
 
-            array.map((item, index) => {
+            arrayDePeriodosSeleccionados.map((item, index) => {
                 if (index > 0) {
                     ids += ",";
                 }
@@ -224,6 +224,7 @@ function CardSelectMalla(props) {
                         } else {
                             dispatch(traerInfoRepitenciaAsync(mallaAux.idMalla, idsPeriodos))
                             dispatch(traerInfoRepitenciaColumnTopAsync(mallaAux.idMalla))
+                            dispatch(setArrayPeriodosDeInteres(arrayDePeriodosSeleccionados))
                         }
 
                     } else if (sampleLocation.pathname == "/tasa_repitencia_metadata") {

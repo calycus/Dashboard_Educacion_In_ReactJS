@@ -6,12 +6,12 @@ import { Radio, RadioGroup, FormControlLabel } from '@mui/material';
 import {
     selectArrayMateriasRepitencia,
     selectArrayAbreviaturasPeriodoRepitencia,
-    setArrayMateriasSelectPeriodo
+    setArrayMateriasRadioSelect
 } from '../../../../store/HighchartStore/DashboardRepitencia/TasaDeRepitencia/HighchartStoreRepitenciaGeneral';
 
 
 export default function CardTable() {
-    
+
     let ArrayMaterias = [];
     let ArrayAbrebiaturasMaterias = [];
     let viewRowsTable = [];
@@ -20,7 +20,7 @@ export default function CardTable() {
     ArrayMaterias = useSelector(selectArrayMateriasRepitencia);
     ArrayAbrebiaturasMaterias = useSelector(selectArrayAbreviaturasPeriodoRepitencia);
 
-    function SubjectsToShow(id_periodo) {
+    const SubjectsToShow = (id_periodo) => {
         // Me llega el id_periodo de la propiedad value="abreviatura.id"
         // Se necesita obtener el index del id_periodo correspondiente al key value de ArrayMaterias
         let indexArray = null;
@@ -39,7 +39,7 @@ export default function CardTable() {
             viewRowsTable.push(datosPeriodo);
         });
 
-        dispatch(setArrayMateriasSelectPeriodo(viewRowsTable))
+        dispatch(setArrayMateriasRadioSelect(viewRowsTable))
 
     }
 

@@ -1,20 +1,29 @@
 import React, { useState } from "react";
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button, IconButton } from '@mui/material'
 import { OpenInFull, Close } from '@mui/icons-material/';
+import Highcharts from "highcharts";
+import HcMore from "highcharts/highcharts-more";
+import { selectOptionsGraphic } from '../../../store/HighchartStore/DashboardRepitencia/TasaDeRepitencia/HighchartStoreRepitenciaGeneral'
+import { useSelector } from "react-redux";
+
+HcMore(Highcharts);
 
 export default function DialogMaterias() {
 
     const [open, setOpen] = useState(false);
+    const opcionGraphic = useSelector(selectOptionsGraphic);
 
     const handleClickOpen = () => {
         setOpen(true);
+        setTimeout(() => {
+            Highcharts.chart('SpaiderWebPeriodSubjects', opcionGraphic)
+        }, 500)
     };
 
     const handleClose = () => {
         setOpen(false);
     };
 
-    //console.log(state)
     return (
         <div>
             <IconButton aria-label="expanded" onClick={handleClickOpen}>
@@ -23,29 +32,15 @@ export default function DialogMaterias() {
             <Dialog
                 open={open}
                 onClose={handleClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
             >
                 <DialogContent className="dialogCloseIcon">
                     <IconButton onClick={handleClose}>
                         <Close />
                     </IconButton>
                 </DialogContent>
-                <DialogTitle id="alert-dialog-title">
-                    {"Use Google's location service?"}
-                </DialogTitle>
                 <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        Let Google help apps determine location. This means sending anonymous
-                        location data to Google, even when no apps are running.
-                    </DialogContentText>
+                    <div id="SpaiderWebPeriodSubjects"></div>
                 </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose}>Disagree</Button>
-                    <Button onClick={handleClose} autoFocus>
-                        Agree
-                    </Button>
-                </DialogActions>
             </Dialog>
         </div>
     );
