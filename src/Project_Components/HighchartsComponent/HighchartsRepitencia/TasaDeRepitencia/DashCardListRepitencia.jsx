@@ -41,6 +41,8 @@ export default function DataTable() {
 
     const [chexData, sendChexData] = useState([])
     const [contador, setContador] = useState(0)
+    
+    const dispatch = useDispatch();
 
     const handleSelects = (data, checkedControl) => {
         let newArray = [];
@@ -50,7 +52,7 @@ export default function DataTable() {
             sendChexData(newArray);
             renderSelected(newArray)
             if (newArray.length > 2) {
-                renderSelectedPeriodSubjects(newArray)
+                renderSelectedPeriodSubjects(dispatch,newArray)
             }
             return
         }
@@ -59,7 +61,7 @@ export default function DataTable() {
         renderSelected(chexData)
 
         if (chexData.length > 2) {
-            renderSelectedPeriodSubjects(chexData)
+            renderSelectedPeriodSubjects(dispatch,chexData)
         }
     }
 
@@ -151,7 +153,7 @@ const renderSelected = (data) => {
     Highcharts.chart('SpaiderWebMateriasSelected', newOpcionGraphicRenderSelected)
 }
 
-const renderSelectedPeriodSubjects = (data) => {
+const renderSelectedPeriodSubjects = (dispatch, data) => {
     newOpcionGraphicRenderSelectedPeriodSubjects.xAxis.categories = []
     newOpcionGraphicRenderSelectedPeriodSubjects.series = []
 
@@ -196,8 +198,13 @@ const renderSelectedPeriodSubjects = (data) => {
     newOpcionGraphicRenderSelectedPeriodSubjects.series =
         arrayMateriasParaMostrar;
 
-    newOpcionGraphicDialogColumn.xAxis.categories = AbreviaturasPeriodoRepitencia
+    AbreviaturasPeriodoRepitencia.map((elemento) => {
+        newOpcionGraphicDialogColumn.xAxis.categories.push(elemento.abreviatura)
+    })
     newOpcionGraphicDialogColumn.series[0].data = ArrayDeIndicesDeRepitencia
+
+    /* dispatch((newOpcionGraphicRenderSelectedPeriodSubjects))
+    dispatch((newOpcionGraphicDialogColumn)) */
 }
 
 const abreviaturaNombrePeriodo = (indexPeriodo) => {
@@ -215,8 +222,8 @@ const abreviaturaNombrePeriodo = (indexPeriodo) => {
 
 const renderHighchartGraphic = () => {
     setTimeout(() => {
-        Highcharts.chart('SpaiderWebPeriodSubjects', newOpcionGraphicRenderSelectedPeriodSubjects)
         Highcharts.chart('DialogColumnPeriodSubjects', newOpcionGraphicDialogColumn)
-    }, 500)
+        Highcharts.chart('SpaiderWebPeriodSubjects', newOpcionGraphicRenderSelectedPeriodSubjects)
+    }, 200)
 }
 export { renderHighchartGraphic }
