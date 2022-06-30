@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
-    Dialog, DialogContentText, DialogContent, DialogActions, IconButton, Card, ListItemText, Button,
+    Dialog, DialogContent, IconButton, Card,
     CardContent, List, ListItemIcon, ListItemButton, Collapse, Typography, Paper, Divider
 } from '@mui/material'
 import { OpenInFull, Close, ExpandLess, ExpandMore } from '@mui/icons-material/';
@@ -19,19 +19,19 @@ const DialogMaterias = () => {
     let ArrayTotalInscripcionesRepitencia = useSelector(selectArrayTotalInscripcionesRepitencia)
     let ArrayTotalInscripcionesPerdidasRepitencia = useSelector(selectArrayTotalInscripcionesPerdidasRepitencia)
     let ArrayTotalInscripcionesPasadasRepitencia = useSelector(selectArrayTotalInscripcionesPasadasRepitencia)
-
+    let contador = 0
     const [open, setOpen] = useState(false);
     const [openList, setOpenList] = useState(true);
-    const [scroll, setScroll] = useState('paper');
 
     const handleClickListInscritos = () => {
         setOpenList(!openList);
     };
 
-    const handleClickOpen = (scrollType) => () => {
-        setOpen(true);
-        setScroll(scrollType);
-        renderHighchartGraphic()
+    const handleClickOpen = () => () => {
+        contador = renderHighchartGraphic()
+        if (contador > 2) {
+            setOpen(true);
+        }
     };
 
     const handleClose = () => {
@@ -40,7 +40,7 @@ const DialogMaterias = () => {
 
     return (
         <div>
-            <IconButton aria-label="expanded" onClick={handleClickOpen("body")}>
+            <IconButton aria-label="expanded" onClick={handleClickOpen("body")} disabled={contador <= 2}>
                 <OpenInFull />
             </IconButton>
             <Dialog
@@ -91,7 +91,7 @@ const DialogMaterias = () => {
                             <Typography className="TitelCardDialog" style={{ paddingTop: '20px' }}>INCIDENCIA POR PERIODO</Typography>
                             <CardContent>
                                 <div id="DialogColumnPeriodSubjects"></div>
-                                <Divider/>
+                                <Divider />
                             </CardContent>
                         </Card>
                     </Box>

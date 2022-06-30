@@ -10,6 +10,12 @@
     min-width: 350px;
 }
 
+.dialogCloseIcon {
+    display: flex !important;
+    justify-content: flex-end !important;
+    padding: 10px 10px 0px 10px !important;
+}
+
 .TitelCardDialog {
     font-size: 14px !important;
     font-weight: 600 !important;

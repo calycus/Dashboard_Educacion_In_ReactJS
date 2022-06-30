@@ -30,6 +30,7 @@ let ArrayDeIndicesDeRepitencia = []
 let newOpcionGraphicRenderSelected = HighchartSpaiderWebRepitencia
 let newOpcionGraphicRenderSelectedPeriodSubjects = HighchartDialogSpaiderWebPeriodSubjects
 let newOpcionGraphicDialogColumn = HighchartDialogColumn
+let cont = null
 
 export default function DataTable() {
     viewRowsTable = useSelector(selectArrayMateriasSelectPeriodo)
@@ -41,18 +42,19 @@ export default function DataTable() {
 
     const [chexData, sendChexData] = useState([])
     const [contador, setContador] = useState(0)
-    
-    const dispatch = useDispatch();
+
 
     const handleSelects = (data, checkedControl) => {
         let newArray = [];
+        cont = null
 
         if (!checkedControl) {
             newArray = chexData.filter((item) => item.id !== data.id);
             sendChexData(newArray);
             renderSelected(newArray)
             if (newArray.length > 2) {
-                renderSelectedPeriodSubjects(dispatch,newArray)
+                cont = newArray.length
+                renderSelectedPeriodSubjects(newArray)
             }
             return
         }
@@ -61,7 +63,8 @@ export default function DataTable() {
         renderSelected(chexData)
 
         if (chexData.length > 2) {
-            renderSelectedPeriodSubjects(dispatch,chexData)
+            cont = chexData.length
+            renderSelectedPeriodSubjects(chexData)
         }
     }
 
@@ -84,17 +87,18 @@ export default function DataTable() {
                 {nameEscuela}
             </Typography>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell ></TableCell>
-                        <TableCell >Materia</TableCell>
-                        <TableCell align="center" >Nivel</TableCell>
-                        <TableCell align="center" >Reprobados</TableCell>
-                        <TableCell align="center" >% INCIDENCIA</TableCell>
+                <TableHead style={{ display: "flex" }}>
+                    <TableRow
+                        style={{ width: '100%', display: 'grid', gridTemplateColumns: '3rem auto 5rem 7rem 9rem' }}>
+                        <TableCell style={{ content: " " }}></TableCell>
+                        <TableCell className='rowTableMateria'>Materia</TableCell>
+                        <TableCell className='rowTable' >Nivel</TableCell>
+                        <TableCell className='rowTable' >Reprobados</TableCell>
+                        <TableCell className='rowTable' >% INCIDENCIA</TableCell>
                     </TableRow>
                 </TableHead>
-                <TableBody>
-                    {viewRowsTable.map((row, index) => (
+                <TableBody style={{ display: 'flex', flexDirection: 'column', overflow: 'auto', maxHeight: '350px' }}>
+                    {viewRowsTable.map((row) => (
                         <Fila
                             key={row.id}
                             row={row}
@@ -122,18 +126,18 @@ const Fila = ({ row, handleSelects, handleChexControl, contador }) => {
 
     return (
         <TableRow
-            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            style={{ display: 'grid', gridTemplateColumns: '3rem auto 5rem 7rem 8rem', alignItems: 'center' }}
         >
-            <TableCell >
+            <TableCell className='rowTable' style={{ textAlign: 'center' }}>
                 <Checkbox color="success" checked={checked} disabled={isDisabled(checked)} onClick={() => handleSelects(row, !checked)} onChange={(e) => {
                     handleChexControl(e.target.checked)
                     setChecked(e.target.checked)
                 }} />
             </TableCell>
-            <TableCell >{row.materia}</TableCell>
-            <TableCell align="center" >{row.nivel}</TableCell>
-            <TableCell align="center" >{row.cantidad_perdidas}</TableCell>
-            <TableCell align="center" >{row.porcentaje_incidencia}</TableCell>
+            <TableCell className='rowTableMateria' >{row.materia}</TableCell>
+            <TableCell className='rowTable' >{row.nivel}</TableCell>
+            <TableCell className='rowTable' >{row.cantidad_perdidas}</TableCell>
+            <TableCell className='rowTable' >{row.porcentaje_incidencia}</TableCell>
         </TableRow>
     )
 }
@@ -153,7 +157,7 @@ const renderSelected = (data) => {
     Highcharts.chart('SpaiderWebMateriasSelected', newOpcionGraphicRenderSelected)
 }
 
-const renderSelectedPeriodSubjects = (dispatch, data) => {
+const renderSelectedPeriodSubjects = (data) => {
     newOpcionGraphicRenderSelectedPeriodSubjects.xAxis.categories = []
     newOpcionGraphicRenderSelectedPeriodSubjects.series = []
 
@@ -225,5 +229,6 @@ const renderHighchartGraphic = () => {
         Highcharts.chart('DialogColumnPeriodSubjects', newOpcionGraphicDialogColumn)
         Highcharts.chart('SpaiderWebPeriodSubjects', newOpcionGraphicRenderSelectedPeriodSubjects)
     }, 200)
+    return cont
 }
 export { renderHighchartGraphic }
