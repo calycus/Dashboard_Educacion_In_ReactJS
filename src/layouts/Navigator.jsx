@@ -89,22 +89,6 @@ export default function PermanentDrawerLeft() {
                   </AccordionSummary>
                 </Accordion>
               </Link>
-              <Link to="/prueba">
-                <Accordion
-                  onClick={() => setExpandedPanel(false)}
-                  sx={{ boxShadow: 'none' }}
-                >
-                  <AccordionSummary
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                  >
-                    <ListItemIcon>
-                      <Send />
-                    </ListItemIcon>
-                    <Typography>prueba</Typography>
-                  </AccordionSummary>
-                </Accordion>
-              </Link>
               <Accordion
                 expanded={expandedPanel === 'panelTRP'}
                 /* onChange={handleAccordionChange('panelTRP')} */
@@ -127,11 +111,13 @@ export default function PermanentDrawerLeft() {
 
                 <AccordionDetails>
 
-                  <ListItemButton>
-                    <ListItemIcon></ListItemIcon>
-                    <ListItemText primary="Por Materia" />
-                  </ListItemButton>
-
+                  <Link to="/tasa_repitencia_por_materia">
+                    <ListItemButton>
+                      <ListItemIcon></ListItemIcon>
+                      <ListItemText primary="Por Materia" />
+                    </ListItemButton>
+                  </Link>
+                  
                   <Link to="/tasa_repitencia_metadata">
                     <ListItemButton>
                       <ListItemIcon></ListItemIcon>

@@ -75,7 +75,6 @@ export const traerInfoRepitenciaAsync = (id_Malla, id_Periodos) => (dispatch) =>
         },
     })
         .then(res => {
-            console.log(res.data.data)
             dispatch(setMateriasRepitencia(res.data.data))
             dispatch(setTotalInscripcionesRepitencia(res.data.data))
             dispatch(setIndicesRepitencia(res.data.data))

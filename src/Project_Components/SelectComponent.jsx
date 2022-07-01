@@ -24,6 +24,7 @@ import { traerInfoRetencionAsync } from '../store/HighchartStore/DashboardRetenc
 import { traerInfoRepitenciaAsync, setArrayPeriodosDeInteres } from '../store/HighchartStore/DashboardRepitencia/TasaDeRepitencia/HighchartStoreRepitenciaGeneral';
 import { traerInfoRepitenciaColumnTopAsync } from '../store/HighchartStore/DashboardRepitencia/TasaDeRepitencia/HighchartStoreRepitenciaColumnTopMaterias';
 ////Repitencia => Repitencia Por Materia
+import { traerInfoRepitenciaPorMateriasAsync } from '../store/HighchartStore/DashboardRepitencia/RepitenciaPorMateria/ListTableStoreRepitenciaPorMateria'
 ////Repitencia => MetaData
 import { traerInfoRPPieFactorEconomicoAsync } from '../store/HighchartStore/DashboardRepitencia/MetaData/HighchartRepitenciaFactorEconomico';
 import { traerInfoRPColumnFactorEdnicoAsync } from '../store/HighchartStore/DashboardRepitencia/MetaData/HighchartRepitenciaFactorEdnico';
@@ -78,17 +79,18 @@ function getStyles(id, PeriodosDeInteres, theme) {
 
 //funciones que devuelven los diferentes selects usados en el dashboard
 function CardSelectMalla(props) {
-    
+
 
     mallaAux = UseSelectAll();
     theme = useTheme();
     nameMalla = useSelector(selectNameEscuela);
     ArrayPeriodos = useSelector(selectArrayPeriodos);
-    
+
     const DataMallas = props;
     const dispatch = useDispatch();
     const sampleLocation = useLocation();
     const [PeriodosDeInteres, setPeriodosDeInteres] = useState([]);
+    const [PeriodoSelected, setPeriodoSelected] = useState("");
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 2;
     const MenuProps = {
@@ -130,9 +132,13 @@ function CardSelectMalla(props) {
                 }
                 ids += item.id.toString();
             });
-
             idsPeriodos = ids;
         }
+    };
+
+    const SelectPeriodo = (event) => {
+        setPeriodoSelected(event);
+        console.log(PeriodoSelected.id)
     };
 
     //constante que devuelve un select con los periodes de interes
@@ -170,28 +176,33 @@ function CardSelectMalla(props) {
                     </Select>
                 </FormControl>
             )
-        } else if (sampleLocation.pathname == "/tasa_retencion") {
-            /* SelectReturn = (
-                <FormControl sx={{ m: 1, minWidth: 200, maxWidth: 400 }} size="small">
-                    <InputLabel id="demo-select-small">Seleccionar Periodo</InputLabel>
+        } else if (sampleLocation.pathname == "/tasa_repitencia_por_materia") {
+            SelectReturn = (
+                <FormControl sx={{ m: 1, minWidth: 500, maxWidth: 700 }} size="small">
+                    <InputLabel id="demo-simple-select-label">Seleccionar Periodo</InputLabel>
                     <Select
-                        labelId="demo-select-small"
-                        id="demo-select-small"
-                        defaultValue={mallaAux.idMalla}
-                        label="id"
-                        onChange={handleChange}
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={PeriodoSelected}
+                        onChange={(e) => SelectPeriodo(e.target.value)}
+                        input={<OutlinedInput id="select-simple-chip" label="Chip" />}
+                        MenuProps={MenuProps}
                     >
-                        {props.map((malla, index) => <MenuItem key={malla.id} value={malla.id}>{
-                            malla.nombre
-                        }</MenuItem>)}
+                        {ArrayPeriodos.map((periodos) => (
+                            <MenuItem
+                                key={periodos.id}
+                                value={periodos}
+                                style={getStyles(periodos.nombre, PeriodosDeInteres, theme)}
+                            >
+                                {periodos.nombre}
+                            </MenuItem>
+                        ))}
                     </Select>
                 </FormControl>
-            ) */
+            )
         }
-
         return SelectReturn
     }
-
 
     return (
         <React.Fragment>
@@ -226,6 +237,9 @@ function CardSelectMalla(props) {
                             dispatch(traerInfoRepitenciaColumnTopAsync(mallaAux.idMalla))
                             dispatch(setArrayPeriodosDeInteres(arrayDePeriodosSeleccionados))
                         }
+
+                    } else if (sampleLocation.pathname == "/tasa_repitencia_por_materia") {
+                        dispatch(traerInfoRepitenciaPorMateriasAsync(mallaAux.idMalla, PeriodoSelected.id))
 
                     } else if (sampleLocation.pathname == "/tasa_repitencia_metadata") {
                         dispatch(traerInfoRPPieFactorEconomicoAsync(mallaAux.idMalla))

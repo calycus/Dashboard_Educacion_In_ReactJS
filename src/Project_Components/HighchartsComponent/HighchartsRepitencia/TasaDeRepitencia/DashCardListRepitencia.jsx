@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Checkbox, Typography } from '@mui/material';
+import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Checkbox, Typography, InputBase, IconButton, TextField } from '@mui/material';
+import { Search } from '@mui/icons-material';
 import Highcharts from "highcharts";
 import HcMore from "highcharts/highcharts-more";
 
@@ -17,6 +18,7 @@ import HighchartDialogSpaiderWebPeriodSubjects from './HighchartDialogSpaiderWeb
 
 import HighchartDialogColumn from './HighchartDialogColumn'
 import '../../../../css/ListTableStyle.css'
+
 
 
 HcMore(Highcharts);
@@ -43,6 +45,8 @@ export default function DataTable() {
     const [chexData, sendChexData] = useState([])
     const [contador, setContador] = useState(0)
 
+    const [RowsTable, setRows] = useState(viewRowsTable)
+    const [Search, setSearch] = useState(false)
 
     const handleSelects = (data, checkedControl) => {
         let newArray = [];
@@ -78,14 +82,34 @@ export default function DataTable() {
         }
     }
 
+    const requestSearch = (searchedVal) => {
+        if (searchedVal.length == 0) {
+            setSearch(false)
+            return
+        }      
+        const filteredRows = viewRowsTable.filter((row) => {
+            return row.materia.toLowerCase().includes(searchedVal.toLowerCase());
+        });
+        setRows(filteredRows)
+        setSearch(true)
+    };
+
     return (
         <TableContainer component={Paper}>
-            <Typography
-                className='TableTitle'
-                component="div"
-            >
-                {nameEscuela}
-            </Typography>
+            <Box sx={{ display: 'flex' }}>
+                <Typography
+                    className='TableTitle'
+                    component="div"
+                >
+                    {nameEscuela}
+                </Typography>
+                <TextField
+                    sx={{ display: 'flex', width: 400 }}
+                    id="standard-basic"
+                    label="Search"
+                    variant="standard"
+                    onChange={(e) => requestSearch(e.target.value)} />
+            </Box>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead style={{ display: "flex" }}>
                     <TableRow
@@ -98,14 +122,25 @@ export default function DataTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody style={{ display: 'flex', flexDirection: 'column', overflow: 'auto', maxHeight: '350px' }}>
-                    {viewRowsTable.map((row) => (
-                        <Fila
-                            key={row.id}
-                            row={row}
-                            handleSelects={handleSelects}
-                            handleChexControl={handleChexControl}
-                            contador={contador} />
-                    ))}
+                    {
+                        !Search ?
+                            viewRowsTable.map((row) => (
+                                <Fila
+                                    key={row.id}
+                                    row={row}
+                                    handleSelects={handleSelects}
+                                    handleChexControl={handleChexControl}
+                                    contador={contador} />
+                            ))
+                            : RowsTable.map((row) => (
+                                <Fila
+                                    key={row.id}
+                                    row={row}
+                                    handleSelects={handleSelects}
+                                    handleChexControl={handleChexControl}
+                                    contador={contador} />
+                            ))
+                    }
                 </TableBody>
             </Table>
         </TableContainer>
