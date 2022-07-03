@@ -15,6 +15,7 @@ import HighchartRepitencia from './HighchartStore/DashboardRepitencia/TasaDeRepi
 import HighchartRepitenciaColumnTop from './HighchartStore/DashboardRepitencia/TasaDeRepitencia/HighchartStoreRepitenciaColumnTopMaterias'
 ////store Highchart DS Repitencia => Repitencia Por Materia
 import ListTableRepitenciaPorMateria from './HighchartStore/DashboardRepitencia/RepitenciaPorMateria/ListTableStoreRepitenciaPorMateria'
+import HighchartStoreRepitenciaPorMateria from './HighchartStore/DashboardRepitencia/RepitenciaPorMateria/HighchartStoreRepitenciaPorMateria'
 ////store Highchart DS Repitencia => Metadata
 import HighchartRepitenciaFactorEconomico from './HighchartStore/DashboardRepitencia/MetaData/HighchartRepitenciaFactorEconomico'
 import HighchartRepitenciaFactorEdnico from './HighchartStore/DashboardRepitencia/MetaData/HighchartRepitenciaFactorEdnico'
@@ -47,6 +48,7 @@ export default configureStore({
     HighchartRepitenciaColumnTop: HighchartRepitenciaColumnTop,
     ////store Highchart DS Repitencia => Repitencia Por Materia
     ListTableRepitenciaPorMateria: ListTableRepitenciaPorMateria,
+    HighchartStoreRepitenciaPorMateria: HighchartStoreRepitenciaPorMateria,
     ////store Highchart DS Repitencia => Metadata
     HighchartRepitenciaFactorEconomico: HighchartRepitenciaFactorEconomico,
     HighchartRepitenciaFactorEdnico: HighchartRepitenciaFactorEdnico,

@@ -6,6 +6,7 @@ import { Divider } from '@mui/material';
 
 //componentes
 import ListMateriasRepitenciaPorMateria from '../../HighchartsComponent/HighchartsRepitencia/RepitenciaPorMateria/DashCardListRepitenciaPorMateria'
+import LineIncidenciaDeMateria from '../../HighchartsComponent/HighchartsRepitencia/RepitenciaPorMateria/HighchartsLineIncidenciaDeMaterias'
 
 const DashCardListRepitenciaPorMateria = () => {
     return (
@@ -56,6 +57,7 @@ const DashCardColumnComparativoPorMateria = () => {
             />
             <Divider />
             <CardContent>
+                <LineIncidenciaDeMateria/>
             </CardContent>
         </React.Fragment>
     )

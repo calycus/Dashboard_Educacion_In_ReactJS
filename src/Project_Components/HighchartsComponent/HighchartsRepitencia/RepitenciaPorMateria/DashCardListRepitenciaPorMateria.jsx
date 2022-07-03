@@ -1,19 +1,21 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Checkbox, Typography, InputBase, IconButton, TextField, Radio } from '@mui/material';
-import { Search } from '@mui/icons-material';
+import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Checkbox, Typography, TextField } from '@mui/material';
 import Highcharts from "highcharts";
 import HcMore from "highcharts/highcharts-more";
 
 //Dependencias
-import { selectArrayListMateriasRepitencia } from '../../../../store/HighchartStore/DashboardRepitencia/RepitenciaPorMateria/ListTableStoreRepitenciaPorMateria';
+import { selectArrayListMateriasRepitencia, setArrayIncidenciaDeMateriasPorDocente } from '../../../../store/HighchartStore/DashboardRepitencia/RepitenciaPorMateria/ListTableStoreRepitenciaPorMateria';
+import { traerIncidenciaDeMateriaAtravezDeLosPeriodosRepitencia } from '../../../../store/HighchartStore/DashboardRepitencia/RepitenciaPorMateria/HighchartStoreRepitenciaPorMateria';
+import { selectIdMalla } from '../../../../store/MallaStore/EleccionMallaStore';
 import '../../../../css/ListTableStyle.css'
 
 
 HcMore(Highcharts);
 
 let viewRowsTable = [];
+let idMalla = null
 
 /* const TableColumns = [
     { name: 'materia', label: 'Materia' },
@@ -49,17 +51,16 @@ const TableOptions = {
 
 export default function SubjectDataTable() {
     viewRowsTable = useSelector(selectArrayListMateriasRepitencia)
+    idMalla = useSelector(selectIdMalla)
 
-
+    const dispatch = useDispatch();
     const [RowsTable, setRows] = useState([])
     const [Search, setSearch] = useState(false)
     const [checked, setChecked] = useState(-1);
 
-    const isDisabled = (data) => {
-        setChecked(data);
-    };
     const handleSelects = (data) => {
-        console.log(data)
+        dispatch(traerIncidenciaDeMateriaAtravezDeLosPeriodosRepitencia(idMalla, data.id_materia))
+        dispatch(setArrayIncidenciaDeMateriasPorDocente(data.id_materia))
     }
 
     const requestSearch = (searchedVal) => {
@@ -72,6 +73,10 @@ export default function SubjectDataTable() {
         });
         setRows(filteredRows)
         setSearch(true)
+    };
+
+    const isDisabled = (data) => {
+        setChecked(data);
     };
 
     return (
