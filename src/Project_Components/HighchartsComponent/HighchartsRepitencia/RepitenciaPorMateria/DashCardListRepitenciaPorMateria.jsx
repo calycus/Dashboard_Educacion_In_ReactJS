@@ -49,7 +49,7 @@ const TableOptions = {
     }
 }; */
 
-export default function SubjectDataTable() {
+/* export default function SubjectDataTable() {
     viewRowsTable = useSelector(selectArrayListMateriasRepitencia)
     idMalla = useSelector(selectIdMalla)
 
@@ -146,7 +146,7 @@ export default function SubjectDataTable() {
             </Table>
         </TableContainer>
     )
-}
+} */
 
 /* const Fila = ({ row, handleSelects, handleChange, index, selectedValue }) => {
     return (
@@ -168,20 +168,18 @@ export default function SubjectDataTable() {
     )
 } */
 
-/* export default function SubjectDataTable() {
+export default function SubjectDataTable() {
     viewRowsTable = useSelector(selectArrayListMateriasRepitencia)
+    idMalla = useSelector(selectIdMalla)
 
-
+    const dispatch = useDispatch();
     const [RowsTable, setRows] = useState([])
     const [Search, setSearch] = useState(false)
-    const [selectedValue, setSelectedValue] = useState(-1);
+    const [checked, setChecked] = useState(-1);
 
-    const handleChange = (data) => {
-        setSelectedValue(data);
-        console.log(data);
-    };
     const handleSelects = (data) => {
-        console.log(data)
+        dispatch(traerIncidenciaDeMateriaAtravezDeLosPeriodosRepitencia(idMalla, data.id_materia))
+        dispatch(setArrayIncidenciaDeMateriasPorDocente(data.id_materia))
     }
 
     const requestSearch = (searchedVal) => {
@@ -194,6 +192,10 @@ export default function SubjectDataTable() {
         });
         setRows(filteredRows)
         setSearch(true)
+    };
+
+    const isDisabled = (data) => {
+        setChecked(data);
     };
 
     return (
@@ -228,17 +230,19 @@ export default function SubjectDataTable() {
                                 key={index}
                                 index={index}
                                 row={row}
+                                checked={checked}
                                 handleSelects={handleSelects}
-                                handleChange={handleChange}
+                                isDisabled={isDisabled}
                             />
                         ))
                         : RowsTable.map((row, index) => (
                             <Fila
                                 key={index}
+                                index={index}
                                 row={row}
-                                selectedValue={selectedValue}
+                                checked={checked}
                                 handleSelects={handleSelects}
-                                handleChange={handleChange}
+                                isDisabled={isDisabled}
                             />
                         ))}
                 </TableBody>
@@ -247,7 +251,7 @@ export default function SubjectDataTable() {
     )
 }
 
-const Fila = ({ row, handleSelects, handleChange, index, selectedValue }) => {
+const Fila = ({ row, handleSelects, isDisabled, index, checked }) => {
     return (
         <TableRow
             style={{ display: 'grid', gridTemplateColumns: '3rem auto 5rem 7rem 8rem', alignItems: 'center' }}
@@ -255,8 +259,8 @@ const Fila = ({ row, handleSelects, handleChange, index, selectedValue }) => {
             <TableCell className='rowTable' style={{ textAlign: 'center' }}>
                 <Checkbox
                     color="success"
-                    checked={selectedValue == index}
-                    onChange={(e) => handleChange(e.target.value)}
+                    checked={checked == index}
+                    onChange={(e) => isDisabled(e.target.value)}
                     onClick={() => handleSelects(row)}
                     value={index}
                 />
@@ -265,4 +269,4 @@ const Fila = ({ row, handleSelects, handleChange, index, selectedValue }) => {
             <TableCell className='rowTable' >{row.nivel}</TableCell>
         </TableRow>
     )
-} */
+}
