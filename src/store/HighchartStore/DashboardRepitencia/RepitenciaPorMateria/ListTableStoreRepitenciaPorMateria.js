@@ -7,6 +7,7 @@ export const traerInfo = createSlice({
     initialState: {
         array_Data_Repitencia_Por_Materia: [],
         array_List_Materias_Repitencia: [],
+        array_Data_Materias_Por_Id_Materia: [],
     },
 
     reducers: {
@@ -38,7 +39,7 @@ export const traerInfo = createSlice({
         setArrayIncidenciaDeMateriasPorDocente: (state, action) => {
             let id_Materia = -1
             let arrayMaTeriasPorIdMaterias = [];
-
+            state.array_Data_Materias_Por_Id_Materia = []
             id_Materia = action.payload
 
             //se recorre la selecciones de materias de la tabla para luego proceder a pushealos en los arrays anteriormente vaciados
@@ -121,6 +122,8 @@ export const traerInfo = createSlice({
                         }
                     }
                 });
+
+            state.array_Data_Materias_Por_Id_Materia = arrayMaTeriasPorIdMaterias
         },
     }
 })
@@ -139,5 +142,6 @@ export const traerInfoRepitenciaPorMateriasAsync = (id_Malla, id_Periodo) => (di
 
 export const { setListMateriasRepitencia, setArrayIncidenciaDeMateriasPorDocente } = traerInfo.actions;
 export const selectArrayListMateriasRepitencia = (state) => state.ListTableRepitenciaPorMateria.array_List_Materias_Repitencia;
+export const selectArrayDataMateriasPorIdMateria = (state) => state.ListTableRepitenciaPorMateria.array_Data_Materias_Por_Id_Materia;
 
 export default traerInfo.reducer;

@@ -1,0 +1,46 @@
+:root {
+    --gridColumn: " ";
+}
+
+.BoxDocentesContainer {
+    display: grid;
+    /* justify-content: center; */
+    align-items: stretch;
+    align-content: stretch;
+    grid-template-columns: repeat(auto-fit, minmax(100px, calc(50% - 0.5rem)));
+    grid-template-rows: auto;
+    gap: 1rem;
+    max-height: 25rem !important;
+}
+
+.CardDocentes {
+    display: grid;
+    grid-column: var(--gridColumn);
+    min-height: 130px;
+    cursor: pointer;
+}
+
+.dashCardHeading {
+    margin-bottom: 3px;
+    color: #004600;
+    font-weight: bold;
+    font-size: 15px;
+    border-bottom: 1px solid #000000;
+}
+
+/* 
+:style="{
+            'grid-column':
+                docentes.length % 2 > 0 && index == docentes.length - 1
+                    ? 'span 2'
+                    : 'span 1',
+            }"
+            class="
+            full-width
+            row
+            wrap
+            justify-around
+            items-center
+            content-center
+            "
+*/

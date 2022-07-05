@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 //componentes
 import DashCardTasaDeRepitenciaPorMateria from '../../../Project_Components/ComponentsTasaRepitencia/RepitenciaPorMateria/DashCardTsRepitenciaPorMateriaComponent';
 import Select from '../../../Project_Components/SelectComponent';
+
 //store
 import {
     selectIdEscuela, selectIdMalla
@@ -50,13 +51,9 @@ export default function PageTasaDeRepitencia() {
                 </Card>
             </div>
             <div className='cardGridDownRepitenciaPorMateria'>
-                <Card>
-                    <CardContent>
-                        {DashCardTasaDeRepitenciaPorMateria.DashCardColumnComparativoPorMateria()}
-                    </CardContent>
-                </Card>
-                <Card>
-                    <CardContent>
+                {DashCardTasaDeRepitenciaPorMateria.CardDocentesQueImpartenLaMateria()}
+                <Card style={{ maxHeight: '24rem' }}>
+                    <CardContent className='chart_general'>
                         {DashCardTasaDeRepitenciaPorMateria.DashCardColumnComparativoPorMateria()}
                     </CardContent>
                 </Card>

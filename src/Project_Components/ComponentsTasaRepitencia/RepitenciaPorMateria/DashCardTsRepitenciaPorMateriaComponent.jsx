@@ -7,11 +7,14 @@ import { Divider } from '@mui/material';
 //componentes
 import ListMateriasRepitenciaPorMateria from '../../HighchartsComponent/HighchartsRepitencia/RepitenciaPorMateria/DashCardListRepitenciaPorMateria'
 import LineIncidenciaDeMateria from '../../HighchartsComponent/HighchartsRepitencia/RepitenciaPorMateria/HighchartsLineIncidenciaDeMaterias'
+import PieIncidenciaDeMateriasPorDocente from '../../HighchartsComponent/HighchartsRepitencia/RepitenciaPorMateria/HighchartsPieIncidenciaDeMateriasPorDocente'
+import CardDocentes from './CardDocentesQueImpartenLaMateria'
+import './DashCardTsRepitenciaPorMateriaComponent.css'
 
 const DashCardListRepitenciaPorMateria = () => {
     return (
         <React.Fragment>
-            <ListMateriasRepitenciaPorMateria/>
+            <ListMateriasRepitenciaPorMateria />
         </React.Fragment>
     )
 }
@@ -34,8 +37,14 @@ const DashCardSpaiderWebPorMateria = () => {
             />
             <Divider />
             <CardContent>
+                <PieIncidenciaDeMateriasPorDocente />
             </CardContent>
         </React.Fragment>
+    )
+}
+const CardDocentesQueImpartenLaMateria = () => {
+    return (
+        <CardDocentes />
     )
 }
 
@@ -56,8 +65,8 @@ const DashCardColumnComparativoPorMateria = () => {
                 title="TASA DE DESERCIÓN"
             />
             <Divider />
-            <CardContent>
-                <LineIncidenciaDeMateria/>
+            <CardContent className="HighchartContentLineRepitenciaPorMateria">
+                <LineIncidenciaDeMateria />
             </CardContent>
         </React.Fragment>
     )
@@ -66,5 +75,6 @@ const DashCardColumnComparativoPorMateria = () => {
 export default {
     DashCardListRepitenciaPorMateria,
     DashCardSpaiderWebPorMateria,
+    CardDocentesQueImpartenLaMateria,
     DashCardColumnComparativoPorMateria,
 }
