@@ -66,7 +66,6 @@ export default function LineVariableIndependiente() {
             },
         ],
     };
-    console.log(prePieData)
 
     if (prePieData.length != 0) {
 

@@ -40,7 +40,7 @@ const DialogMaterias = () => {
 
     return (
         <div>
-            <IconButton aria-label="expanded" onClick={handleClickOpen("body")} disabled={contador <= 2}>
+            <IconButton aria-label="expanded" onClick={handleClickOpen("body")}>
                 <OpenInFull />
             </IconButton>
             <Dialog

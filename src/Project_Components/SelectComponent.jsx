@@ -138,7 +138,6 @@ function CardSelectMalla(props) {
 
     const SelectPeriodo = (event) => {
         setPeriodoSelected(event);
-        console.log(PeriodoSelected.id)
     };
 
     //constante que devuelve un select con los periodes de interes

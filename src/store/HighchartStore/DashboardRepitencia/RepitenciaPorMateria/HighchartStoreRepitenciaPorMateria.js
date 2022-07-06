@@ -7,7 +7,9 @@ export const traerInfo = createSlice({
     initialState: {
         array_Incidencia_De_Materia: [],
         array_Abreviatura_Incidencia_De_Materia_Por_Periodo: [],
-        array_Indice_De_Incidencia_De_Materia_Por_Periodo: []
+        array_Indice_De_Incidencia_De_Materia_Por_Periodo: [],
+        array_Info_Data_Docente: [],
+        id_Docente: null
     },
 
     reducers: {
@@ -47,19 +49,20 @@ export const traerInfo = createSlice({
 
         },
 
+        setInfoDataDocente: (state, action) => {
+            state.array_Info_Data_Docente = []
+            state.array_Info_Data_Docente = action.payload
+            
+        },
+
+        setIdDocente:(state, action)=>{
+            state.id_Docente = null
+            state.id_Docente = action.payload
+        }
+
     }
 })
 
-/* export const traerInfoRepitenciaPorMateriasAsync = (id_Malla, id_Periodo) => (dispatch) => {
-    axios.get(ApiUrl.Api + '/api/educacion/tasa_repitencia/por_materia/tabla_materias/' + id_Malla + "/" + id_Periodo, {
-        headers: {
-            Authorization: "Bearer " + ApiUrl.userToken,
-        },
-    })
-        .then(res => {
-            dispatch(setListMateriasRepitencia(res.data.data))
-        })
-} */
 export const traerIncidenciaDeMateriaAtravezDeLosPeriodosRepitencia = (id_Malla, id_Materia) => (dispatch) => {
     axios.get(ApiUrl.Api + '/api/educacion/tasa_repitencia/por_materia/incidencia_por_periodo_select_tabla_materias/' +
         id_Malla +
@@ -76,9 +79,24 @@ export const traerIncidenciaDeMateriaAtravezDeLosPeriodosRepitencia = (id_Malla,
 }
 
 
-export const { setArrayIncidenciaDeMateriasRepitencia } = traerInfo.actions;
+export const traerInfoDataDocenteAsync = (id_Docente) => (dispatch) => {
+    axios.get(ApiUrl.Api + '/api/educacion/tasa_repitencia/por_materia/data_docentes/' + id_Docente, {
+        headers: {
+            Authorization: "Bearer " + ApiUrl.userToken,
+        },
+    })
+        .then(res => {
+            dispatch(setIdDocente(id_Docente))
+            dispatch(setInfoDataDocente(res.data))
+        })
+}
+
+
+export const { setArrayIncidenciaDeMateriasRepitencia, setInfoDataDocente,setIdDocente } = traerInfo.actions;
 export const selectArrayIncidenciaDeMateriasRepitencia = (state) => state.HighchartStoreRepitenciaPorMateria.array_Incidencia_De_Materia;
 export const selectArrayAbreviaturaIncidenciaDeMateriaRepitencia = (state) => state.HighchartStoreRepitenciaPorMateria.array_Abreviatura_Incidencia_De_Materia_Por_Periodo;
 export const selectArrayIndiceDeIncidenciaDeMateriaRepitencia = (state) => state.HighchartStoreRepitenciaPorMateria.array_Indice_De_Incidencia_De_Materia_Por_Periodo;
+export const selectArrayInfoDataDocenteRepitencia = (state) => state.HighchartStoreRepitenciaPorMateria.array_Info_Data_Docente;
+export const selectIdDocenteRepitencia = (state) => state.HighchartStoreRepitenciaPorMateria.id_Docente;
 
 export default traerInfo.reducer;

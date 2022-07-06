@@ -1,13 +1,14 @@
 import React, { useState } from "react"
 import {
     Dialog, DialogContent, IconButton, Card,
-    CardContent, Box, Button, ListItemButton, Collapse, Typography, Paper, Divider
+    CardContent, Box, Button, ListItemButton, Collapse, Typography, Paper, Divider, Icon, Stack, Avatar, DialogTitle
 } from '@mui/material'
 import { OpenInFull, Close } from '@mui/icons-material/';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 //Dependencias
 import { selectArrayDataMateriasPorIdMateria } from "../../../store/HighchartStore/DashboardRepitencia/RepitenciaPorMateria/ListTableStoreRepitenciaPorMateria"
+import { traerInfoDataDocenteAsync } from "../../../store/HighchartStore/DashboardRepitencia/RepitenciaPorMateria/HighchartStoreRepitenciaPorMateria";
 import DialogDocentesContainer from './DashcardDialogDataDocentes'
 import './CardDocentesQueImpartenLaMateria.css'
 
@@ -25,10 +26,15 @@ const setCssPorfile = (docentes, index) => {
 const CardDocentes = () => {
 
     const [open, setOpen] = useState(false);
+    const dispatch = useDispatch();
+
     array_Data_Materias_Por_Id_Materia = useSelector(selectArrayDataMateriasPorIdMateria)
 
     const setOpenDialogDocente = (id_Docente) => {
+        dispatch(traerInfoDataDocenteAsync(id_Docente))
         setOpen(true)
+
+
     }
     const handleClose = () => {
         setOpen(false);
@@ -40,24 +46,34 @@ const CardDocentes = () => {
                 {array_Data_Materias_Por_Id_Materia[0].docentes.map((docente, index) => {
                     setCssPorfile(array_Data_Materias_Por_Id_Materia[0].docentes.length, index);
                     return (
-                        <Card key={index} className="CardDocentes" onClick={() => setOpenDialogDocente(docente.id)}>
-                                <CardContent>
-                                    <div label="Alert">
-                                        <div >
-                                            <div className="dashCardHeading">
-                                                {docente.docente}
-                                            </div>
-                                        </div>
+                        <Card
+                            key={index}
+                            className="CardDocentes"
+                            style={{
+                                display: 'flex',
+                                'gridColumn':
+                                    array_Data_Materias_Por_Id_Materia[0].docentes.length % 2 > 0 &&
+                                        index == array_Data_Materias_Por_Id_Materia[0].docentes.length - 1
+                                        ? 'span 2'
+                                        : 'span 1',
+                            }}
+                            onClick={() => setOpenDialogDocente(docente.id)}
+                        >
+                            <Box label="Alert">
+                                <div className="wellDashCard">
+                                    <div className="dashCardHeading">
+                                        {docente.docente}
                                     </div>
-                                    <div >
-                                        <div >
-                                            <div>
-                                                {docente.tot_reprobados}/{docente.tot_inscritos}
-                                            </div>
-                                            <label>Reprobados</label>
-                                        </div>
+                                </div>
+                            </Box>
+                            <Box className="wellDashCard">
+                                <div >
+                                    <div className="TextDashcard">
+                                        {docente.tot_reprobados}/{docente.tot_inscritos}
                                     </div>
-                                </CardContent>
+                                    <label className="TextDashcardReprobados">Reprobados</label>
+                                </div>
+                            </Box>
                         </Card>
                     )
                 })}
@@ -66,19 +82,24 @@ const CardDocentes = () => {
                     <Dialog
                         open={open}
                         onClose={handleClose}
-                        style={{ minWidth: "200px" }}
+                        className="dashCardContainer"
                     >
-                        <DialogContent className="dialogCloseIcon">
-                            <IconButton onClick={handleClose}>
-                                <Close />
-                            </IconButton>
-                        </DialogContent>
+                        <DialogTitle className="dialogToolbarContainer">
+                            <Stack direction="row" spacing={2} style={{ display: 'flex', alignItems: 'center' }}>
+                                <Avatar alt="Utm" src="/icons/Logo_utm.png" />
+                                <Typography className="TituloDialogRepitenciDocentes">Reporte por Docente</Typography>
+                            </Stack>
+                            <DialogContent sx={{ display: 'flex', justifyContent: 'right', padding: '0px' }}>
+                                <IconButton onClick={handleClose}>
+                                    <Close />
+                                </IconButton>
+                            </DialogContent>
+                        </DialogTitle>
                         <DialogContent >
-                            <DialogDocentesContainer/>
+                            <DialogDocentesContainer />
                         </DialogContent>
                     </Dialog>
-                    :
-                    <div></div>}
+                    : null}
             </Box>
         )
     }

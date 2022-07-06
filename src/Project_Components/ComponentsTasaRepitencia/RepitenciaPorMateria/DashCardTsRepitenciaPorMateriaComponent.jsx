@@ -9,7 +9,6 @@ import ListMateriasRepitenciaPorMateria from '../../HighchartsComponent/Highchar
 import LineIncidenciaDeMateria from '../../HighchartsComponent/HighchartsRepitencia/RepitenciaPorMateria/HighchartsLineIncidenciaDeMaterias'
 import PieIncidenciaDeMateriasPorDocente from '../../HighchartsComponent/HighchartsRepitencia/RepitenciaPorMateria/HighchartsPieIncidenciaDeMateriasPorDocente'
 import CardDocentes from './CardDocentesQueImpartenLaMateria'
-import './DashCardTsRepitenciaPorMateriaComponent.css'
 
 const DashCardListRepitenciaPorMateria = () => {
     return (
@@ -65,9 +64,7 @@ const DashCardColumnComparativoPorMateria = () => {
                 title="TASA DE DESERCIÓN"
             />
             <Divider />
-            <CardContent className="HighchartContentLineRepitenciaPorMateria">
                 <LineIncidenciaDeMateria />
-            </CardContent>
         </React.Fragment>
     )
 }

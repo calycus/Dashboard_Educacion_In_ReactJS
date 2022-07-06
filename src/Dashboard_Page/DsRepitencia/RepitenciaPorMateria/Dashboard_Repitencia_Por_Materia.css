@@ -61,7 +61,10 @@
 .chart_general {
     /* min-width: 100%;
     max-height: 400px; */
-    
-    min-height: 20rem !important;
-    max-height: 22rem !important;
+
+    display: flex;
+    flex-direction: column;
+    min-width: 80%;
+    max-height: 400px;
+    justify-content: center;
 }

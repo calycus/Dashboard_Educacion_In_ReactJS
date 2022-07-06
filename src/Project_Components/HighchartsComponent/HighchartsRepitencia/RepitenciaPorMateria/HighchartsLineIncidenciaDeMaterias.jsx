@@ -6,6 +6,7 @@ import {
     selectArrayIndiceDeIncidenciaDeMateriaRepitencia
 } from '../../../../store/HighchartStore/DashboardRepitencia/RepitenciaPorMateria/HighchartStoreRepitenciaPorMateria'
 
+import './HighchartsLineIncidenciaDeMaterias.css'
 
 //dependencia
 import { useSelector } from 'react-redux'
@@ -116,6 +117,7 @@ export default function LineVariableIndependiente() {
             <HighchartsReact
                 highcharts={Highcharts}
                 options={newData}
+                containerProps = {{ className: 'HighchartContentLineRepitenciaPorMateria' }}
             />
         )
     }
