@@ -25,6 +25,8 @@ import HighchartRepitenciaFactorGeografico from './HighchartStore/DashboardRepit
 import HighchartDesercionGeneral from './HighchartStore/DashboardDesercion/TasaDeDesercion/HighchartDesercionGeneral'
 import HighchartDesercionGenerosEdadEmbarazo from './HighchartStore/DashboardDesercion/TasaDeDesercion/HighchartDesercionGenerosEdadEmbarazo'
 ////store Highchart DS Desercion => Prediccion
+import ListTableEstudiantesPrediccion from './HighchartStore/DashboardDesercion/Prediccion/ListTableStorePosiblesDesertores'
+import HighchartStoreInfoPrediccionDesercion from './HighchartStore/DashboardDesercion/Prediccion/HighchartStoreInfoPrediccionDesercion'
 ////store Highchart DS Desercion => Metadata
 import HighchartDesercionFactorEconomico from './HighchartStore/DashboardDesercion/MetaData/HighchartDesercionFactorEconomico'
 import HighchartDesercionFactorEdnico from './HighchartStore/DashboardDesercion/MetaData/HighchartDesercionFactorEdnico'
@@ -58,6 +60,8 @@ export default configureStore({
     HighchartDesercionGeneral: HighchartDesercionGeneral,
     HighchartDesercionGenerosEdadEmbarazo: HighchartDesercionGenerosEdadEmbarazo,
     ////store Highchart DS Desercion => Prediccion
+    ListTableEstudiantesPrediccion:ListTableEstudiantesPrediccion,
+    HighchartStoreInfoPrediccionDesercion:HighchartStoreInfoPrediccionDesercion,
     ////store Highchart DS Desercion => Metadata
     HighchartDesercionFactorEconomico: HighchartDesercionFactorEconomico,
     HighchartDesercionFactorEdnico: HighchartDesercionFactorEdnico,

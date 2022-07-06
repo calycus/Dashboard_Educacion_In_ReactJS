@@ -34,6 +34,7 @@ import { traerInfoRPColumnFactorGeograficoAsync } from '../store/HighchartStore/
 import { traerInfoLineDesertoresAsync } from '../store/HighchartStore/DashboardDesercion/TasaDeDesercion/HighchartDesercionGeneral'
 import { traerInfoesercionGenerosEdadEmbarazoAsync } from '../store/HighchartStore/DashboardDesercion/TasaDeDesercion/HighchartDesercionGenerosEdadEmbarazo'
 ////Desercion => Prediccion
+import { traerListaPosiblesDesertoresAsync } from '../store/HighchartStore/DashboardDesercion/Prediccion/ListTableStorePosiblesDesertores';
 ////Desercion => MetaData
 import { traerInfoDSPieFactorEconomicoAsync } from '../store/HighchartStore/DashboardDesercion/MetaData/HighchartDesercionFactorEconomico';
 import { traerInfoDSColumnFactorEdnicoAsync } from '../store/HighchartStore/DashboardDesercion/MetaData/HighchartDesercionFactorEdnico';
@@ -42,6 +43,7 @@ import { traerInfoDSColumnFactorGeograficoAsync } from '../store/HighchartStore/
 
 //dependencias CSS
 import '../css/Select.css'
+import '../css/GlobalCss.css'
 import { useTheme } from '@mui/material/styles';
 
 
@@ -53,6 +55,10 @@ let theme = null;
 let mallaAux = [];
 let ArrayPeriodos = [];
 let arrayDePeriodosSeleccionados = [];
+let Metodologia = [
+    { Tipo: "Regresión Lineal", id: 1 }
+]
+
 
 //funcion encargada de traer las los datos del store
 function UseSelectAll() {
@@ -199,9 +205,34 @@ function CardSelectMalla(props) {
                     </Select>
                 </FormControl>
             )
+        } else if (sampleLocation.pathname == "/tasa_desercion_prediccion") {
+            SelectReturn = (
+                <FormControl sx={{ m: 1, minWidth: 300, maxWidth: 500 }} size="small">
+                    <InputLabel id="demo-simple-select-label">Metodología</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={PeriodoSelected}
+                        onChange={(e) => SelectPeriodo(e.target.value)}
+                        input={<OutlinedInput id="select-simple-chip" label="Chip" />}
+                        MenuProps={MenuProps}
+                    >
+                        {Metodologia.map((metodologia) => (
+                            <MenuItem
+                                key={metodologia.id}
+                                value={metodologia}
+                                style={getStyles(metodologia.Tipo, PeriodosDeInteres, theme)}
+                            >
+                                {metodologia.Tipo}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+            )
         }
         return SelectReturn
     }
+
 
     return (
         <React.Fragment>
@@ -221,41 +252,7 @@ function CardSelectMalla(props) {
             </FormControl>
             {SelectPeriodos()}
             <IconButton aria-label="search" size='large' onClick={() => {
-                {
-                    if (sampleLocation.pathname == "/general") {
-                        dispatch(traerInfoGeneralAsync(mallaAux.idMalla))
-
-                    } else if (sampleLocation.pathname == "/tasa_retencion") {
-                        dispatch(traerInfoRetencionAsync(mallaAux.idMalla))
-
-                    } else if (sampleLocation.pathname == "/tasa_repitencia") {
-                        if (PeriodosDeInteres.length == 0) {
-                            return
-                        } else {
-                            dispatch(traerInfoRepitenciaAsync(mallaAux.idMalla, idsPeriodos))
-                            dispatch(traerInfoRepitenciaColumnTopAsync(mallaAux.idMalla))
-                            dispatch(setArrayPeriodosDeInteres(arrayDePeriodosSeleccionados))
-                        }
-
-                    } else if (sampleLocation.pathname == "/tasa_repitencia_por_materia") {
-                        dispatch(traerInfoRepitenciaPorMateriasAsync(mallaAux.idMalla, PeriodoSelected.id))
-
-                    } else if (sampleLocation.pathname == "/tasa_repitencia_metadata") {
-                        dispatch(traerInfoRPPieFactorEconomicoAsync(mallaAux.idMalla))
-                        dispatch(traerInfoRPColumnFactorEdnicoAsync(mallaAux.idMalla))
-                        dispatch(traerInfoRPColumnFactorGeograficoAsync(mallaAux.idMalla))
-
-                    } else if (sampleLocation.pathname == "/tasa_desercion") {
-                        dispatch(traerInfoLineDesertoresAsync(mallaAux.idMalla))
-                        dispatch(traerInfoesercionGenerosEdadEmbarazoAsync(mallaAux.idMalla))
-
-                    } else if (sampleLocation.pathname == "/tasa_desercion_metadata") {
-                        dispatch(traerInfoDSPieFactorEconomicoAsync(mallaAux.idMalla))
-                        dispatch(traerInfoDSColumnFactorEdnicoAsync(mallaAux.idMalla))
-                        dispatch(traerInfoDSColumnFactorGeograficoAsync(mallaAux.idMalla))
-
-                    }
-                }
+                SearchButton({ dispatch, sampleLocation, PeriodosDeInteres, PeriodoSelected })
             }}>
                 <SearchIcon sx={{ fontSize: 30, color: theme.palette.primary.main }} />
             </IconButton>
@@ -265,4 +262,50 @@ function CardSelectMalla(props) {
 
 export default {
     CardSelectMalla,
+}
+
+const SearchButton = ({ dispatch, sampleLocation, PeriodosDeInteres, PeriodoSelected }) => {
+    if (sampleLocation.pathname == "/general") {
+        dispatch(traerInfoGeneralAsync(mallaAux.idMalla))
+
+    } else if (sampleLocation.pathname == "/tasa_retencion") {
+        dispatch(traerInfoRetencionAsync(mallaAux.idMalla))
+
+    } else if (sampleLocation.pathname == "/tasa_repitencia") {
+        if (PeriodosDeInteres.length == 0) {
+            return
+        } else {
+            dispatch(traerInfoRepitenciaAsync(mallaAux.idMalla, idsPeriodos))
+            dispatch(traerInfoRepitenciaColumnTopAsync(mallaAux.idMalla))
+            dispatch(setArrayPeriodosDeInteres(arrayDePeriodosSeleccionados))
+        }
+
+    } else if (sampleLocation.pathname == "/tasa_repitencia_por_materia") {
+        if (PeriodoSelected.length == "") {
+            return
+        } else {
+            dispatch(traerInfoRepitenciaPorMateriasAsync(mallaAux.idMalla, PeriodoSelected.id))
+        }
+    } else if (sampleLocation.pathname == "/tasa_repitencia_metadata") {
+        dispatch(traerInfoRPPieFactorEconomicoAsync(mallaAux.idMalla))
+        dispatch(traerInfoRPColumnFactorEdnicoAsync(mallaAux.idMalla))
+        dispatch(traerInfoRPColumnFactorGeograficoAsync(mallaAux.idMalla))
+
+    } else if (sampleLocation.pathname == "/tasa_desercion") {
+        dispatch(traerInfoLineDesertoresAsync(mallaAux.idMalla))
+        dispatch(traerInfoesercionGenerosEdadEmbarazoAsync(mallaAux.idMalla))
+
+    } else if (sampleLocation.pathname == "/tasa_desercion_prediccion") {
+        if (PeriodoSelected.length == "") {
+            return
+        } else {
+            dispatch(traerListaPosiblesDesertoresAsync(mallaAux.idMalla, PeriodoSelected.id))
+        }
+    } else if (sampleLocation.pathname == "/tasa_desercion_metadata") {
+        dispatch(traerInfoDSPieFactorEconomicoAsync(mallaAux.idMalla))
+        dispatch(traerInfoDSColumnFactorEdnicoAsync(mallaAux.idMalla))
+        dispatch(traerInfoDSColumnFactorGeograficoAsync(mallaAux.idMalla))
+
+    }
+    return
 }

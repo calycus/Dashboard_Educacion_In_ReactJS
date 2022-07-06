@@ -11,6 +11,7 @@ import Dashboard_Repitencia_Por_Materia from '../Dashboard_Page/DsRepitencia/Rep
 import Dashboard_Tasa_Repitencia_MetaData from '../Dashboard_Page/DsRepitencia/Metadata/Metadata_Repitencia';
 //Tasa de Desercion
 import Dashboard_Tasa_Desercion from '../Dashboard_Page/DsDesercion/TasaDeDesercion/Dashboard_Desercion';
+import Dashboard_Tasa_Desercion_Prediccion from '../Dashboard_Page/DsDesercion/Prediccion/Dashboard_Desercion_Prediccion';
 import Dashboard_Tasa_Desercion_MetaData from '../Dashboard_Page/DsDesercion/Metadata/Metadata_Desercion';
 
 
@@ -37,6 +38,9 @@ const SwitchDrawer = () => {
             } />
             <Route path='/tasa_desercion' element={
                 <Dashboard_Tasa_Desercion />
+            } />
+            <Route path='/tasa_desercion_prediccion' element={
+                <Dashboard_Tasa_Desercion_Prediccion />
             } />
             <Route path='/tasa_desercion_metadata' element={
                 <Dashboard_Tasa_Desercion_MetaData />
