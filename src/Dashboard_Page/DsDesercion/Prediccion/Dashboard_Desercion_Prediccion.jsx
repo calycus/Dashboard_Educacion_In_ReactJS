@@ -18,7 +18,7 @@ export default function PageTasaDeDesercion() {
 
     React.useEffect(() => {
         dispatch(traerMallasPorIdEscuelaAsync(id_escuela))
-        
+
     }, []);
     return (
         <Box sx={{ minWidth: 275 }}>
@@ -47,12 +47,12 @@ export default function PageTasaDeDesercion() {
                 </Card>
             </div>
             <div className='cardGridDownDesercion_Prediccion'>
-                <Card>
+                <Card style={{ maxHeight: '27rem' }}>
                     <CardContent>
                         {DashCardDsPrediccion.DashCardLineTrayectoriaEstudiantil()}
                     </CardContent>
                 </Card>
-                <Card>
+                <Card style={{ maxHeight: '27rem' }}>
                     <CardContent>
                         {DashCardDsPrediccion.CardTableListMateriasEstudiante()}
                     </CardContent>

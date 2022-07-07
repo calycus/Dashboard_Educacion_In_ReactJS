@@ -8,7 +8,7 @@ import HcMore from "highcharts/highcharts-more";
 //Dependencias
 import { selectArrayDataEstudiantesEnRiesgo } from '../../../../store/HighchartStore/DashboardDesercion/Prediccion/ListTableStorePosiblesDesertores';
 import { selectIdMalla } from '../../../../store/MallaStore/EleccionMallaStore';
-import { traerInfoEstudiantesDesertoresAsync } from '../../../../store/HighchartStore/DashboardDesercion/Prediccion/HighchartStoreInfoPrediccionDesercion';
+import { traerInfoEstudiantesDesertoresAsync, traerInfoTrayectoriaEstudiantesAsync } from '../../../../store/HighchartStore/DashboardDesercion/Prediccion/HighchartStoreInfoPrediccionDesercion';
 import '../../../../css/ListTableStyle.css'
 
 
@@ -27,8 +27,8 @@ export default function SubjectDataTable() {
     const [checked, setChecked] = useState(-1);
 
     const handleSelects = (data) => {
-        console.log(data.cedula)
         dispatch(traerInfoEstudiantesDesertoresAsync(idMalla, data.cedula))
+        dispatch(traerInfoTrayectoriaEstudiantesAsync(idMalla, data.cedula))
     }
 
     const requestSearch = (searchedVal) => {

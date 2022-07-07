@@ -3,13 +3,13 @@ import { Avatar, Box, Card, CardContent, Divider, Stack, Typography } from "@mui
 import { useSelector } from "react-redux";
 
 //Dependencias
-import { selectArrayDataEstudiantesEnRiesgo } from '../../../store/HighchartStore/DashboardDesercion/Prediccion/HighchartStoreInfoPrediccionDesercion'
+import { selectArrayInfoEstudiante } from '../../../store/HighchartStore/DashboardDesercion/Prediccion/HighchartStoreInfoPrediccionDesercion'
 import './CardInfoEstudiantesEnRiesgo.css'
 let arrayInfoEstudiante = []
 
 const CardInfoDataEstudiante = () => {
 
-    arrayInfoEstudiante = useSelector(selectArrayDataEstudiantesEnRiesgo)
+    arrayInfoEstudiante = useSelector(selectArrayInfoEstudiante)
 
     if (arrayInfoEstudiante != []) {
         return (
@@ -66,7 +66,14 @@ const CardInfoDataEstudiante = () => {
                         <div className="DataFijaEstudiante">
                             Estado Actual:
                         </div>
-                        <div className="DataDinamicaEstudiante">
+                        <div className="DataDinamicaEstudiante"
+                            style={{
+                                'color':
+                                    arrayInfoEstudiante.estado_actual == 'INSCRITO'
+                                        ? '#21BA45'
+                                        : '#C10015',
+                                fontWeight: '700'
+                            }}>
                             {arrayInfoEstudiante.estado_actual}
                         </div>
                     </div>
@@ -78,7 +85,7 @@ const CardInfoDataEstudiante = () => {
                     </div>
 
                     <div className="AlingDataContactoEstudiante">
-                        <div className="DataFiDataFijaEstudianteja">
+                        <div className="DataFijaEstudiante">
                             Correo Institucional:
                         </div>
                         <div className="DataDinamicaEstudiante">

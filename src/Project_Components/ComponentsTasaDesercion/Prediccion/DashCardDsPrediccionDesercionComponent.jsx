@@ -7,25 +7,27 @@ import { Divider } from '@mui/material';
 //componentes
 import DashCardListEstudiantesDesercion from '../../HighchartsComponent/HighchartsDesercion/Prediccion/DashCardListEstudiantesDesercion'
 import CardInfoDataEstudiante from './CardInfoEstudiantesEnRiesgo'
+import ColumnTendenciaDelEstudiante from '../../HighchartsComponent/HighchartsDesercion/Prediccion/HighchartsColumnTendenciaDelEstudiante'
+import LineTrayectoriaAcademicaDelEstudiante from '../../HighchartsComponent/HighchartsDesercion/Prediccion/HighchartsLineTrayectoriaDelEstudiante'
+import DashCardListMateriasSuspendidasDelEstudiante from '../../HighchartsComponent/HighchartsDesercion/Prediccion/DashCardListMateriasSuspendidasDelEstudiante'
 import './DashCardDsPrediccionDesercionComponent.css'
 
 const CardInfoEstudiante = () => {
     return (
         <React.Fragment>
-                <CardInfoDataEstudiante/>
+            <CardInfoDataEstudiante />
         </React.Fragment>
     )
 }
 
 const DashCardColumnTendenciaDelEstuainte = () => {
     return (
-        <React.Fragment>
+        <React.Fragment >
             <CardHeader
                 title="TENDENCIA DEL ESTUDIANTE"
             />
             <Divider />
-            <CardContent>
-            </CardContent>
+            <ColumnTendenciaDelEstudiante />
         </React.Fragment>
     )
 }
@@ -34,7 +36,7 @@ const CardTableListEstudianteEnRiesgo = () => {
     return (
         <React.Fragment>
             <CardContent>
-                <DashCardListEstudiantesDesercion/>
+                <DashCardListEstudiantesDesercion />
             </CardContent>
         </React.Fragment>
     )
@@ -48,6 +50,7 @@ const DashCardLineTrayectoriaEstudiantil = () => {
             />
             <Divider />
             <CardContent>
+                <LineTrayectoriaAcademicaDelEstudiante />
             </CardContent>
         </React.Fragment>
     )
@@ -57,6 +60,7 @@ const CardTableListMateriasEstudiante = () => {
     return (
         <React.Fragment>
             <CardContent>
+                <DashCardListMateriasSuspendidasDelEstudiante />
             </CardContent>
         </React.Fragment>
     )

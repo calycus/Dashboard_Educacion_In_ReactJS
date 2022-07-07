@@ -24,6 +24,13 @@
     font-weight: 600 !important;
 }
 
+.TableTitleListMateriasSuspendidas {
+    flex: 1 1 100%;
+    padding: 5px 5px 5px 10px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+}
+
 .css-j204z7-MuiFormControlLabel-root .MuiFormControlLabel-label {
     font-size: 14px !important;
     font-weight: lighter !important;

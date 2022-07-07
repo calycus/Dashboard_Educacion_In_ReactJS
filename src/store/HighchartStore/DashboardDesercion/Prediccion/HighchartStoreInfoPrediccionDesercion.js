@@ -6,6 +6,10 @@ export const traerInfo = createSlice({
     name: 'HighchartStoreInfoPrediccionDesercion',
     initialState: {
         array_Info_Estudiantes_En_Riesgo: [],
+        array_Tracyectoria_Academica_Del_Estudiante: [],
+        array_Materias_Suspendidas: [],
+        array_Categorias: [],
+        array_Series: [],
     },
 
     reducers: {
@@ -13,17 +17,36 @@ export const traerInfo = createSlice({
         setInfoEstudianteEnRiesgo: (state, action) => {
             state.array_Info_Estudiantes_En_Riesgo = []
             state.array_Info_Estudiantes_En_Riesgo = action.payload
-            console.log(state.array_Info_Estudiantes_En_Riesgo)
         },
 
         setInfoTrayectoriaEstudiantes: (state, action) => {
-            state.array_List_Data_Estudiantes_En_Riesgo = []
-            state.array_List_Data_Estudiantes_En_Riesgo = action.payload
-        },
+            state.array_Tracyectoria_Academica_Del_Estudiante = []
+            state.array_Materias_Suspendidas = []
+            state.array_Categorias = []
+            state.array_Series = []
 
-        setListInscripcionesPerdidas: (state, action) => {
-            state.array_List_Data_Estudiantes_En_Riesgo = []
-            state.array_List_Data_Estudiantes_En_Riesgo = action.payload
+            state.array_Tracyectoria_Academica_Del_Estudiante = action.payload
+
+            /* forEach para poder recorrer la informacion guardada en la variable */
+            state.array_Tracyectoria_Academica_Del_Estudiante.map((elementoPeriodos) => {
+                elementoPeriodos.array_materias_reprobadas.forEach(
+                    (elementoMateriasSuspendida) => {
+                        state.array_Materias_Suspendidas.push({
+                            materia: elementoMateriasSuspendida.materia,
+                            nivel: elementoMateriasSuspendida.nivel,
+                        });
+                    }
+                );
+
+                /* pushearla al graficocorrespondiente  */
+                state.array_Categorias.push(
+                    elementoPeriodos.periodo.abreviatura
+                );
+
+                state.array_Series.push({
+                    y: parseInt(elementoPeriodos.contador_inscripciones_perdidas),
+                });
+            });
         },
 
 
@@ -48,29 +71,24 @@ export const traerInfoEstudiantesDesertoresAsync = (id_Malla, id_Estudiante) => 
 
 export const traerInfoTrayectoriaEstudiantesAsync = (id_Malla, id_Estudiante) => (dispatch) => {
 
-    axios.get(ApiUrl.Api + '/api/educacion/tasa_desertores/prediccion/inscripciones_perdidas_potenciales_desertores/' + id_Estudiante, {
-        headers: {
-            Authorization: "Bearer " + ApiUrl.userToken,
-        },
-    })
+    axios.get(ApiUrl.Api + '/api/educacion/tasa_desertores/prediccion/inscripciones_perdidas_potenciales_desertores/' +
+        id_Malla +
+        '/' +
+        id_Estudiante,
+        {
+            headers: {
+                Authorization: "Bearer " + ApiUrl.userToken,
+            },
+        })
         .then(res => {
             dispatch(setInfoTrayectoriaEstudiantes(res.data.data))
         })
 }
 
-export const traerListaInscripcionesPerdidasAsync = (id_Malla, id_Estudiante) => (dispatch) => {
-
-    axios.get(ApiUrl.Api + '/api/educacion/tasa_desertores/prediccion/met_regresion_lineal/listado_potenciales_desertores/' + id_Malla, {
-        headers: {
-            Authorization: "Bearer " + ApiUrl.userToken,
-        },
-    })
-        .then(res => {
-            dispatch(setListInscripcionesPerdidas(res.data.data))
-        })
-}
-
-export const { setInfoEstudianteEnRiesgo, setInfoTrayectoriaEstudiantes, setListInscripcionesPerdidas } = traerInfo.actions;
-export const selectArrayDataEstudiantesEnRiesgo = (state) => state.HighchartStoreInfoPrediccionDesercion.array_Info_Estudiantes_En_Riesgo;
+export const { setInfoEstudianteEnRiesgo, setInfoTrayectoriaEstudiantes } = traerInfo.actions;
+export const selectArrayInfoEstudiante = (state) => state.HighchartStoreInfoPrediccionDesercion.array_Info_Estudiantes_En_Riesgo;
+export const selectArrayMateriaSuspendidas = (state) => state.HighchartStoreInfoPrediccionDesercion.array_Materias_Suspendidas;
+export const selectArrayCategoria = (state) => state.HighchartStoreInfoPrediccionDesercion.array_Categorias;
+export const selectArraySeries = (state) => state.HighchartStoreInfoPrediccionDesercion.array_Series;
 
 export default traerInfo.reducer;
